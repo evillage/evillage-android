@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">embeddedNotifications</string>
+    <string name="thank_you">%s\n, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</string>
+    <string name="done">Done</string>
+    <string name="email_hint">Enter email</string>
+    <string name="submit">Submit</string>
+</resources>

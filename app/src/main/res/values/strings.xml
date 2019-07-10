@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EvillageDemoApp</string>
+    <string name="main_text">Provide your email address in order to register an account</string>
+    <string name="register">Register</string>
+</resources>
