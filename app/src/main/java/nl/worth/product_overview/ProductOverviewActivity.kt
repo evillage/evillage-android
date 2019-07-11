@@ -1,5 +1,6 @@
 package nl.worth.product_overview
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -23,8 +24,7 @@ class ProductOverviewActivity : AppCompatActivity() {
         recycler_view.adapter = productOverviewAdapter
 
         productOverviewAdapter.onItemClick = { item ->
-            val intent = Intent(this, ProductDetailsActivity::class.java)
-            startActivity(intent)
+            startActivity(ProductDetailsActivity.getIntent(this, item.name))
         }
 
     }
