@@ -26,15 +26,19 @@ class ProductOverviewAdapter(private val productList: List<ProductOverviewItem>)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.productName.text = productList[position].name
-        holder.productThumbnail.setImageResource(productList[position].thumbnailId)
-        holder.productPrice.text = productList[position].price
+        holder.onBind(productList[position])
     }
 
     inner class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        val productName: TextView = view.name
-        val productPrice: TextView = view.price
-        val productThumbnail: ImageView = view.thumbnail
+        val productName: TextView = view.findViewById(R.id.name)
+        val productPrice: TextView = view.findViewById(R.id.price)
+        val productThumbnail: ImageView = view.findViewById(R.id.thumbnail)
+
+        fun onBind(productOverviewItem: ProductOverviewItem) {
+            productName.text = productOverviewItem.name
+            productPrice.text = productOverviewItem.price
+            productThumbnail.setImageResource(productOverviewItem.thumbnailId)
+        }
 
         init {
             itemView.setOnClickListener {
