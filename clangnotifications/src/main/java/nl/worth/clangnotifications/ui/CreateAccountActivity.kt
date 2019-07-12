@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.data.interactor.AccountInteractor
 
@@ -22,8 +24,7 @@ class CreateAccountActivity : AppCompatActivity() {
                     startActivityForResult(ThankYouActivity.getIntent(this, email.text.toString()), 0)
                 },
                 {
-                    //TODO add alert dialog for an error
-                    throw it
+                    showAlertDialogOnErrorOccured(it)
                 }
             )
         }
@@ -32,5 +33,19 @@ class CreateAccountActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0 && resultCode == Activity.RESULT_OK) finish()
+    }
+
+    fun showAlertDialogOnErrorOccured(throwable: Throwable) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Error!Error!Panic!")
+        builder.setMessage(throwable.message)
+
+        builder.setPositiveButton(android.R.string.yes) { _, _ ->
+            Toast.makeText(
+                applicationContext,
+                android.R.string.yes, Toast.LENGTH_SHORT
+            ).show()
+        }
+        builder.show()
     }
 }
