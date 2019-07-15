@@ -22,4 +22,12 @@
             tools:layout_editor_absoluteY="390dp"
             tools:layout_editor_absoluteX="161dp"/>
 
+    <Button
+            android:id="@+id/products"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/go_to_product_overview"
+            tools:layout_editor_absoluteY="390dp"
+            tools:layout_editor_absoluteX="161dp"/>
+
 </LinearLayout>
