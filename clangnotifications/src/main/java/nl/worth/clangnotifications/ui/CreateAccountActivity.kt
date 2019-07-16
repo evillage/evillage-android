@@ -35,7 +35,7 @@ class CreateAccountActivity : AppCompatActivity() {
         if (requestCode == 0 && resultCode == Activity.RESULT_OK) finish()
     }
 
-    fun showAlertDialogOnErrorOccured(throwable: Throwable) {
+    private fun showAlertDialogOnErrorOccured(throwable: Throwable) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error!Error!Panic!")
         builder.setMessage(throwable.message)

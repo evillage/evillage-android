@@ -5,13 +5,20 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application>
-        <activity android:name="nl.worth.clangnotifications.ui.ThankYouActivity">
+        <service
+                android:name=".firebase.ClangIntentService"
+                android:exported="false">
+        </service>
+
+        <activity android:name=".ui.ClangActivity">
         </activity>
-        <activity android:name="nl.worth.clangnotifications.ui.CreateAccountActivity">
+        <activity android:name=".ui.ThankYouActivity">
+        </activity>
+        <activity android:name=".ui.CreateAccountActivity">
         </activity>
 
         <service
-                android:name="nl.worth.clangnotifications.firebase.EmbeddedFirebaseMessagingService"
+                android:name=".firebase.ClangFirebaseMessagingService"
                 android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT"/>
