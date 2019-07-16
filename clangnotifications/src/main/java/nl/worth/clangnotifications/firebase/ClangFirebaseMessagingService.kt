@@ -13,7 +13,7 @@ import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.ui.ClangActivity
 import kotlin.random.Random
 
-class ClangFirebaseMessagingService : FirebaseMessagingService() {
+open class ClangFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(p0: RemoteMessage?) {
         p0?.data?.let { data ->
@@ -28,8 +28,8 @@ class ClangFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun handleClangNotification(data: Map<String, String>): Boolean {
-        val productTitle = data["title"]
-        val productContent = data["message"]
+        val productTitle = data["clangTitle"]
+        val productContent = data["clangMessage"]
 
         val intent = Intent(this, ClangActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -53,7 +53,7 @@ class ClangFirebaseMessagingService : FirebaseMessagingService() {
             .setSmallIcon(R.drawable.notification_icon)
             .setContentTitle(productTitle)
             .setContentText(productContent)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
