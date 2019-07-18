@@ -6,4 +6,5 @@
     <string name="done">Done</string>
     <string name="email_hint">Enter email</string>
     <string name="submit">Submit</string>
+    <string name="saved_email_key">saved_email_key</string>
 </resources>

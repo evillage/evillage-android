@@ -1,6 +1,7 @@
 package nl.worth.clangnotifications.ui
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.data.interactor.AccountInteractor
+import nl.worth.clangnotifications.util.isEmailValid
 
 class CreateAccountActivity : AppCompatActivity() {
 
@@ -19,6 +21,7 @@ class CreateAccountActivity : AppCompatActivity() {
         val submit = findViewById<Button>(R.id.submit)
         val email = findViewById<EditText>(R.id.email)
         submit.setOnClickListener {
+            if(email.text.toString().isEmailValid()) saveEmailToSHaredPreferences(email.text.toString())
             AccountInteractor().registerAccount(email.text.toString(),
                 {
                     startActivityForResult(ThankYouActivity.getIntent(this, email.text.toString()), 0)
@@ -27,6 +30,14 @@ class CreateAccountActivity : AppCompatActivity() {
                     showAlertDialogOnErrorOccured(it)
                 }
             )
+        }
+    }
+
+    private fun saveEmailToSHaredPreferences(email: String) {
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+        with (sharedPref.edit()) {
+            putString(getString(R.string.saved_email_key), email)
+            apply()
         }
     }
 
