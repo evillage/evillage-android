@@ -32,19 +32,12 @@ class ProductOverviewActivity : AppCompatActivity() {
     fun getDummyProducts() : List<ProductOverviewItem> {
         val products: ArrayList<ProductOverviewItem> = ArrayList()
 
-        products.add(ProductOverviewItem("Raspberry Pi 4 Model B - 2GB", R.drawable.raspberry_pi, "€ 49.95"))
-        products.add(ProductOverviewItem("Raspberry Pi Official Beginners Guide", R.drawable.book, "€ 11.00"))
-        products.add(ProductOverviewItem("Raspberry Pi Official Beginners Guide", R.drawable.book, "€ 11.00"))
-        products.add(ProductOverviewItem("Raspberry Pi 4 Model B - 2GB", R.drawable.raspberry_pi, "€ 49.95"))
-        products.add(ProductOverviewItem("Raspberry Pi 4 Model B - 2GB", R.drawable.raspberry_pi, "€ 49.95"))
-        products.add(ProductOverviewItem("Raspberry Pi 4 Model B - 2GB", R.drawable.raspberry_pi, "€ 49.95"))
-        products.add(ProductOverviewItem("Raspberry Pi 4 Model B - 2GB", R.drawable.raspberry_pi, "€ 49.95"))
-        products.add(ProductOverviewItem("Raspberry Pi 4 Model B - 2GB", R.drawable.raspberry_pi, "€ 49.95"))
-        products.add(ProductOverviewItem("Raspberry Pi Official Beginners Guide", R.drawable.book, "€ 11.00"))
-        products.add(ProductOverviewItem("Raspberry Pi Official Beginners Guide", R.drawable.book, "€ 11.00"))
-        products.add(ProductOverviewItem("Raspberry Pi Official Beginners Guide", R.drawable.book, "€ 11.00"))
-        products.add(ProductOverviewItem("Raspberry Pi Official Beginners Guide", R.drawable.book, "€ 11.00"))
-        products.add(ProductOverviewItem("Raspberry Pi Official Beginners Guide", R.drawable.book, "€ 11.00"))
+        products.add(ProductOverviewItem("One Plus One 2014 3/64GB", R.drawable.phone, "€ 336.95"))
+        products.add(ProductOverviewItem("Xiaomi Redmi 4 (4X) 2017 3/32GB", R.drawable.phone, "€ 197.00"))
+        products.add(ProductOverviewItem("Google Pixel 2 2017 4/64GB", R.drawable.phone, "€ 309.99"))
+        products.add(ProductOverviewItem("LG V30 2017 4/64GB", R.drawable.phone, "€ 359.00"))
+        products.add(ProductOverviewItem("Lenovo Moto G (3rd gen) 2015 1/8GB", R.drawable.phone, "€ 139.15"))
+
 
         return products
 
