@@ -5,11 +5,13 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import nl.worth.clangnotifications.R
+import nl.worth.clangnotifications.data.interactor.TokenInteractor
 import nl.worth.clangnotifications.ui.ClangActivity
 import kotlin.random.Random
 
@@ -88,5 +90,26 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
                 }
             }
         }
+    }
+
+    override fun onNewToken(token: String?) {
+        val email = retrieveEmailFromSP()
+        token?.let { fbToken ->
+            TokenInteractor().sendTokenToServer(fbToken, email,
+                {
+                    Log.d("TAG", "Refreshed token: $fbToken")
+                },
+                {
+                    Log.d("TAG", "failed to update token")
+                }
+            )
+        }
+    }
+
+    private fun retrieveEmailFromSP(): String {
+        val sharedPref = applicationContext.getSharedPreferences("Clang", Context.MODE_PRIVATE)
+        val defaultValue = ""
+        val email = sharedPref.getString(getString(R.string.saved_email_key), defaultValue)
+        return email ?: defaultValue
     }
 }

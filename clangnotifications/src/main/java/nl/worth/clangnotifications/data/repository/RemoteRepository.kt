@@ -1,7 +1,7 @@
 package nl.worth.clangnotifications.data.repository
 
 import nl.worth.clangnotifications.BuildConfig
-import nl.worth.clangnotifications.data.model.CreateAccountRequest
+import nl.worth.clangnotifications.data.model.AccountModel
 import nl.worth.clangnotifications.data.model.CreateAccountResponse
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -11,8 +11,8 @@ import retrofit2.http.POST
 
 interface RemoteRepository {
 
-    @POST("account/create")
-    fun createAccount(@Body request: CreateAccountRequest): Call<CreateAccountResponse>
+    @POST("api/v1/account/register")
+    fun createAccount(@Body accountModel: AccountModel): Call<CreateAccountResponse>
 
     companion object {
         fun create(): RemoteRepository {
@@ -25,4 +25,8 @@ interface RemoteRepository {
             return retrofit.create(RemoteRepository::class.java)
         }
     }
+
+    @POST("/api/v1/token/save")
+    fun storeFirebaseToken(@Body tokenRequest: AccountModel): Call<Unit>
+
 }
