@@ -15,6 +15,15 @@ interface RemoteRepository {
     @POST("api/v1/account/register")
     fun createAccount(@Body accountModel: AccountModel): Call<CreateAccountResponse>
 
+    @POST("api/v1/token/save")
+    fun storeFirebaseToken(@Body tokenRequest: AccountModel): Call<Unit>
+
+    @POST("api/v1/notification/subscribeToTopic")
+    fun subscribeToTopic(@Body topicRequest: NotoficationTopicRequest): Call<Unit>
+
+    @POST("api/v1/notification/unsubscribeFromTopic")
+    fun unsubscribeFromTopic(@Body topicRequest: NotoficationTopicRequest): Call<Unit>
+
     companion object {
         fun create(): RemoteRepository {
 
@@ -26,14 +35,4 @@ interface RemoteRepository {
             return retrofit.create(RemoteRepository::class.java)
         }
     }
-
-    @POST("api/v1/token/save")
-    fun storeFirebaseToken(@Body tokenRequest: AccountModel): Call<Unit>
-
-    @POST("api/v1/notification/subscribeToTopic")
-    fun subscribeToTopic(@Body topicRequest: NotoficationTopicRequest): Call<Unit>
-
-    @POST("api/v1/notification/unsubscribeFromTopic")
-    fun unsubscribeFromTopic(@Body topicRequest: NotoficationTopicRequest): Call<Unit>
-
 }

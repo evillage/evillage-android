@@ -21,7 +21,6 @@ class AccountInteractor {
         if (email.isEmailValid()) {
             val applicationName = BuildConfig.APPLICATION_ID
             val account = AccountModel(email, applicationName, firebaseToken)
-//            successCallback(CreateAccountResponse(applicationName))
             RemoteRepository.create().createAccount(account).enqueue(object :
                 Callback<CreateAccountResponse> {
                 override fun onFailure(call: Call<CreateAccountResponse>, t: Throwable) {

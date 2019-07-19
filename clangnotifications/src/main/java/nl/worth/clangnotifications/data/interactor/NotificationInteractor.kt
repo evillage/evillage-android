@@ -15,7 +15,6 @@ class NotificationInteractor {
         successCallback: (Unit) -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
-//        successCallback(Unit)
         retrieveCurrentFirebaseToken { token ->
             val tokens = mutableListOf(token)
             RemoteRepository.create().subscribeToTopic(NotoficationTopicRequest(topic, tokens)).enqueue(object :
