@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.data.interactor.AccountInteractor
+import nl.worth.clangnotifications.ui.subscription.SubscriptionActivity
 import nl.worth.clangnotifications.util.isEmailValid
 
 class CreateAccountActivity : AppCompatActivity() {
@@ -28,7 +29,7 @@ class CreateAccountActivity : AppCompatActivity() {
             retrieveToken {token ->
                 AccountInteractor().registerAccount(email.text.toString(), token,
                     {
-                        startActivityForResult(ThankYouActivity.getIntent(this, email.text.toString()), 0)
+                        startActivityForResult(SubscriptionActivity.getIntent(this, email.text.toString()), 0)
                     },
                     {
                         showAlertDialogOnErrorOccured(it)

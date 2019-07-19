@@ -38,6 +38,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:2.6.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-messaging:19.0.1'
+    implementation 'com.android.support:recyclerview-v7'
 }
 repositories {
     mavenCentral()

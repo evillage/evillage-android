@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.product_overview_row.view.*
 import nl.worth.R
 
 class ProductOverviewAdapter(private val productList: List<ProductOverviewItem>):

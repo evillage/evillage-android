@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application>
+        <activity android:name=".ui.subscription.SubscriptionActivity">
+        </activity>
+
         <service
                 android:name=".firebase.ClangIntentService"
                 android:exported="false">
