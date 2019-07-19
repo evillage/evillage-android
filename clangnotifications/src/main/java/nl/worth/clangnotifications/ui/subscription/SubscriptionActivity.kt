@@ -32,13 +32,20 @@ class SubscriptionActivity : AppCompatActivity() {
         topicsAdapter.onItemClick = { item ->
             NotificationInteractor().subscribeToTopic(item.topic,
                 {
-                    startActivityForResult(ThankYouActivity.getIntent(this, EMAIL_EXTRA), 0)
+                    startActivityForResult(ThankYouActivity.getIntent(this, retrieveEmailFromSP()), 0)
                 },
                 {
                     showAlertDialogOnErrorOccured(it)
                 }
             )
         }
+    }
+
+    private fun retrieveEmailFromSP(): String {
+        val sharedPref = applicationContext.getSharedPreferences("Clang", Context.MODE_PRIVATE)
+        val defaultValue = ""
+        val email = sharedPref.getString(getString(R.string.saved_email_key), defaultValue)
+        return email ?: defaultValue
     }
 
     private fun getTopics(): List<TopicItem> {
@@ -66,12 +73,4 @@ class SubscriptionActivity : AppCompatActivity() {
         builder.show()
     }
 
-    companion object {
-        internal val EMAIL_EXTRA = "email"
-
-        fun getIntent(context: Context, email: String): Intent =
-            Intent(context, SubscriptionActivity::class.java).apply {
-                putExtra(EMAIL_EXTRA, email)
-            }
-    }
 }

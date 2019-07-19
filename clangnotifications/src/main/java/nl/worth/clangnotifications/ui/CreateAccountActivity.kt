@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -16,6 +15,8 @@ import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.data.interactor.AccountInteractor
 import nl.worth.clangnotifications.ui.subscription.SubscriptionActivity
 import nl.worth.clangnotifications.util.isEmailValid
+
+
 
 class CreateAccountActivity : AppCompatActivity() {
 
@@ -29,7 +30,7 @@ class CreateAccountActivity : AppCompatActivity() {
             retrieveToken {token ->
                 AccountInteractor().registerAccount(email.text.toString(), token,
                     {
-                        startActivityForResult(SubscriptionActivity.getIntent(this, email.text.toString()), 0)
+                        this.startActivity(Intent(this, SubscriptionActivity::class.java))
                     },
                     {
                         showAlertDialogOnErrorOccured(it)
