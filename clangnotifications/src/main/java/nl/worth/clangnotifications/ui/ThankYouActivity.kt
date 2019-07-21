@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import nl.worth.clangnotifications.R
 
-class ThankYouActivity : AppCompatActivity() {
+internal class ThankYouActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

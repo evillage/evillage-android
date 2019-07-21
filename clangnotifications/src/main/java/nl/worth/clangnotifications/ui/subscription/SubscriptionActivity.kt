@@ -1,6 +1,5 @@
 package nl.worth.clangnotifications.ui.subscription
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -13,7 +12,7 @@ import nl.worth.clangnotifications.data.interactor.NotificationInteractor
 import nl.worth.clangnotifications.ui.ThankYouActivity
 import nl.worth.clangnotifications.util.retrieveEmailFromSP
 
-class SubscriptionActivity : AppCompatActivity() {
+internal class SubscriptionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

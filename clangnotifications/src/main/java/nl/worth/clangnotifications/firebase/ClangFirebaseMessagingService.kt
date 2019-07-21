@@ -34,16 +34,17 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
         val productTitle = data["clangTitle"]
         val productContent = data["clangMessage"]
 
-        val intent = Intent(this, ClangActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+//        val intent = Intent(this, ClangActivity::class.java).apply {
+//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, Intent(), 0)
 
 
         val notificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val channelId = "channel-01"
         val channelName = "Channel Name"
         val importance = NotificationManager.IMPORTANCE_HIGH
+        val notificationId = Random.nextInt(0, 100)
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             val mChannel = NotificationChannel(
@@ -61,15 +62,15 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
             .setAutoCancel(true)
 
         //FIXME: side effects!!!!!!
-        addActions(data, builder)
+        addActions(data, builder, notificationId)
 
         with(NotificationManagerCompat.from(this)) {
-            notify(Random.nextInt(0, 100), builder.build())
+            notify(notificationId, builder.build())
         }
         return true
     }
 
-    private fun addActions(data: Map<String, String>, notificationBuilder: NotificationCompat.Builder) {
+    private fun addActions(data: Map<String, String>, notificationBuilder: NotificationCompat.Builder, notificationId: Int) {
         val productId = data["id"]
         for (i in 1..3) {
             val actionId = data["action${i}Id"]
@@ -81,6 +82,7 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
                         PendingIntent.getService(this, 0, Intent(this, ClangIntentService::class.java).apply {
                             this.putExtra("productId", productId)
                             this.putExtra("actionId", actionId)
+                            this.putExtra("notificationId", notificationId)
                         }, 0)
 
                     notificationBuilder.addAction(

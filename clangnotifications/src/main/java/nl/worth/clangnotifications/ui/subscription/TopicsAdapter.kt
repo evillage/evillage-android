@@ -3,17 +3,14 @@ package nl.worth.clangnotifications.ui.subscription
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.RadioButton
 import android.widget.TextView
 import nl.worth.clangnotifications.R
 import androidx.recyclerview.widget.RecyclerView
 
-
-class TopicsAdapter(private val topics: List<TopicItem>): RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
+internal class TopicsAdapter(private val topics: List<TopicItem>): RecyclerView.Adapter<TopicsAdapter.ViewHolder>() {
 
     var onItemClick: ((TopicItem) -> Unit)? = null
-
 
     override fun getItemCount() = topics.size
 
@@ -35,6 +32,7 @@ class TopicsAdapter(private val topics: List<TopicItem>): RecyclerView.Adapter<T
 
         fun onBind(item: TopicItem) {
             text.text = item.topic
+            radioButton.isChecked = item.checked
         }
 
         init {

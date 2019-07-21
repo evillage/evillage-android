@@ -12,7 +12,7 @@ import nl.worth.clangnotifications.ClangNotifications
 import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.ui.subscription.SubscriptionActivity
 
-class CreateAccountActivity : AppCompatActivity() {
+internal class CreateAccountActivity : AppCompatActivity() {
 
     lateinit var clangNotifications: ClangNotifications
 
