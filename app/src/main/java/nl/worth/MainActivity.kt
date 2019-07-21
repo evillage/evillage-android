@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         val productsBtn = findViewById<Button>(R.id.products)
         val mainText = findViewById<TextView>(R.id.mainText)
 
-        clangNotifications = ClangNotifications.getInstance()
+        clangNotifications = ClangNotifications.getInstance(this)
 
         registerBtn.setOnClickListener {
             clangNotifications.createAccountWithUI(this)
