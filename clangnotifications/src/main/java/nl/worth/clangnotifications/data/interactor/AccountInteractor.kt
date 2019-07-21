@@ -10,7 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.NullPointerException
 
-class AccountInteractor {
+internal class AccountInteractor {
 
     fun registerAccount(
         email: String,
@@ -19,6 +19,7 @@ class AccountInteractor {
         errorCallback: (Throwable) -> Unit
     ) {
         if (email.isEmailValid()) {
+            //TODO change app id to main app nit library
             val applicationName = BuildConfig.APPLICATION_ID
             val account = AccountModel(email, applicationName, firebaseToken)
             RemoteRepository.create().createAccount(account).enqueue(object :

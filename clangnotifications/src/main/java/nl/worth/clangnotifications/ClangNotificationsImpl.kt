@@ -7,7 +7,8 @@ import nl.worth.clangnotifications.data.interactor.AccountInteractor
 import nl.worth.clangnotifications.data.model.CreateAccountResponse
 import nl.worth.clangnotifications.ui.CreateAccountActivity
 import nl.worth.clangnotifications.util.isEmailValid
-import nl.worth.clangnotifications.util.retrieveToken
+import nl.worth.clangnotifications.util.retrieveFirebaseToken
+import nl.worth.clangnotifications.util.saveEmailToSharedPreferences
 
 internal class ClangNotificationsImpl(val context: Context) : ClangNotifications {
 
@@ -16,22 +17,14 @@ internal class ClangNotificationsImpl(val context: Context) : ClangNotifications
         successCallback: (CreateAccountResponse) -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
-        if (email.isEmailValid()) saveEmailToSharedPreferences(email)
-        retrieveToken { token ->
+        if (email.isEmailValid()) context.saveEmailToSharedPreferences(email)
+        retrieveFirebaseToken { token ->
             AccountInteractor().registerAccount(
                 email,
                 token,
                 successCallback,
                 errorCallback
             )
-        }
-    }
-
-    private fun saveEmailToSharedPreferences(email: String) {
-        val sharedPref = context.getSharedPreferences("Clang", Context.MODE_PRIVATE)
-        with(sharedPref.edit()) {
-            putString(context.getString(R.string.saved_email_key), email)
-            apply()
         }
     }
 

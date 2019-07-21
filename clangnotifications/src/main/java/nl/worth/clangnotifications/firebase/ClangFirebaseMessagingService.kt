@@ -13,6 +13,7 @@ import com.google.firebase.messaging.RemoteMessage
 import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.data.interactor.TokenInteractor
 import nl.worth.clangnotifications.ui.ClangActivity
+import nl.worth.clangnotifications.util.retrieveEmailFromSP
 import kotlin.random.Random
 
 open class ClangFirebaseMessagingService : FirebaseMessagingService() {
@@ -104,12 +105,5 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
                 }
             )
         }
-    }
-
-    private fun retrieveEmailFromSP(): String {
-        val sharedPref = applicationContext.getSharedPreferences("Clang", Context.MODE_PRIVATE)
-        val defaultValue = ""
-        val email = sharedPref.getString(getString(R.string.saved_email_key), defaultValue)
-        return email ?: defaultValue
     }
 }

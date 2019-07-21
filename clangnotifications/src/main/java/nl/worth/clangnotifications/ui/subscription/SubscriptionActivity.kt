@@ -1,7 +1,6 @@
 package nl.worth.clangnotifications.ui.subscription
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -12,18 +11,15 @@ import kotlinx.android.synthetic.main.activity_subscription.*
 import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.data.interactor.NotificationInteractor
 import nl.worth.clangnotifications.ui.ThankYouActivity
+import nl.worth.clangnotifications.util.retrieveEmailFromSP
 
 class SubscriptionActivity : AppCompatActivity() {
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_subscription)
 
         val topicsAdapter = TopicsAdapter(getTopics())
-
 
         recycler_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
         recycler_view.layoutManager = LinearLayoutManager(this)
@@ -39,13 +35,6 @@ class SubscriptionActivity : AppCompatActivity() {
                 }
             )
         }
-    }
-
-    private fun retrieveEmailFromSP(): String {
-        val sharedPref = applicationContext.getSharedPreferences("Clang", Context.MODE_PRIVATE)
-        val defaultValue = ""
-        val email = sharedPref.getString(getString(R.string.saved_email_key), defaultValue)
-        return email ?: defaultValue
     }
 
     private fun getTopics(): List<TopicItem> {

@@ -8,12 +8,14 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.NullPointerException
 
-class TokenInteractor {
+internal class TokenInteractor {
 
-    fun sendTokenToServer(firebaseToken: String,
-                          email: String,
-                          successCallback: (Unit) -> Unit,
-                          errorCallback: (Throwable) -> Unit) {
+    fun sendTokenToServer(
+        firebaseToken: String,
+        email: String,
+        successCallback: (Unit) -> Unit,
+        errorCallback: (Throwable) -> Unit
+    ) {
         val applicationName = BuildConfig.APPLICATION_ID
         val account = AccountModel(email, applicationName, firebaseToken)
         RemoteRepository.create().storeFirebaseToken(account).enqueue(object :

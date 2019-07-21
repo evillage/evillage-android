@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface RemoteRepository {
+internal interface RemoteRepository {
 
     @POST("api/v1/account/register")
     fun createAccount(@Body accountModel: AccountModel): Call<CreateAccountResponse>
