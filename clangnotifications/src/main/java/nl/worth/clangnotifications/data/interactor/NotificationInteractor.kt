@@ -30,7 +30,6 @@ internal class NotificationInteractor {
                 }
             })
         }
-
     }
 
     fun unsubscribeFromTopic(

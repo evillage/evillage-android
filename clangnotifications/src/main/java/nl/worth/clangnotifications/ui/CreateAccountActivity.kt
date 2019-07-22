@@ -25,7 +25,7 @@ internal class CreateAccountActivity : AppCompatActivity() {
         clangNotifications = ClangNotifications.getInstance(this)
 
         submit.setOnClickListener {
-            clangNotifications.createAccoun(email.text.toString(),
+            clangNotifications.createAccount(email.text.toString(),
                 {
                     this.startActivity(Intent(this, SubscriptionActivity::class.java))
                 },

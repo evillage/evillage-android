@@ -8,7 +8,7 @@ interface ClangNotifications {
 
     fun createAccountWithUI(activity: Activity): Int
 
-    fun createAccoun(
+    fun createAccount(
         email: String,
         successCallback: (CreateAccountResponse) -> Unit,
         errorCallback: (Throwable) -> Unit
