@@ -39,7 +39,7 @@ internal class SubscriptionActivity : AppCompatActivity() {
     private fun getTopics(): List<TopicItem> {
         return mutableListOf(
             TopicItem(false, "Samsung"),
-            TopicItem(false, "OnePlus"),
+            TopicItem(true, "OnePlus"),
             TopicItem(false, "LG"),
             TopicItem(false, "Xiaomi"),
             TopicItem(false, "Google Pixel"),

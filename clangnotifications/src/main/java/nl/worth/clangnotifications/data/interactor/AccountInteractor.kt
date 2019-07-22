@@ -19,8 +19,7 @@ internal class AccountInteractor {
         errorCallback: (Throwable) -> Unit
     ) {
         if (email.isEmailValid()) {
-            //TODO change app id to main app nit library
-            val applicationName = BuildConfig.APPLICATION_ID
+            val applicationName = BuildConfig.APP_ID
             val account = AccountModel(email, applicationName, firebaseToken)
             RemoteRepository.create().createAccount(account).enqueue(object :
                 Callback<CreateAccountResponse> {

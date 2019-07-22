@@ -3,6 +3,7 @@ package nl.worth.clangnotifications.data.repository
 import nl.worth.clangnotifications.BuildConfig
 import nl.worth.clangnotifications.data.model.AccountModel
 import nl.worth.clangnotifications.data.model.CreateAccountResponse
+import nl.worth.clangnotifications.data.model.EmptyBody
 import nl.worth.clangnotifications.data.model.NotoficationTopicRequest
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -16,13 +17,13 @@ internal interface RemoteRepository {
     fun createAccount(@Body accountModel: AccountModel): Call<CreateAccountResponse>
 
     @POST("api/v1/token/save")
-    fun storeFirebaseToken(@Body tokenRequest: AccountModel): Call<Unit>
+    fun storeFirebaseToken(@Body tokenRequest: AccountModel): Call<EmptyBody>
 
     @POST("api/v1/notification/subscribeToTopic")
-    fun subscribeToTopic(@Body topicRequest: NotoficationTopicRequest): Call<Unit>
+    fun subscribeToTopic(@Body topicRequest: NotoficationTopicRequest): Call<EmptyBody>
 
     @POST("api/v1/notification/unsubscribeFromTopic")
-    fun unsubscribeFromTopic(@Body topicRequest: NotoficationTopicRequest): Call<Unit>
+    fun unsubscribeFromTopic(@Body topicRequest: NotoficationTopicRequest): Call<EmptyBody>
 
     companion object {
         fun create(): RemoteRepository {
