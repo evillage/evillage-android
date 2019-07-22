@@ -42,7 +42,7 @@ internal class SubscriptionActivity : AppCompatActivity() {
             TopicItem(true, "OnePlus"),
             TopicItem(false, "LG"),
             TopicItem(false, "Xiaomi"),
-            TopicItem(false, "Google Pixel"),
+            TopicItem(false, "GooglePixel"),
             TopicItem(false, "Huawei")
         )
     }
