@@ -12,7 +12,7 @@ import nl.worth.clangnotifications.util.saveEmailToSharedPreferences
 
 internal class ClangNotificationsImpl(val context: Context) : ClangNotifications {
 
-    override fun createAccoun(
+    override fun createAccount(
         email: String,
         successCallback: (CreateAccountResponse) -> Unit,
         errorCallback: (Throwable) -> Unit
