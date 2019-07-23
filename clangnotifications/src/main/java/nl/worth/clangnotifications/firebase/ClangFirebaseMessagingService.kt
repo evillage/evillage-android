@@ -34,10 +34,10 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
         val productTitle = data["clangTitle"]
         val productContent = data["clangMessage"]
 
-//        val intent = Intent(this, ClangActivity::class.java).apply {
-//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, Intent(), 0)
+        val intent = Intent(this, ClangActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
 
         val notificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

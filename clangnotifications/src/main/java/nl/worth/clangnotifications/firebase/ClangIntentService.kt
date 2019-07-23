@@ -9,7 +9,7 @@ internal class ClangIntentService : IntentService("ClangIntentService") {
     override fun onHandleIntent(intent: Intent?) {
         val id = intent?.getStringExtra("actionId")
         val promotionId = intent?.getStringExtra("productId")
-        val notificationId = intent?.getStringExtra("notificationId")?.toInt() ?: 0
+        val notificationId = intent?.getIntExtra("notificationId", 0) ?: 0
         NotificationManagerCompat.from(this).cancel(notificationId)
         //TODO send to back end (data what user picked)
     }
