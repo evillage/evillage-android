@@ -1,7 +1,10 @@
 package nl.worth.clangnotifications.ui.subscription
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -36,10 +39,18 @@ internal class SubscriptionActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 0) {
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
+    }
+
     private fun getTopics(): List<TopicItem> {
         return mutableListOf(
             TopicItem(false, "Samsung"),
-            TopicItem(true, "OnePlus"),
+            TopicItem(false, "OnePlus"),
             TopicItem(false, "LG"),
             TopicItem(false, "Xiaomi"),
             TopicItem(false, "GooglePixel"),

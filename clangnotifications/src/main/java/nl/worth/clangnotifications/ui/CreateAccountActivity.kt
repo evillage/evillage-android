@@ -27,7 +27,7 @@ internal class CreateAccountActivity : AppCompatActivity() {
         submit.setOnClickListener {
             clangNotifications.createAccount(email.text.toString(),
                 {
-                    this.startActivity(Intent(this, SubscriptionActivity::class.java))
+                    startActivityForResult(Intent(this, SubscriptionActivity::class.java), 0)
                 },
                 {
                     showAlertDialogOnErrorOccured(it)
@@ -38,7 +38,10 @@ internal class CreateAccountActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 0 && resultCode == Activity.RESULT_OK) finish()
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK) {
+            setResult(Activity.RESULT_OK)
+            finish()
+        }
     }
 
     private fun showAlertDialogOnErrorOccured(throwable: Throwable) {
