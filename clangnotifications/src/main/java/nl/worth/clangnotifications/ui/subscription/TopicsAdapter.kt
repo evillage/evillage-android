@@ -27,12 +27,10 @@ internal class TopicsAdapter(private val topics: List<TopicItem>): RecyclerView.
     }
 
     inner class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        val radioButton: RadioButton = view.findViewById(R.id.list_view_item_radio)
         val text: TextView = view.findViewById(R.id.list_view_item_text)
 
         fun onBind(item: TopicItem) {
             text.text = item.topic
-            radioButton.isChecked = item.checked
         }
 
         init {
