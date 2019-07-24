@@ -12,8 +12,10 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.data.interactor.TokenInteractor
+import nl.worth.clangnotifications.data.model.KeyValue
 import nl.worth.clangnotifications.ui.ClangActivity
 import nl.worth.clangnotifications.util.retrieveEmailFromSP
+import java.io.Serializable
 import kotlin.random.Random
 
 open class ClangFirebaseMessagingService : FirebaseMessagingService() {
@@ -36,6 +38,9 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
 
         val intent = Intent(this, ClangActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            putExtra("keyValue", arrayListOf<KeyValue>().apply {
+                data.keys.forEach { add(KeyValue(it, data[it] ?: "")) }
+            })
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
