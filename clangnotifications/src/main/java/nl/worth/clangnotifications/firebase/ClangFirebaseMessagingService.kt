@@ -33,23 +33,26 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun handleClangNotification(data: Map<String, String>): Boolean {
+        val notificationId = Random.nextInt(0, 100)
         val productTitle = data["clangTitle"]
         val productContent = data["clangMessage"]
 
-        val intent = Intent(this, ClangActivity::class.java).apply {
+        val intent = Intent(this, ClangActivity::class.java)
+        val oldPendingIntent: PendingIntent = PendingIntent.getActivity(this, notificationId, intent, 0)
+        oldPendingIntent.cancel()
+        intent.apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            putExtra("keyValue", arrayListOf<KeyValue>().apply {
+            val list = arrayListOf<KeyValue>().apply {
                 data.keys.forEach { add(KeyValue(it, data[it] ?: "")) }
-            })
+            }
+            putExtra("keyValue", list)
         }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
-
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, notificationId, intent, 0)
 
         val notificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val channelId = "channel-01"
         val channelName = "Channel Name"
         val importance = NotificationManager.IMPORTANCE_HIGH
-        val notificationId = Random.nextInt(0, 100)
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             val mChannel = NotificationChannel(
@@ -75,7 +78,11 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
         return true
     }
 
-    private fun addActions(data: Map<String, String>, notificationBuilder: NotificationCompat.Builder, notificationId: Int) {
+    private fun addActions(
+        data: Map<String, String>,
+        notificationBuilder: NotificationCompat.Builder,
+        notificationId: Int
+    ) {
         val productId = data["id"]
         for (i in 1..3) {
             val actionId = data["action${i}Id"]
