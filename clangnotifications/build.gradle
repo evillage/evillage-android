@@ -16,7 +16,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         buildConfigField "String", "REMOTE_REPO_BASE_URL", '"https://firebase-demo.test.worth.systems"'
 
-        buildConfigField("String", "FIREBASE_APP_KEY", "\"${firebaseAppKey}\"")
         buildConfigField("String", "APP_ID", "\"${appId}\"")
     }
 
