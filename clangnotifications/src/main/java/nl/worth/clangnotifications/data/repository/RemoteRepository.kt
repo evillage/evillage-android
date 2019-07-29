@@ -1,9 +1,7 @@
 package nl.worth.clangnotifications.data.repository
 
 import nl.worth.clangnotifications.BuildConfig
-import nl.worth.clangnotifications.data.model.AccountModel
-import nl.worth.clangnotifications.data.model.CreateAccountResponse
-import nl.worth.clangnotifications.data.model.NotoficationTopicRequest
+import nl.worth.clangnotifications.data.model.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -14,16 +12,10 @@ import retrofit2.http.POST
 internal interface RemoteRepository {
 
     @POST("api/v1/account/register")
-    fun createAccount(@Body accountModel: AccountModel): Call<CreateAccountResponse>
+    fun createAccount(@Body createAccountModel: CreateAccountModel): Call<CreateAccountResponse>
 
     @POST("api/v1/token/save")
     fun storeFirebaseToken(@Body tokenRequest: AccountModel): Call<ResponseBody>
-
-    @POST("api/v1/notification/subscribeToTopic")
-    fun subscribeToTopic(@Body topicRequest: NotoficationTopicRequest): Call<ResponseBody>
-
-    @POST("api/v1/notification/unsubscribeFromTopic")
-    fun unsubscribeFromTopic(@Body topicRequest: NotoficationTopicRequest): Call<ResponseBody>
 
     companion object {
         fun create(): RemoteRepository {

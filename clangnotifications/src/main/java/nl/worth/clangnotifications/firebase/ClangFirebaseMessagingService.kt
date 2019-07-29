@@ -14,8 +14,7 @@ import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.data.interactor.TokenInteractor
 import nl.worth.clangnotifications.data.model.KeyValue
 import nl.worth.clangnotifications.ui.ClangActivity
-import nl.worth.clangnotifications.util.retrieveEmailFromSP
-import java.io.Serializable
+import nl.worth.clangnotifications.util.retrieveIdFromSP
 import kotlin.random.Random
 
 open class ClangFirebaseMessagingService : FirebaseMessagingService() {
@@ -108,7 +107,7 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     override fun onNewToken(token: String?) {
-        val email = retrieveEmailFromSP()
+        val email = retrieveIdFromSP()
         token?.let { fbToken ->
             TokenInteractor().sendTokenToServer(fbToken, email,
                 {

@@ -1,24 +1,21 @@
 package nl.worth.clangnotifications.data.interactor
 
-import nl.worth.clangnotifications.BuildConfig
 import nl.worth.clangnotifications.data.model.AccountModel
 import nl.worth.clangnotifications.data.repository.RemoteRepository
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.NullPointerException
 
 internal class TokenInteractor {
 
     fun sendTokenToServer(
         firebaseToken: String,
-        email: String,
+        id: String,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
-        val applicationName = BuildConfig.APP_ID
-        val account = AccountModel(email, applicationName, firebaseToken)
+        val account = AccountModel(id, firebaseToken)
         RemoteRepository.create().storeFirebaseToken(account).enqueue(object :
             Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

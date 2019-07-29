@@ -5,10 +5,6 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import nl.worth.clangnotifications.R
 
-internal fun String.isEmailValid(): Boolean {
-    return isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
-}
-
 internal fun retrieveFirebaseToken(onTokenReceived: (String) -> Unit) {
     FirebaseInstanceId.getInstance().instanceId
         .addOnCompleteListener(OnCompleteListener { task ->
@@ -20,17 +16,17 @@ internal fun retrieveFirebaseToken(onTokenReceived: (String) -> Unit) {
         })
 }
 
-internal fun Context.retrieveEmailFromSP(): String {
+internal fun Context.retrieveIdFromSP(): String {
     val sharedPref = getSharedPreferences("Clang", Context.MODE_PRIVATE)
     val defaultValue = ""
-    val email = sharedPref.getString(getString(R.string.saved_email_key), defaultValue)
+    val email = sharedPref.getString(getString(R.string.saved_id_key), defaultValue)
     return email ?: defaultValue
 }
 
-internal fun Context.saveEmailToSharedPreferences(email: String) {
+fun Context.saveIdToSharedPreferences(id: String) {
     val sharedPref = getSharedPreferences("Clang", Context.MODE_PRIVATE)
     with(sharedPref.edit()) {
-        putString(getString(R.string.saved_email_key), email)
+        putString( getString(R.string.saved_id_key), id)
         apply()
     }
 }
