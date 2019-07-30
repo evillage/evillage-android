@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import nl.worth.clangnotifications.ClangNotifications
 import nl.worth.product_overview.ProductOverviewActivity
 
@@ -23,7 +24,13 @@ class MainActivity : AppCompatActivity() {
         clangNotifications = ClangNotifications.getInstance(this)
 
         registerBtn.setOnClickListener {
-            clangNotifications.createAccountWithUI(this)
+            clangNotifications.createAccount(this, {
+                val toast = Toast.makeText(applicationContext, it.id, Toast.LENGTH_LONG)
+                toast.show()
+            }, {
+                val toast = Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG)
+                toast.show()
+            })
         }
         productsBtn.setOnClickListener {
             val intent = Intent(this, ProductOverviewActivity::class.java)

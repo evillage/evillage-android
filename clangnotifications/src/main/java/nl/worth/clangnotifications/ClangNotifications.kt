@@ -6,6 +6,7 @@ import nl.worth.clangnotifications.data.model.CreateAccountResponse
 interface ClangNotifications {
 
     fun createAccount(
+        context: Context,
         successCallback: (CreateAccountResponse) -> Unit,
         errorCallback: (Throwable) -> Unit
     )

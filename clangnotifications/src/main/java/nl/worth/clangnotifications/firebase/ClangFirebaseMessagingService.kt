@@ -33,8 +33,8 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
 
     private fun handleClangNotification(data: Map<String, String>): Boolean {
         val notificationId = Random.nextInt(0, 100)
-        val productTitle = data["clangTitle"]
-        val productContent = data["clangMessage"]
+        val productTitle = data["notificationTitle"]
+        val productContent = data["notificationBody"]
 
         val intent = Intent(this, ClangActivity::class.java)
         val oldPendingIntent: PendingIntent = PendingIntent.getActivity(this, notificationId, intent, 0)
@@ -82,7 +82,7 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
         notificationBuilder: NotificationCompat.Builder,
         notificationId: Int
     ) {
-        val productId = data["id"]
+        val productId = data["notificationId"]
         for (i in 1..3) {
             val actionId = data["action${i}Id"]
             val actionTitle = data["action${i}Title"]
@@ -107,9 +107,9 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     override fun onNewToken(token: String?) {
-        val email = retrieveIdFromSP()
+        val id = retrieveIdFromSP()
         token?.let { fbToken ->
-            TokenInteractor().sendTokenToServer(fbToken, email,
+            TokenInteractor().sendTokenToServer(fbToken, id,
                 {
                     Log.d("TAG", "Refreshed token: $fbToken")
                 },

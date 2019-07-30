@@ -22,13 +22,13 @@ internal class ClangActivity : AppCompatActivity() {
 
         val keyValue: ArrayList<KeyValue> = intent.getParcelableArrayListExtra("keyValue")
 
-        title.text = keyValue.find { it.key == "clangTitle" }?.value
-        description.text = keyValue.find { it.key == "clangMessage" }?.value
+        title.text = keyValue.find { it.key == "notificationTitle" }?.value
+        description.text = keyValue.find { it.key == "notificationBody" }?.value
         action1Btn.text = keyValue.find { it.key == "action1Title" }?.value
         action2Btn.text = keyValue.find { it.key == "action2Title" }?.value
         action3Btn.text = keyValue.find { it.key == "action3Title" }?.value
 
-        val productId = keyValue.find { it.key == "id" }?.value
+        val productId = keyValue.find { it.key == "notificationId" }?.value
         productId?.let {
             action1Btn.apply {
                 setOnClickListener {

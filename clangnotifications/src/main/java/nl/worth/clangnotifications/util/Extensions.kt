@@ -23,7 +23,7 @@ internal fun Context.retrieveIdFromSP(): String {
     return email ?: defaultValue
 }
 
-fun Context.saveIdToSharedPreferences(id: String) {
+internal fun Context.saveIdToSharedPreferences(id: String) {
     val sharedPref = getSharedPreferences("Clang", Context.MODE_PRIVATE)
     with(sharedPref.edit()) {
         putString( getString(R.string.saved_id_key), id)
