@@ -32,12 +32,12 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun handleClangNotification(data: Map<String, String>): Boolean {
-        val notificationId = Random.nextInt(0, 100)
+        val systemNotificationId = Random.nextInt(0, 100)
         val productTitle = data["notificationTitle"]
         val productContent = data["notificationBody"]
 
         val intent = Intent(this, ClangActivity::class.java)
-        val oldPendingIntent: PendingIntent = PendingIntent.getActivity(this, notificationId, intent, 0)
+        val oldPendingIntent: PendingIntent = PendingIntent.getActivity(this, systemNotificationId, intent, 0)
         oldPendingIntent.cancel()
         intent.apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -46,7 +46,7 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
             }
             putExtra("keyValue", list)
         }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, notificationId, intent, 0)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, systemNotificationId, intent, 0)
 
         val notificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val channelId = "channel-01"
@@ -69,10 +69,10 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
             .setAutoCancel(true)
 
         //FIXME: side effects!!!!!!
-        addActions(data, builder, notificationId)
+        addActions(data, builder, systemNotificationId)
 
         with(NotificationManagerCompat.from(this)) {
-            notify(notificationId, builder.build())
+            notify(systemNotificationId, builder.build())
         }
         return true
     }
@@ -80,9 +80,9 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
     private fun addActions(
         data: Map<String, String>,
         notificationBuilder: NotificationCompat.Builder,
-        notificationId: Int
+        systemNotificationId: Int
     ) {
-        val productId = data["notificationId"]
+        val notId = data["notificationId"]
         for (i in 1..3) {
             val actionId = data["action${i}Id"]
             val actionTitle = data["action${i}Title"]
@@ -91,9 +91,9 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
                 actionTitle.let {
                     val pendingIntent =
                         PendingIntent.getService(this, 0, Intent(this, ClangIntentService::class.java).apply {
-                            this.putExtra("productId", productId)
+                            this.putExtra("notificationId", notId)
                             this.putExtra("actionId", actionId)
-                            this.putExtra("notificationId", notificationId)
+                            this.putExtra("systemNotificationId", systemNotificationId)
                         }, 0)
 
                     notificationBuilder.addAction(

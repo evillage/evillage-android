@@ -1,8 +1,6 @@
 package nl.worth.clangnotifications
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import nl.worth.clangnotifications.data.interactor.AccountInteractor
 import nl.worth.clangnotifications.data.model.CreateAccountResponse
 import nl.worth.clangnotifications.util.retrieveFirebaseToken

@@ -28,21 +28,21 @@ internal class ClangActivity : AppCompatActivity() {
         action2Btn.text = keyValue.find { it.key == "action2Title" }?.value
         action3Btn.text = keyValue.find { it.key == "action3Title" }?.value
 
-        val productId = keyValue.find { it.key == "notificationId" }?.value
-        productId?.let {
+        val notificationId = keyValue.find { it.key == "notificationId" }?.value
+        notificationId?.let {
             action1Btn.apply {
                 setOnClickListener {
-                    onActionClick(keyValue, productId, "action1Id")
+                    onActionClick(keyValue, notificationId, "action1Id")
                 }
             }
             action2Btn.apply {
                 setOnClickListener {
-                    onActionClick(keyValue, productId, "action2Id")
+                    onActionClick(keyValue, notificationId, "action2Id")
                 }
             }
             action3Btn.apply {
                 setOnClickListener {
-                    onActionClick(keyValue, productId, "action3Id")
+                    onActionClick(keyValue, notificationId, "action3Id")
                 }
             }
         }
@@ -50,18 +50,18 @@ internal class ClangActivity : AppCompatActivity() {
 
     private fun onActionClick(
         keyValue: ArrayList<KeyValue>,
-        productId: String,
+        notificationId: String,
         actionKey: String
     ) {
         keyValue.find { it.key == actionKey }?.value?.let {
-            sendAction(it, productId)
+            sendAction(it, notificationId)
         }
         finish()
     }
 
-    private fun sendAction(actionId: String, productId: String) {
+    private fun sendAction(actionId: String, notificationId: String) {
         startService(Intent(this, ClangIntentService::class.java).apply {
-            this.putExtra("productId", productId)
+            this.putExtra("notificationId", notificationId)
             this.putExtra("actionId", actionId)
         })
     }

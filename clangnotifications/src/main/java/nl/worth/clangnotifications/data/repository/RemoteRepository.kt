@@ -17,6 +17,9 @@ internal interface RemoteRepository {
     @POST("api/v1/token/save")
     fun storeFirebaseToken(@Body tokenRequest: AccountModel): Call<ResponseBody>
 
+    @POST("/api/v1/notification/action")
+    fun logNotificationAction(@Body actionRequest: ActionRequest): Call<ResponseBody>
+
     companion object {
         fun create(): RemoteRepository {
 
