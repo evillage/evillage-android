@@ -4,15 +4,14 @@ import android.content.Context
 import nl.worth.clangnotifications.data.interactor.AccountInteractor
 import nl.worth.clangnotifications.data.interactor.NotificationInteractor
 import nl.worth.clangnotifications.data.model.CreateAccountResponse
-import nl.worth.clangnotifications.data.model.PollData
 import nl.worth.clangnotifications.util.retrieveFirebaseToken
 import nl.worth.clangnotifications.util.retrieveIdFromSP
 
-internal class ClangNotificationsImpl(val context: Context) : ClangNotifications {
+internal class RemoteApiEvents(val context: Context) : Clang {
     override fun logEvent(
         context: Context,
         event: String,
-        data: List<PollData>,
+        data: Map<String, String>,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {

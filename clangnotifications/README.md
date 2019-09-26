@@ -47,26 +47,21 @@ The above lines just find the *.aar* file in libs folder.
 
 **Register account feature**
 
-There are two options available for registering an account: *with UI* and *without UI*. In both cases you just call an Instance of ClangNotifications with the method you need.
-     
- ***createAccountWithUI(activity: Activity)*** 
- 
-Takes current context as argument and creates Intent to start newCreateAccountActivity. After finishing all the process goes back to the activity from which was started. 
+In order to register device just call an Instance of Clang with the function createAccount():
+ Creating a new instance of Clang just requires a context from Activity or Service.
 How to use:  
 
- * on a class level create field ClangNotifications:
-       ``lateinit var clangNotifications: ClangNotifications``
+ * on a class level create field Clang:
+       ``lateinit var clang: Clang``
  * inside *onCreate()* initialise it:
-    	``clangNotifications = ClangNotifications.getInstance(this)``
- * use the function:
-    	``clangNotifications.createAccountWithUI(this)``
+    	``clang = Clang.getInstance(this)``
 
-***createAccount(email: String, successCallback: (CreateAccountResponse) -> Unit, errorCallback: (Throwable) -> Unit )***
+***createAccount(successCallback: (CreateAccountResponse) -> Unit, errorCallback: (Throwable) -> Unit )***
 
-Takes user email(for registration) successCallback and errorCallback which are lambda functions. SuccessCallback accepts the returned result from the server and returns it in the CreateAccountResponse object. ErrorCallback accepts Throwable.
-
+Takes successCallback and errorCallback which are lambda functions. SuccessCallback accepts the returned result from the server and returns it in the CreateAccountResponse object. ErrorCallback accepts Throwable.
+Behind the scene it send firebase token to the back end and from the response stores user id in shared preferences for future use purposes.
 How to use(create field and initialise it as showed in first example):
-		``clangNotifications.createAccount(email.text.toString(),  
+		``clang.createAccount(  
           {  
           //do something with the result  
             },  
@@ -75,6 +70,20 @@ How to use(create field and initialise it as showed in first example):
             }  
         )``
  
+**Register event feature**
+
+For sending/registering events on the server side *logEvent()* function is used. It accepts current context for 
+accessing shared preferences in order to get user id from it,type of an event to register, map with key value pairs 
+with all needed additional data and same as previous function success and error callbacks.
+How to use(create field and initialise it as showed at the very beginning):
+``clang.logEvent(this, "EVENT", mapOf("key1" to "value1", "key2" to "value2"),
+                  {
+                      //do something with the result 
+                  },
+                  {
+                      //do something with error
+                  }
+              )``
 
 ### Links ###
 

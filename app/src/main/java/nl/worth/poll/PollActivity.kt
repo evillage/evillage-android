@@ -11,13 +11,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_product_overview.*
 import nl.worth.R
-import nl.worth.clangnotifications.ClangNotifications
-import nl.worth.clangnotifications.data.model.PollData
+import nl.worth.clangnotifications.Clang
 import nl.worth.thank_you.ThankYouActivity
 
 class PollActivity : AppCompatActivity() {
 
-    lateinit var clangNotifications: ClangNotifications
+    lateinit var clang: Clang
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +25,7 @@ class PollActivity : AppCompatActivity() {
         val question = findViewById<TextView>(R.id.question)
         question.text = "What is you favourite car color?"
 
-        clangNotifications = ClangNotifications.getInstance(this)
+        clang = Clang.getInstance(this)
         val topicsAdapter = QuestionsAdapter(getAnswers())
 
 
@@ -35,8 +34,7 @@ class PollActivity : AppCompatActivity() {
         recycler_view.adapter = topicsAdapter
 
         topicsAdapter.onItemClick = { item ->
-
-            clangNotifications.logEvent(this, "pollSubmit", mutableListOf(PollData("POLL_TITLE", item.text)),
+            clang.logEvent(this, "pollSubmit", mapOf("title" to "FavouriteCarColour", "value" to item.text),
                 {
                     startActivityForResult(ThankYouActivity.getIntent(this, EMAIL_EXTRA), 0)
                 },

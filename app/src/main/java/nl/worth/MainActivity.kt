@@ -6,14 +6,13 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import nl.worth.clangnotifications.ClangNotifications
+import nl.worth.clangnotifications.Clang
 import nl.worth.poll.PollActivity
-import nl.worth.product_overview.ProductOverviewActivity
 
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var clangNotifications: ClangNotifications
+    lateinit var clang: Clang
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,10 +22,10 @@ class MainActivity : AppCompatActivity() {
         val pollBtn = findViewById<Button>(R.id.poll)
         val mainText = findViewById<TextView>(R.id.mainText)
 
-        clangNotifications = ClangNotifications.getInstance(this)
+        clang = Clang.getInstance(this)
 
         registerBtn.setOnClickListener {
-            clangNotifications.createAccount(this, {
+            clang.createAccount(this, {
                 val toast = Toast.makeText(applicationContext, it.id, Toast.LENGTH_LONG)
                 toast.show()
             }, {

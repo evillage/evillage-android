@@ -6,13 +6,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import nl.worth.clangnotifications.ClangNotifications
-import nl.worth.clangnotifications.data.model.PollData
+import nl.worth.clangnotifications.Clang
 import nl.worth.thank_you.ThankYouActivity
 
 class LoginActivity : AppCompatActivity() {
 
-    lateinit var clangNotifications: ClangNotifications
+    lateinit var clang: Clang
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,10 +20,10 @@ class LoginActivity : AppCompatActivity() {
         val email = findViewById<EditText>(R.id.email)
         val password = findViewById<EditText>(R.id.password)
 
-        clangNotifications = ClangNotifications.getInstance(this)
+        clang = Clang.getInstance(this)
 
         submit.setOnClickListener {
-            clangNotifications.logEvent(this, "login", mutableListOf(PollData("login", email.text.toString())),
+            clang.logEvent(this, "login", mapOf("title" to "Login", "userEmail" to email.text.toString()),
                 {
                     startActivityForResult(ThankYouActivity.getIntent(this, email.text.toString()), 0)
                 },

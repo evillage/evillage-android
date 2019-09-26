@@ -33,7 +33,7 @@ internal class NotificationInteractor {
 
     fun logEvent(
         event: String,
-        data: List<PollData>,
+        data: Map<String, String>,
         userId: String,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
