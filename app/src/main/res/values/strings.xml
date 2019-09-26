@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">EvillageDemoApp</string>
-    <string name="main_text">Provide your email address in order to register an account</string>
+    <string name="main_text">Choose wisely the needed button</string>
     <string name="register">Register</string>
     <string name="add_to_basket">Add to basket</string>
     <string name="product_picture">product picture</string>
     <string name="go_to_product_overview">Go to product overview</string>
+    <string name="password_hint">Enter password</string>
+    <string name="login">Login</string>
+    <string name="poll">Take a poll</string>
 </resources>

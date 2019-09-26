@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import nl.worth.clangnotifications.ClangNotifications
+import nl.worth.poll.PollActivity
 import nl.worth.product_overview.ProductOverviewActivity
 
 
@@ -18,7 +19,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val registerBtn = findViewById<Button>(R.id.register)
-        val productsBtn = findViewById<Button>(R.id.products)
+        val loginBtn = findViewById<Button>(R.id.login)
+        val pollBtn = findViewById<Button>(R.id.poll)
         val mainText = findViewById<TextView>(R.id.mainText)
 
         clangNotifications = ClangNotifications.getInstance(this)
@@ -32,8 +34,13 @@ class MainActivity : AppCompatActivity() {
                 toast.show()
             })
         }
-        productsBtn.setOnClickListener {
-            val intent = Intent(this, ProductOverviewActivity::class.java)
+
+        loginBtn.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
+        pollBtn.setOnClickListener {
+            val intent = Intent(this, PollActivity::class.java)
             startActivity(intent)
         }
     }

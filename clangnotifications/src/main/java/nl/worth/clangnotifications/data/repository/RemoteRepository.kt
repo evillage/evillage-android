@@ -20,6 +20,9 @@ internal interface RemoteRepository {
     @POST("/api/v1/notification/action")
     fun logNotificationAction(@Body actionRequest: ActionRequest): Call<ResponseBody>
 
+    @POST("/api/v1/notification/event")
+    fun logEvent(@Body eventLog: EventLogRequest): Call<ResponseBody>
+
     companion object {
         fun create(): RemoteRepository {
 

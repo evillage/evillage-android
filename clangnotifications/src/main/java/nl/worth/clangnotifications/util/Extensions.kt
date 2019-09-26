@@ -19,8 +19,8 @@ internal fun retrieveFirebaseToken(onTokenReceived: (String) -> Unit) {
 internal fun Context.retrieveIdFromSP(): String {
     val sharedPref = getSharedPreferences("Clang", Context.MODE_PRIVATE)
     val defaultValue = ""
-    val email = sharedPref.getString(getString(R.string.saved_id_key), defaultValue)
-    return email ?: defaultValue
+    val userId = sharedPref.getString(getString(R.string.saved_id_key), defaultValue)
+    return userId ?: defaultValue
 }
 
 internal fun Context.saveIdToSharedPreferences(id: String) {
