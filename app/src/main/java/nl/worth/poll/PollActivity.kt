@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_product_overview.*
+import androidx.recyclerview.widget.RecyclerView
 import nl.worth.R
 import nl.worth.clangnotifications.Clang
 import nl.worth.thank_you.ThankYouActivity
@@ -28,15 +28,15 @@ class PollActivity : AppCompatActivity() {
         clang = Clang.getInstance(this)
         val topicsAdapter = QuestionsAdapter(getAnswers())
 
-
-        recycler_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-        recycler_view.layoutManager = LinearLayoutManager(this)
-        recycler_view.adapter = topicsAdapter
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+        recyclerView.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = topicsAdapter
 
         topicsAdapter.onItemClick = { item ->
             clang.logEvent(this, "pollSubmit", mapOf("title" to "FavouriteCarColour", "value" to item.text),
                 {
-                    startActivityForResult(ThankYouActivity.getIntent(this, EMAIL_EXTRA), 0)
+                    startActivityForResult(ThankYouActivity.getIntent(this), 0)
                 },
                 {
                     showAlertDialogOnErrorOccured(it)
@@ -69,11 +69,7 @@ class PollActivity : AppCompatActivity() {
     }
 
     companion object {
-        internal val EMAIL_EXTRA = "email"
-
-        fun getIntent(context: Context, email: String): Intent =
-            Intent(context, PollActivity::class.java).apply {
-                putExtra(EMAIL_EXTRA, email)
-            }
+        fun getIntent(context: Context): Intent =
+            Intent(context, PollActivity::class.java)
     }
 }

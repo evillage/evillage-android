@@ -16,19 +16,14 @@ internal class ThankYouActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_thank_you)
         setResult(Activity.RESULT_OK)
-        val thankYouText = findViewById<TextView>(R.id.thankyou)
-        thankYouText.text = getString(R.string.thank_you)
         findViewById<Button>(R.id.done).setOnClickListener {
             finish()
         }
     }
 
     companion object {
-        internal val EMAIL_EXTRA = "email"
 
-        fun getIntent(context: Context, email: String): Intent =
-            Intent(context, ThankYouActivity::class.java).apply {
-                putExtra(EMAIL_EXTRA, email)
-            }
+        fun getIntent(context: Context): Intent =
+            Intent(context, ThankYouActivity::class.java)
     }
 }

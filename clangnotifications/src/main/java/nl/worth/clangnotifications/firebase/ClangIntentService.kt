@@ -17,12 +17,10 @@ internal class ClangIntentService : IntentService("ClangIntentService") {
         if (notificationId != null && id != null) {
             NotificationInteractor().logNotificationAction(notificationId, userId, id,
                 {
-                    val toast = Toast.makeText(applicationContext, "Thank you for your submit!", Toast.LENGTH_LONG)
-                    toast.show()
+                    Toast.makeText(applicationContext, "Thank you for your submit!", Toast.LENGTH_LONG).show()
                 },
                 {
-                    val toast = Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG)
-                    toast.show()
+                    Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
                 }
             )
         }

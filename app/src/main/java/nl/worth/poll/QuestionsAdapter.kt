@@ -28,8 +28,7 @@ class QuestionsAdapter(private val answers: List<QuestionItem>): RecyclerView.Ad
     }
 
     inner class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        val radioButton: RadioButton = view.findViewById(R.id.list_view_item_radio)
-        val text: TextView = view.findViewById(R.id.list_view_item_text)
+        val text: TextView = view.findViewById(R.id.question_text)
 
         fun onBind(item: QuestionItem) {
             text.text = item.text

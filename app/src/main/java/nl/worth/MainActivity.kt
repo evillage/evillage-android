@@ -20,27 +20,22 @@ class MainActivity : AppCompatActivity() {
         val registerBtn = findViewById<Button>(R.id.register)
         val loginBtn = findViewById<Button>(R.id.login)
         val pollBtn = findViewById<Button>(R.id.poll)
-        val mainText = findViewById<TextView>(R.id.mainText)
 
         clang = Clang.getInstance(this)
 
         registerBtn.setOnClickListener {
             clang.createAccount(this, {
-                val toast = Toast.makeText(applicationContext, it.id, Toast.LENGTH_LONG)
-                toast.show()
+                Toast.makeText(applicationContext, it.id, Toast.LENGTH_LONG).show()
             }, {
-                val toast = Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG)
-                toast.show()
+                Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
             })
         }
 
         loginBtn.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            startActivity(LoginActivity.getIntent(this))
         }
         pollBtn.setOnClickListener {
-            val intent = Intent(this, PollActivity::class.java)
-            startActivity(intent)
+            startActivity(PollActivity.getIntent(this))
         }
     }
 }

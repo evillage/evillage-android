@@ -1,5 +1,7 @@
 package nl.worth
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -25,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
         submit.setOnClickListener {
             clang.logEvent(this, "login", mapOf("title" to "Login", "userEmail" to email.text.toString()),
                 {
-                    startActivityForResult(ThankYouActivity.getIntent(this, email.text.toString()), 0)
+                    startActivityForResult(ThankYouActivity.getIntent(this), 0)
                 },
                 {
                     showAlertDialogOnErrorOccured(it)
@@ -47,5 +49,10 @@ class LoginActivity : AppCompatActivity() {
             ).show()
         }
         builder.show()
+    }
+
+    companion object {
+        fun getIntent(context: Context): Intent =
+            Intent(context, LoginActivity::class.java)
     }
 }

@@ -33,10 +33,7 @@ class ProductDetailsActivity : AppCompatActivity() {
     companion object {
         internal val productName: String = "name"
 
-        fun getProductDetails(): List<ProductDetails> {
-            val products: ArrayList<ProductDetails> = ArrayList()
-
-            products.add(
+        fun getProductDetails(): List<ProductDetails> = listOf(
                 ProductDetails(
                     "One Plus One 2014 3/64GB",
                     " Android Version: 5.1.1\n" +
@@ -47,9 +44,7 @@ class ProductDetailsActivity : AppCompatActivity() {
                             " Display resolution: 1080 x 1920 pixels, 16:9 ratio (~401 ppi density)",
                     "€ 336.95",
                     R.drawable.phone
-                )
-            )
-            products.add(
+                ),
                 ProductDetails(
                     "Xiaomi Redmi 4 (4X) 2017 3/32GB",
                     " Android Version: 9.0\n" +
@@ -60,9 +55,7 @@ class ProductDetailsActivity : AppCompatActivity() {
                             " Display resolution: 720 x 1280 pixels, 16:9 ratio (~294 ppi density)",
                     "€ 197.00",
                     R.drawable.phone
-                )
-            )
-            products.add(
+                ),
                 ProductDetails(
                     "Google Pixel 2 2017 4/64GB",
                     " Android Version: 8.0\n" +
@@ -73,9 +66,7 @@ class ProductDetailsActivity : AppCompatActivity() {
                             " Display resolution: 1080 x 1920 pixels, 16:9 ratio (~441 ppi density)",
                     "€ 309.99",
                     R.drawable.phone
-                )
-            )
-            products.add(
+                ),
                 ProductDetails(
                     "LG V30 2017 4/64GB",
                     " Android Version: 8.0\n" +
@@ -86,9 +77,7 @@ class ProductDetailsActivity : AppCompatActivity() {
                             " Display resolution: 1440 x 2880 pixels, 18:9 ratio (~537 ppi density)",
                     "€ 359.00",
                     R.drawable.phone
-                )
-            )
-            products.add(
+                ),
                 ProductDetails(
                     "Lenovo Moto G (3rd gen) 2015 1/8GB",
                     " Android Version: 9.0\n" +
@@ -101,9 +90,6 @@ class ProductDetailsActivity : AppCompatActivity() {
                     R.drawable.phone
                 )
             )
-
-            return products
-        }
 
         fun getIntent(context: Context, productItemName: String): Intent =
             Intent(context, ProductDetailsActivity::class.java).apply {
