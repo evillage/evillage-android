@@ -28,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
             clang.logEvent(this, "login", mapOf("title" to "Login", "userEmail" to email.text.toString()),
                 {
                     startActivityForResult(ThankYouActivity.getIntent(this), 0)
+                    finish()
                 },
                 {
                     showAlertDialogOnErrorOccured(it)

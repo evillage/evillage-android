@@ -37,6 +37,7 @@ class PollActivity : AppCompatActivity() {
             clang.logEvent(this, "pollSubmit", mapOf("title" to "FavouriteCarColour", "value" to item.text),
                 {
                     startActivityForResult(ThankYouActivity.getIntent(this), 0)
+                    finish()
                 },
                 {
                     showAlertDialogOnErrorOccured(it)

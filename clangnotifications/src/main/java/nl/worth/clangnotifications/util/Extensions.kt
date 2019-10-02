@@ -1,6 +1,7 @@
 package nl.worth.clangnotifications.util
 
 import android.content.Context
+import android.provider.Settings
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import nl.worth.clangnotifications.R
@@ -29,4 +30,8 @@ internal fun Context.saveIdToSharedPreferences(id: String) {
         putString( getString(R.string.saved_id_key), id)
         apply()
     }
+}
+
+internal fun Context.getAndroidId(): String {
+    return Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 }
