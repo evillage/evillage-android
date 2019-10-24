@@ -11,16 +11,16 @@ import retrofit2.http.POST
 
 internal interface RemoteRepository {
 
-    @POST("api/v1/account/register")
+    @POST("/push/account/register")
     fun createAccount(@Body createAccountModel: CreateAccountModel): Call<CreateAccountResponse>
 
-    @POST("api/v1/token/save")
+    @POST("/push/token/save")
     fun storeFirebaseToken(@Body tokenRequest: AccountModel): Call<ResponseBody>
 
-    @POST("/api/v1/notification/action")
+    @POST("/push/notification/action")
     fun logNotificationAction(@Body actionRequest: ActionRequest): Call<ResponseBody>
 
-    @POST("/api/v1/notification/event")
+    @POST("/push/notification/event")
     fun logEvent(@Body eventLog: EventLogRequest): Call<ResponseBody>
 
     companion object {
