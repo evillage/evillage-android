@@ -32,13 +32,11 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun handleClangNotification(data: Map<String, String>): Boolean {
-        val systemNotificationId = Random.nextInt(0, 100)
+        val systemNotificationId = Random.nextInt(0, Int.MAX_VALUE)
         val productTitle = data["notificationTitle"]
         val productContent = data["notificationBody"]
 
         val intent = Intent(this, ClangActivity::class.java)
-        val oldPendingIntent: PendingIntent = PendingIntent.getActivity(this, systemNotificationId, intent, 0)
-        oldPendingIntent.cancel()
         intent.apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             val list = arrayListOf<KeyValue>().apply {
@@ -46,7 +44,8 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
             }
             putExtra("keyValue", list)
         }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, systemNotificationId, intent, 0)
+        val pendingIntent: PendingIntent =
+            PendingIntent.getActivity(this, systemNotificationId, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val notificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val channelId = "channel-01"
@@ -90,11 +89,13 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
             actionId?.let {
                 actionTitle.let {
                     val pendingIntent =
-                        PendingIntent.getService(this, 0, Intent(this, ClangIntentService::class.java).apply {
-                            this.putExtra("notificationId", notId)
-                            this.putExtra("actionId", actionId)
-                            this.putExtra("systemNotificationId", systemNotificationId)
-                        }, 0)
+                        PendingIntent.getService(this, Random.nextInt(0, Int.MAX_VALUE) + i,
+                            Intent(this, ClangIntentService::class.java).apply {
+                                this.putExtra("notificationId", notId)
+                                this.putExtra("actionId", actionId)
+                                this.putExtra("systemNotificationId", systemNotificationId)
+                            }, PendingIntent.FLAG_UPDATE_CURRENT
+                        )
 
                     notificationBuilder.addAction(
                         android.R.drawable.ic_notification_overlay,
