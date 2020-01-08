@@ -1,3 +1,3 @@
 package nl.worth.clangnotifications.data.model
 
-data class CreateAccountResponse(val id: String)
+data class CreateAccountResponse(val id: String, val secret: String)

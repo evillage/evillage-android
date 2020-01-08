@@ -4,6 +4,7 @@ import nl.worth.clangnotifications.data.model.ActionRequest
 import nl.worth.clangnotifications.data.model.EventLogRequest
 import nl.worth.clangnotifications.data.model.PollData
 import nl.worth.clangnotifications.data.repository.RemoteRepository
+import nl.worth.clangnotifications.util.authenticationHeader
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,11 +16,12 @@ internal class NotificationInteractor {
         notificationId: String,
         userId: String,
         actionId: String,
+        secret: String,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
         val actionRequest = ActionRequest(notificationId, userId, actionId)
-        RemoteRepository.create().logNotificationAction(actionRequest).enqueue(object :
+        RemoteRepository.create().logNotificationAction(authenticationHeader(secret), actionRequest).enqueue(object :
             Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 errorCallback(t)
@@ -35,11 +37,12 @@ internal class NotificationInteractor {
         event: String,
         data: Map<String, String>,
         userId: String,
+        secret: String,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
         val eventLogRequest = EventLogRequest(userId, event, data)
-        RemoteRepository.create().logEvent(eventLogRequest).enqueue(object :
+        RemoteRepository.create().logEvent(authenticationHeader(secret), eventLogRequest).enqueue(object :
             Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 errorCallback(t)

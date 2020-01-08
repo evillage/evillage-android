@@ -24,10 +24,25 @@ internal fun Context.retrieveIdFromSP(): String {
     return userId ?: defaultValue
 }
 
-internal fun Context.saveIdToSharedPreferences(id: String) {
+internal fun Context.retrieveSecretFromSP(): String {
+    val sharedPref = getSharedPreferences("Clang", Context.MODE_PRIVATE)
+    val defaultValue = ""
+    val secret = sharedPref.getString(getString(R.string.saved_secret_key), defaultValue)
+    return secret ?: defaultValue
+}
+
+internal fun authenticationHeader(secret: String): String {
+    if (secret.isNotEmpty()) {
+        return "Bearer $secret"
+    }
+    return ""
+}
+
+internal fun Context.saveIdToSharedPreferences(id: String, secret: String) {
     val sharedPref = getSharedPreferences("Clang", Context.MODE_PRIVATE)
     with(sharedPref.edit()) {
         putString( getString(R.string.saved_id_key), id)
+        putString( getString(R.string.saved_secret_key), secret)
         apply()
     }
 }

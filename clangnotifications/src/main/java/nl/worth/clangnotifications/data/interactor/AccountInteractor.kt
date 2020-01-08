@@ -31,7 +31,7 @@ internal class AccountInteractor {
 
             override fun onResponse(call: Call<CreateAccountResponse>, response: Response<CreateAccountResponse>) {
                 response.body()?.let {
-                    context.saveIdToSharedPreferences(it.id)
+                    context.saveIdToSharedPreferences(it.id, it.secret)
                     successCallback(it)
                 } ?: errorCallback(NullPointerException("response null"))
             }

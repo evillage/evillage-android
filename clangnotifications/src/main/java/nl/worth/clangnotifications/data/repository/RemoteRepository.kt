@@ -7,6 +7,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 internal interface RemoteRepository {
@@ -15,13 +16,16 @@ internal interface RemoteRepository {
     fun createAccount(@Body createAccountModel: CreateAccountModel): Call<CreateAccountResponse>
 
     @POST("api/v1/token/save")
-    fun storeFirebaseToken(@Body tokenRequest: AccountModel): Call<ResponseBody>
+    fun storeFirebaseToken(@Header("authorization") secretHeader: String,
+                           @Body tokenRequest: AccountModel): Call<ResponseBody>
 
     @POST("/api/v1/notification/action")
-    fun logNotificationAction(@Body actionRequest: ActionRequest): Call<ResponseBody>
+    fun logNotificationAction(@Header("authorization") secretHeader: String,
+                              @Body actionRequest: ActionRequest): Call<ResponseBody>
 
     @POST("/api/v1/notification/event")
-    fun logEvent(@Body eventLog: EventLogRequest): Call<ResponseBody>
+    fun logEvent(@Header("authorization") secretHeader: String,
+                 @Body eventLog: EventLogRequest): Call<ResponseBody>
 
     companion object {
         fun create(): RemoteRepository {

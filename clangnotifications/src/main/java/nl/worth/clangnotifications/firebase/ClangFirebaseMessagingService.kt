@@ -15,6 +15,7 @@ import nl.worth.clangnotifications.data.interactor.TokenInteractor
 import nl.worth.clangnotifications.data.model.KeyValue
 import nl.worth.clangnotifications.ui.ClangActivity
 import nl.worth.clangnotifications.util.retrieveIdFromSP
+import nl.worth.clangnotifications.util.retrieveSecretFromSP
 import kotlin.random.Random
 
 open class ClangFirebaseMessagingService : FirebaseMessagingService() {
@@ -109,8 +110,9 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String?) {
         val id = retrieveIdFromSP()
+        val secret = retrieveSecretFromSP()
         token?.let { fbToken ->
-            TokenInteractor().sendTokenToServer(fbToken, id,
+            TokenInteractor().sendTokenToServer(fbToken, id, secret,
                 {
                     Log.d("TAG", "Refreshed token: $fbToken")
                 },
