@@ -1,6 +1,7 @@
 package nl.worth.clangnotifications.data.interactor
 
 import android.content.Context
+import nl.worth.clangnotifications.BuildConfig
 import nl.worth.clangnotifications.data.model.CreateAccountModel
 import nl.worth.clangnotifications.data.model.CreateAccountResponse
 import nl.worth.clangnotifications.data.repository.RemoteRepository
@@ -22,7 +23,7 @@ internal class AccountInteractor {
         errorCallback: (Throwable) -> Unit
     ) {
 
-        val account = CreateAccountModel(firebaseToken, context.getAndroidId())
+        val account = CreateAccountModel(firebaseToken, context.getAndroidId(), BuildConfig.CUSTOMER_ID)
         RemoteRepository.create().createAccount(account).enqueue(object :
             Callback<CreateAccountResponse> {
             override fun onFailure(call: Call<CreateAccountResponse>, t: Throwable) {
