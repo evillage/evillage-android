@@ -10,8 +10,8 @@ Go to [firebase console](https://console.firebase.google.com/) :
  3. Add gradle dependencies to main module and app module as the instruction says. Continue with the rest of steps to finish.
  4. Go to IDE where your project is open.
  5. Go to *gradle.properties* and add:
- `appId = your_application_unique_identifier`
- It is needed for server to identify the client application
+ `customerId = your_application_unique_identifier`
+ It is needed for server to identify the client application and set as build config field in build.gradle file.
 
 ## Adding library to already existing Android app
 
