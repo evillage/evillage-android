@@ -27,6 +27,10 @@ internal interface RemoteRepository {
     fun logEvent(@Header("authorization") secretHeader: String,
                  @Body eventLog: EventLogRequest): Call<ResponseBody>
 
+    @POST("/api/v1/properties")
+    fun updateProperties(@Header("authorization") secretHeader: String,
+                         @Body properties: PropertiesRequest): Call<ResponseBody>
+
     companion object {
         fun create(): RemoteRepository {
 

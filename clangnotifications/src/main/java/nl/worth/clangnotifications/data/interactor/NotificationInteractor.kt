@@ -2,7 +2,6 @@ package nl.worth.clangnotifications.data.interactor
 
 import nl.worth.clangnotifications.data.model.ActionRequest
 import nl.worth.clangnotifications.data.model.EventLogRequest
-import nl.worth.clangnotifications.data.model.PollData
 import nl.worth.clangnotifications.data.repository.RemoteRepository
 import nl.worth.clangnotifications.util.authenticationHeader
 import okhttp3.ResponseBody

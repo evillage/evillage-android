@@ -8,4 +8,5 @@
     <string name="password_hint">Enter password</string>
     <string name="login">Login</string>
     <string name="poll">Take a poll</string>
+    <string name="property">Set property</string>
 </resources>
