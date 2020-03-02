@@ -38,9 +38,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(PollActivity.getIntent(this))
         }
 
-
         propertyBtn.setOnClickListener {
-            startActivity(PropertiesActivity.getIntent(this))
+            clang.updateProperties(mapOf("title" to "Pizza", "value" to "Calzone"), {
+                Toast.makeText(applicationContext, it.id, Toast.LENGTH_LONG).show()
+            }, {
+                Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
+            })
         }
     }
 }
