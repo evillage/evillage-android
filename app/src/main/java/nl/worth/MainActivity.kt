@@ -20,10 +20,10 @@ class MainActivity : AppCompatActivity() {
         val pollBtn = findViewById<Button>(R.id.poll)
         val propertyBtn = findViewById<Button>(R.id.property)
 
-        clang = Clang.getInstance(this)
+        clang = Clang.getInstance()
 
         registerBtn.setOnClickListener {
-            clang.createAccount(this, {
+            clang.createAccount({
                 Toast.makeText(applicationContext, it.id, Toast.LENGTH_LONG).show()
             }, {
                 Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
