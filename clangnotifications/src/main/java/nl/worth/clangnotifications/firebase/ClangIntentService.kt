@@ -5,6 +5,7 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
 import nl.worth.clangnotifications.data.interactor.NotificationInteractor
+import nl.worth.clangnotifications.util.getUserId
 
 internal class ClangIntentService : IntentService("ClangIntentService") {
     override fun onHandleIntent(intent: Intent?) {
@@ -12,7 +13,7 @@ internal class ClangIntentService : IntentService("ClangIntentService") {
         val notificationId = intent?.getStringExtra("notificationId")
 
         if (notificationId != null && id != null) {
-            NotificationInteractor().logNotificationAction(notificationId, "userId", id, "secret",
+            NotificationInteractor().logNotificationAction("authHeader", notificationId, applicationContext.getUserId(), id,
                 {
                     Toast.makeText(applicationContext, "Thank you for your submit!", Toast.LENGTH_LONG).show()
                 },
