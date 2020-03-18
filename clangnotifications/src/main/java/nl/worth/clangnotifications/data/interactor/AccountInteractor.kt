@@ -9,8 +9,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.lang.NullPointerException
 
-
-
 internal class AccountInteractor {
 
     fun registerAccount(
