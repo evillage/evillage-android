@@ -1,22 +1,18 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
 
-
-
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "REMOTE_REPO_BASE_URL", '"https://firebase-demo.test.worth.systems"'
-
-        buildConfigField("String", "CUSTOMER_ID", "\"${customerId}\"")
+        buildConfigField "String", "REMOTE_REPO_BASE_URL", '"https://914261bf.ngrok.io"'
     }
 
     buildTypes {
@@ -39,6 +35,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-messaging:19.0.1'
     implementation 'com.android.support:recyclerview-v7'
+    implementation "androidx.security:security-crypto:1.0.0-alpha02"
+
 }
 repositories {
     mavenCentral()

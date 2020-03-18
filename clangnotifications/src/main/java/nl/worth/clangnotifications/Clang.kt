@@ -1,9 +1,11 @@
 package nl.worth.clangnotifications
+import android.content.Context
 import nl.worth.clangnotifications.data.model.CreateAccountResponse
 
 interface Clang {
 
     fun createAccount(
+        deviceId: String,
         successCallback: (CreateAccountResponse) -> Unit,
         errorCallback: (Throwable) -> Unit
     )
@@ -22,6 +24,10 @@ interface Clang {
     )
 
     companion object {
-        fun getInstance(): Clang = RemoteApiEvents()
+        fun getInstance(
+            context: Context,
+            authenticationToken: String,
+            integrationId: String
+        ): Clang = RemoteApiEvents(context, authenticationToken, integrationId)
     }
 }

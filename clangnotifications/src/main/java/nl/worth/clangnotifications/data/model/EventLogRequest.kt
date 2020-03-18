@@ -1,3 +1,8 @@
 package nl.worth.clangnotifications.data.model
 
-data class EventLogRequest(val userId: String, val event: String, val data: Map<String, String>)
+data class EventLogRequest(
+    val userId: String,
+    val event: String,
+    val data: Map<String, String>,
+    val integrationId: String
+)

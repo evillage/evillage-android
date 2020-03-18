@@ -5,19 +5,12 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application>
-        <activity android:name=".ui.subscription.SubscriptionActivity">
-        </activity>
-
         <service
                 android:name=".firebase.ClangIntentService"
                 android:exported="false">
         </service>
 
         <activity android:name=".ui.ClangActivity">
-        </activity>
-        <activity android:name=".ui.ThankYouActivity">
-        </activity>
-        <activity android:name=".ui.CreateAccountActivity">
         </activity>
 
         <service

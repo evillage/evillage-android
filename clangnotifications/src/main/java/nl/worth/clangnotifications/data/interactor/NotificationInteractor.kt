@@ -12,16 +12,19 @@ import retrofit2.Response
 internal class NotificationInteractor {
 
     fun logNotificationAction(
+        authenticationToken: String,
         notificationId: String,
         userId: String,
         actionId: String,
-        secret: String,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
         val actionRequest = ActionRequest(notificationId, userId, actionId)
-        RemoteRepository.create().logNotificationAction(authenticationHeader(secret), actionRequest).enqueue(object :
-            Callback<ResponseBody> {
+
+        RemoteRepository.create().logNotificationAction(
+            authenticationHeader(authenticationToken),
+            actionRequest
+        ).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 errorCallback(t)
             }
@@ -33,15 +36,17 @@ internal class NotificationInteractor {
     }
 
     fun logEvent(
+        authenticationToken: String,
+        integrationId: String,
         event: String,
         data: Map<String, String>,
         userId: String,
-        secret: String,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
-        val eventLogRequest = EventLogRequest(userId, event, data)
-        RemoteRepository.create().logEvent(authenticationHeader(secret), eventLogRequest).enqueue(object :
+        val eventLogRequest = EventLogRequest(userId, event, data, integrationId)
+
+        RemoteRepository.create().logEvent(authenticationHeader(authenticationToken), eventLogRequest).enqueue(object :
             Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 errorCallback(t)

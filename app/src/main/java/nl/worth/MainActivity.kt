@@ -2,6 +2,8 @@ package nl.worth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
+import android.provider.Settings.*
 import android.widget.Button
 import android.widget.Toast
 import nl.worth.clangnotifications.Clang
@@ -20,10 +22,13 @@ class MainActivity : AppCompatActivity() {
         val pollBtn = findViewById<Button>(R.id.poll)
         val propertyBtn = findViewById<Button>(R.id.property)
 
-        clang = Clang.getInstance()
+        clang = Clang.getInstance(applicationContext,"46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5", "63f4bf70-2a0d-4eb2-b35a-531da0a61b20")
+
+        // UNIQUE DEVICE IDENTIFIER: prefer to use AdvertisingId
+        val deviceId: String = Secure.getString(contentResolver, Secure.ANDROID_ID)
 
         registerBtn.setOnClickListener {
-            clang.createAccount({
+            clang.createAccount(deviceId, {
                 Toast.makeText(applicationContext, it.id, Toast.LENGTH_LONG).show()
             }, {
                 Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
@@ -39,8 +44,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         propertyBtn.setOnClickListener {
-            clang.updateProperties(mapOf("title" to "Pizza", "value" to "Calzone"), {
-                Toast.makeText(applicationContext, it.id, Toast.LENGTH_LONG).show()
+            clang.updateProperties(mapOf("pizzaPreference" to "Calzone"), {
+                Toast.makeText(applicationContext, "Pizza preference submitted", Toast.LENGTH_LONG).show()
             }, {
                 Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
             })

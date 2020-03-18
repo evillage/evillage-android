@@ -12,16 +12,19 @@ import retrofit2.Response
 internal class PropertiesInteractor {
 
     fun updateProperties (
+        authenticationToken: String,
+        integrationId: String,
         data: Map<String, String>,
         userId: String,
-        secret: String,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
-        val propertiesRequest = PropertiesRequest(userId, data)
+        val propertiesRequest = PropertiesRequest(userId, integrationId, data)
 
-        RemoteRepository.create().updateProperties(authenticationHeader(secret), propertiesRequest).enqueue(object :
-            Callback<ResponseBody> {
+        RemoteRepository.create().updateProperties(
+            authenticationHeader(authenticationToken),
+            propertiesRequest
+        ).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 errorCallback(t)
             }
