@@ -10,9 +10,6 @@
                 android:exported="false">
         </service>
 
-        <activity android:name=".ui.ClangActivity">
-        </activity>
-
         <service
                 android:name=".firebase.ClangFirebaseMessagingService"
                 android:exported="false">

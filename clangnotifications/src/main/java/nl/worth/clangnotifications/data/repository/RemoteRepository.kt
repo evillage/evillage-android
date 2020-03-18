@@ -20,7 +20,7 @@ internal interface RemoteRepository {
 
     @POST("api/v1/token/save")
     fun storeFirebaseToken(@Header("authorization") bearerToken: String,
-                           @Body tokenRequest: AccountModel): Call<ResponseBody>
+                           @Body tokenRequest: TokenUpdateRequest): Call<ResponseBody>
 
     @POST("/api/v1/notification/action")
     fun logNotificationAction(@Header("authorization") bearerToken: String,

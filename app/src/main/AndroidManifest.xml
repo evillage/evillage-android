@@ -39,6 +39,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="nl.worth.NotificationClickedActivity" />
+
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_channel_id"
                 android:value="channel-01"/>

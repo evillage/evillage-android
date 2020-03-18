@@ -13,7 +13,7 @@ import com.google.firebase.messaging.RemoteMessage
 import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.data.interactor.TokenInteractor
 import nl.worth.clangnotifications.data.model.KeyValue
-import nl.worth.clangnotifications.ui.ClangActivity
+import nl.worth.clangnotifications.util.getUserId
 import kotlin.random.Random
 
 open class ClangFirebaseMessagingService : FirebaseMessagingService() {
@@ -35,7 +35,8 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
         val productTitle = data["notificationTitle"]
         val productContent = data["notificationBody"]
 
-        val intent = Intent(this, ClangActivity::class.java)
+        val intent = Intent(this, nl.worth.NotificationClickedActivity::class.java)
+
         intent.apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             val list = arrayListOf<KeyValue>().apply {
@@ -108,7 +109,7 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String?) {
         token?.let { fbToken ->
-            TokenInteractor().sendTokenToServer(fbToken, "id", "secret",
+            TokenInteractor().sendTokenToServer(fbToken, applicationContext.getUserId(),
                 {
                     Log.d("TAG", "Refreshed token: $fbToken")
                 },

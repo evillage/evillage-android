@@ -62,4 +62,20 @@ internal class RemoteApiEvents(
             )
         }
     }
+
+    override fun logNotificationAction(
+        actionId: String,
+        notificationId: String,
+        successCallback: () -> Unit,
+        errorCallback: (Throwable) -> Unit
+    ) {
+        NotificationInteractor().logNotificationAction(
+            authenticationToken,
+            notificationId,
+            context.getUserId(),
+            actionId,
+            successCallback,
+            errorCallback
+        )
+    }
 }
