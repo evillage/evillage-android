@@ -4,6 +4,7 @@ import android.content.Context
 import nl.worth.clangnotifications.data.interactor.AccountInteractor
 import nl.worth.clangnotifications.data.interactor.NotificationInteractor
 import nl.worth.clangnotifications.data.interactor.PropertiesInteractor
+import nl.worth.clangnotifications.data.interactor.TokenInteractor
 import nl.worth.clangnotifications.data.model.CreateAccountResponse
 import nl.worth.clangnotifications.util.getUserId
 import nl.worth.clangnotifications.util.retrieveFirebaseToken
@@ -74,6 +75,19 @@ internal class RemoteApiEvents(
             notificationId,
             context.getUserId(),
             actionId,
+            successCallback,
+            errorCallback
+        )
+    }
+
+    override fun updateToken (
+        firebaseToken: String,
+        successCallback: () -> Unit,
+        errorCallback: (Throwable) -> Unit
+    ) {
+        TokenInteractor().sendTokenToServer(
+            firebaseToken,
+            context.getUserId(),
             successCallback,
             errorCallback
         )

@@ -1,6 +1,6 @@
 package nl.worth
 
-import nl.worth.clangnotifications.firebase.ClangFirebaseMessagingService
+import nl.worth.notifications.ClangFirebaseMessagingService
 
 class AppFirebaseService : ClangFirebaseMessagingService()
 

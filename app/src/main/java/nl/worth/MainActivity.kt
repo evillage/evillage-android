@@ -2,7 +2,6 @@ package nl.worth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
 import android.provider.Settings.*
 import android.widget.Button
 import android.widget.Toast

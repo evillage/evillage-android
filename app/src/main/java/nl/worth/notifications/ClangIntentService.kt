@@ -1,19 +1,22 @@
-package nl.worth.clangnotifications.firebase
+package nl.worth.notifications
 
 import android.app.IntentService
 import android.content.Intent
 import android.widget.Toast
 import androidx.core.app.NotificationManagerCompat
-import nl.worth.clangnotifications.data.interactor.NotificationInteractor
-import nl.worth.clangnotifications.util.getUserId
+import nl.worth.clangnotifications.Clang
 
 internal class ClangIntentService : IntentService("ClangIntentService") {
+    lateinit var clang : Clang
+
     override fun onHandleIntent(intent: Intent?) {
-        val id = intent?.getStringExtra("actionId")
+        clang = Clang.getInstance(applicationContext,"46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5", "63f4bf70-2a0d-4eb2-b35a-531da0a61b20")
+
+        val actionId = intent?.getStringExtra("actionId")
         val notificationId = intent?.getStringExtra("notificationId")
 
-        if (notificationId != null && id != null) {
-            NotificationInteractor().logNotificationAction("authHeader", notificationId, applicationContext.getUserId(), id,
+        if (notificationId != null && actionId != null) {
+            clang.logNotificationAction(actionId, notificationId,
                 {
                     Toast.makeText(applicationContext, "Thank you for your submit!", Toast.LENGTH_LONG).show()
                 },
