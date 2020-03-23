@@ -1,4 +1,4 @@
-package nl.worth
+package nl.worth.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -66,11 +66,10 @@ internal class NotificationClickedActivity : AppCompatActivity() {
     }
 
     private fun sendAction(actionId: String, notificationId: String) {
-        clang.logNotificationAction(actionId, notificationId,
-            {
+        clang.logNotificationAction(actionId, notificationId, {
 
-            }, {
-                Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
-            })
+        }, {
+            Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
+        })
     }
 }
