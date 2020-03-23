@@ -1,4 +1,4 @@
-package nl.worth.poll
+package nl.worth.ui.poll
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_poll.*
-import nl.worth.MainActivity
+import nl.worth.ui.MainActivity
 import nl.worth.R
+import nl.worth.data.QuestionItem
 
 /**
  * A simple [Fragment] subclass.

@@ -13,6 +13,7 @@ import com.google.firebase.messaging.RemoteMessage
 import nl.worth.clangnotifications.Clang
 import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.data.model.KeyValue
+import nl.worth.ui.NotificationClickedActivity
 import kotlin.random.Random
 
 open class ClangFirebaseMessagingService : FirebaseMessagingService() {
@@ -35,7 +36,7 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
         val productTitle = data["notificationTitle"]
         val productContent = data["notificationBody"]
 
-        val intent = Intent(this, nl.worth.NotificationClickedActivity::class.java)
+        val intent = Intent(this, NotificationClickedActivity::class.java)
 
         intent.apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

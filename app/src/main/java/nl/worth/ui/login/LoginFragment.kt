@@ -1,4 +1,4 @@
-package nl.worth
+package nl.worth.ui.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_login.*
+import nl.worth.ui.MainActivity
+import nl.worth.R
 
 /**
  * A simple [Fragment] subclass.
@@ -31,11 +33,15 @@ class LoginFragment : Fragment() {
     private var submitClickListener = View.OnClickListener {
         when {
             et_email.text.isNullOrEmpty() -> {
-                et_email.setError("Email address not filled in!", requireContext().getDrawable(R.drawable.ic_error))
+                et_email.setError("Email address not filled in!", requireContext().getDrawable(
+                    R.drawable.ic_error
+                ))
                 et_email.requestFocus()
             }
             et_password.text.isNullOrEmpty() -> {
-                et_password.setError("Password not filled in!", requireContext().getDrawable(R.drawable.ic_error))
+                et_password.setError("Password not filled in!", requireContext().getDrawable(
+                    R.drawable.ic_error
+                ))
                 et_password.requestFocus()
             }
             else -> {

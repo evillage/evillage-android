@@ -1,4 +1,4 @@
-package nl.worth
+package nl.worth.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,7 @@ import android.provider.Settings.Secure
 import android.widget.Toast
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.fragment_main.*
+import nl.worth.R
 
 /**
  * A simple [Fragment] subclass.

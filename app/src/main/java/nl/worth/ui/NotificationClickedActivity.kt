@@ -1,4 +1,4 @@
-package nl.worth
+package nl.worth.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
