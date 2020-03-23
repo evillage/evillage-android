@@ -9,4 +9,7 @@
     <string name="login">Login</string>
     <string name="poll">Take a poll</string>
     <string name="property">Set property</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

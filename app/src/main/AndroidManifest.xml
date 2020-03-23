@@ -12,6 +12,16 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
+        <activity android:name=".NotificationClickedActivity" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
         <service
                 android:name=".notifications.ClangIntentService"
                 android:exported="false">
@@ -25,11 +35,6 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".thank_you.ThankYouActivity">
-        </activity>
-        <activity android:name=".poll.PollActivity">
-        </activity>
-
         <service
                 android:name=".AppFirebaseService"
                 android:exported="false">
@@ -38,26 +43,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".product_details.ProductDetailsActivity">
-        </activity>
-        <activity android:name=".product_overview.ProductOverviewActivity">
-        </activity>
-        <activity android:name=".LoginActivity">
-        </activity>
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-
-        <activity android:name="nl.worth.NotificationClickedActivity" />
-
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_channel_id"
                 android:value="channel-01"/>
     </application>
-
 </manifest>

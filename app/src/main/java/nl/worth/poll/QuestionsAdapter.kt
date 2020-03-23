@@ -12,7 +12,6 @@ class QuestionsAdapter(private val answers: List<QuestionItem>): RecyclerView.Ad
 
     var onItemClick: ((QuestionItem) -> Unit)? = null
 
-
     override fun getItemCount() = answers.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
