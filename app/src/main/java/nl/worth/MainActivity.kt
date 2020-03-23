@@ -1,10 +1,10 @@
 package nl.worth
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
+import android.provider.Settings.*
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import nl.worth.clangnotifications.Clang
 import nl.worth.poll.PollActivity
@@ -20,11 +20,15 @@ class MainActivity : AppCompatActivity() {
         val registerBtn = findViewById<Button>(R.id.register)
         val loginBtn = findViewById<Button>(R.id.login)
         val pollBtn = findViewById<Button>(R.id.poll)
+        val propertyBtn = findViewById<Button>(R.id.property)
 
-        clang = Clang.getInstance(this)
+        clang = Clang.getInstance(applicationContext,"46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5", "63f4bf70-2a0d-4eb2-b35a-531da0a61b20")
+
+        // UNIQUE DEVICE IDENTIFIER: prefer to use AdvertisingId
+        val deviceId: String = Secure.getString(contentResolver, Secure.ANDROID_ID)
 
         registerBtn.setOnClickListener {
-            clang.createAccount(this, {
+            clang.createAccount(deviceId, {
                 Toast.makeText(applicationContext, it.id, Toast.LENGTH_LONG).show()
             }, {
                 Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
@@ -34,8 +38,17 @@ class MainActivity : AppCompatActivity() {
         loginBtn.setOnClickListener {
             startActivity(LoginActivity.getIntent(this))
         }
+
         pollBtn.setOnClickListener {
             startActivity(PollActivity.getIntent(this))
+        }
+
+        propertyBtn.setOnClickListener {
+            clang.updateProperties(mapOf("pizzaPreference" to "Calzone"), {
+                Toast.makeText(applicationContext, "Pizza preference submitted", Toast.LENGTH_LONG).show()
+            }, {
+                Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
+            })
         }
     }
 }

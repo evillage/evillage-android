@@ -25,7 +25,11 @@ class PollActivity : AppCompatActivity() {
         val question = findViewById<TextView>(R.id.question)
         question.text = "What is you favourite car color?"
 
-        clang = Clang.getInstance(this)
+        clang = Clang.getInstance(
+            applicationContext,
+            "46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5",
+            "63f4bf70-2a0d-4eb2-b35a-531da0a61b20")
+
         val topicsAdapter = QuestionsAdapter(getAnswers())
 
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
@@ -34,7 +38,7 @@ class PollActivity : AppCompatActivity() {
         recyclerView.adapter = topicsAdapter
 
         topicsAdapter.onItemClick = { item ->
-            clang.logEvent(this, "pollSubmit", mapOf("title" to "FavouriteCarColour", "value" to item.text),
+            clang.logEvent("pollSubmit", mapOf("title" to "FavouriteCarColour", "value" to item.text),
                 {
                     startActivityForResult(ThankYouActivity.getIntent(this), 0)
                     finish()

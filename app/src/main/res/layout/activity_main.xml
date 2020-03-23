@@ -38,4 +38,12 @@
             tools:layout_editor_absoluteY="390dp"
             tools:layout_editor_absoluteX="161dp"/>
 
+    <Button
+            android:id="@+id/property"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/property"
+            tools:layout_editor_absoluteY="390dp"
+            tools:layout_editor_absoluteX="161dp"/>
+
 </LinearLayout>

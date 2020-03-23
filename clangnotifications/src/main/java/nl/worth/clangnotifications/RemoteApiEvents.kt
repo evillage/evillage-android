@@ -3,34 +3,60 @@ package nl.worth.clangnotifications
 import android.content.Context
 import nl.worth.clangnotifications.data.interactor.AccountInteractor
 import nl.worth.clangnotifications.data.interactor.NotificationInteractor
+import nl.worth.clangnotifications.data.interactor.PropertiesInteractor
 import nl.worth.clangnotifications.data.model.CreateAccountResponse
+import nl.worth.clangnotifications.util.getUserId
 import nl.worth.clangnotifications.util.retrieveFirebaseToken
-import nl.worth.clangnotifications.util.retrieveIdFromSP
-import nl.worth.clangnotifications.util.retrieveSecretFromSP
 
-internal class RemoteApiEvents(val context: Context) : Clang {
+internal class RemoteApiEvents(
+    private val context: Context,
+    private val authenticationToken: String,
+    private val integrationId: String) : Clang {
+
     override fun logEvent(
-        context: Context,
         event: String,
         data: Map<String, String>,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
-        val userId = context.retrieveIdFromSP()
-        val secret = context.retrieveSecretFromSP()
+        NotificationInteractor().logEvent(
+            authenticationToken,
+            integrationId,
+            event,
+            data,
+            context.getUserId(),
+            successCallback,
+            errorCallback
+        )
+    }
 
-        NotificationInteractor().logEvent(event, data, userId, secret, successCallback, errorCallback)
+    override fun updateProperties(
+        data: Map<String, String>,
+        successCallback: () -> Unit,
+        errorCallback: (Throwable) -> Unit
+    ) {
+        PropertiesInteractor().updateProperties(
+            authenticationToken,
+            integrationId,
+            data,
+            context.getUserId(),
+            successCallback,
+            errorCallback
+        )
     }
 
     override fun createAccount(
-        context: Context,
+        deviceId: String,
         successCallback: (CreateAccountResponse) -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
         retrieveFirebaseToken { token ->
             AccountInteractor().registerAccount(
-                token,
                 context,
+                authenticationToken,
+                integrationId,
+                token,
+                deviceId,
                 successCallback,
                 errorCallback
             )

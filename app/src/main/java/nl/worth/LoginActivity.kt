@@ -20,12 +20,11 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         val submit = findViewById<Button>(R.id.submit)
         val email = findViewById<EditText>(R.id.email)
-        val password = findViewById<EditText>(R.id.password)
 
-        clang = Clang.getInstance(this)
+        clang = Clang.getInstance(applicationContext,"46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5", "63f4bf70-2a0d-4eb2-b35a-531da0a61b20")
 
         submit.setOnClickListener {
-            clang.logEvent(this, "login", mapOf("title" to "Login", "userEmail" to email.text.toString()),
+            clang.logEvent("login", mapOf("title" to "Login", "userEmail" to email.text.toString()),
                 {
                     startActivityForResult(ThankYouActivity.getIntent(this), 0)
                     finish()
