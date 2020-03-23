@@ -5,14 +5,14 @@ import nl.worth.clangnotifications.data.interactor.AccountInteractor
 import nl.worth.clangnotifications.data.interactor.NotificationInteractor
 import nl.worth.clangnotifications.data.interactor.PropertiesInteractor
 import nl.worth.clangnotifications.data.interactor.TokenInteractor
-import nl.worth.clangnotifications.data.model.CreateAccountResponse
+import nl.worth.clangnotifications.data.model.ClangAccountResponse
 import nl.worth.clangnotifications.util.getUserId
 import nl.worth.clangnotifications.util.retrieveFirebaseToken
 
-internal class RemoteApiEvents(
+class ClangImplementation(
     private val context: Context,
     private val authenticationToken: String,
-    private val integrationId: String) : Clang {
+    private val integrationId: String) : Clang() {
 
     override fun logEvent(
         event: String,
@@ -48,7 +48,7 @@ internal class RemoteApiEvents(
 
     override fun createAccount(
         deviceId: String,
-        successCallback: (CreateAccountResponse) -> Unit,
+        successCallback: (ClangAccountResponse) -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
         retrieveFirebaseToken { token ->
@@ -92,4 +92,5 @@ internal class RemoteApiEvents(
             errorCallback
         )
     }
+
 }

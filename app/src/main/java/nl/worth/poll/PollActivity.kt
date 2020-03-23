@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import nl.worth.R
 import nl.worth.clangnotifications.Clang
+import nl.worth.clangnotifications.ClangImplementation
 import nl.worth.thank_you.ThankYouActivity
 
 class PollActivity : AppCompatActivity() {
@@ -24,7 +25,6 @@ class PollActivity : AppCompatActivity() {
 
         val question = findViewById<TextView>(R.id.question)
         question.text = "What is you favourite car color?"
-
         clang = Clang.getInstance(
             applicationContext,
             "46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5",

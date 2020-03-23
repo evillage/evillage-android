@@ -1,47 +1,56 @@
 package nl.worth.clangnotifications
+
 import android.content.Context
-import nl.worth.clangnotifications.data.model.CreateAccountResponse
+import nl.worth.clangnotifications.data.model.ClangAccountResponse
 
-interface Clang {
+abstract class Clang {
 
-    fun createAccount(
+    abstract fun createAccount(
         deviceId: String,
-        successCallback: (CreateAccountResponse) -> Unit,
+        successCallback: (ClangAccountResponse) -> Unit,
         errorCallback: (Throwable) -> Unit
     )
 
-    fun logEvent(
+    abstract fun logEvent(
         event: String,
         data: Map<String, String>,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     )
 
-    fun updateProperties(
+    abstract fun updateProperties(
         data: Map<String, String>,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     )
 
-    fun logNotificationAction(
+    abstract fun logNotificationAction(
         actionId: String,
         notificationId: String,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     )
 
-    fun updateToken (
+    abstract fun updateToken(
         firebaseToken: String,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     )
 
     companion object {
+        @Volatile
+        private var instance: ClangImplementation? = null
 
         fun getInstance(
             context: Context,
             authenticationToken: String,
             integrationId: String
-        ): Clang = RemoteApiEvents(context, authenticationToken, integrationId)
+        ): Clang {
+            return if (instance == null) {
+                ClangImplementation(context, authenticationToken, integrationId)
+            } else {
+                instance as ClangImplementation
+            }
+        }
     }
 }

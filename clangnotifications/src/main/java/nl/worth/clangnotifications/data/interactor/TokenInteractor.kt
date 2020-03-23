@@ -1,7 +1,7 @@
 package nl.worth.clangnotifications.data.interactor
 
-import nl.worth.clangnotifications.data.model.TokenUpdateRequest
-import nl.worth.clangnotifications.data.repository.RemoteRepository
+import nl.worth.clangnotifications.data.model.ClangTokenUpdate
+import nl.worth.clangnotifications.data.repository.ClangApiClient
 import nl.worth.clangnotifications.util.authenticationHeader
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -15,9 +15,9 @@ internal class TokenInteractor {
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
-        val account = TokenUpdateRequest(userId, firebaseToken)
+        val account = ClangTokenUpdate(userId, firebaseToken)
 
-        RemoteRepository.create().storeFirebaseToken(
+        ClangApiClient.getInstance().storeFirebaseToken(
             authenticationHeader("authenticationHeader"), // not required since no Clang API call
             account
         ).enqueue(object : Callback<ResponseBody> {

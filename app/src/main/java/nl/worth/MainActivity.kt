@@ -6,6 +6,7 @@ import android.provider.Settings.*
 import android.widget.Button
 import android.widget.Toast
 import nl.worth.clangnotifications.Clang
+import nl.worth.clangnotifications.ClangImplementation
 import nl.worth.poll.PollActivity
 
 
