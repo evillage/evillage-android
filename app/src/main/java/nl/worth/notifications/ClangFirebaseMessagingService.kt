@@ -1,4 +1,4 @@
-package nl.worth.clangnotifications.firebase
+package nl.worth.notifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,13 +10,13 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import nl.worth.clangnotifications.Clang
 import nl.worth.clangnotifications.R
-import nl.worth.clangnotifications.data.interactor.TokenInteractor
 import nl.worth.clangnotifications.data.model.KeyValue
-import nl.worth.clangnotifications.ui.ClangActivity
 import kotlin.random.Random
 
 open class ClangFirebaseMessagingService : FirebaseMessagingService() {
+    lateinit var clang: Clang
 
     override fun onMessageReceived(p0: RemoteMessage?) {
         p0?.data?.let { data ->
@@ -35,7 +35,8 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
         val productTitle = data["notificationTitle"]
         val productContent = data["notificationBody"]
 
-        val intent = Intent(this, ClangActivity::class.java)
+        val intent = Intent(this, nl.worth.NotificationClickedActivity::class.java)
+
         intent.apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             val list = arrayListOf<KeyValue>().apply {
@@ -66,12 +67,12 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
-        //FIXME: side effects!!!!!!
         addActions(data, builder, systemNotificationId)
 
         with(NotificationManagerCompat.from(this)) {
             notify(systemNotificationId, builder.build())
         }
+
         return true
     }
 
@@ -108,7 +109,8 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String?) {
         token?.let { fbToken ->
-            TokenInteractor().sendTokenToServer(fbToken, "id", "secret",
+            clang = Clang.getInstance(applicationContext,"46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5", "63f4bf70-2a0d-4eb2-b35a-531da0a61b20")
+            clang.updateToken(fbToken,
                 {
                     Log.d("TAG", "Refreshed token: $fbToken")
                 },

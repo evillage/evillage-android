@@ -52,13 +52,9 @@ internal fun Context.getUserId(): String {
     return sharedPreferences.getString("user.id", "").orEmpty()
 }
 
-internal fun authenticationHeader(secret: String): String {
-    if (secret.isNotEmpty()) {
-        return "Bearer $secret"
+internal fun authenticationHeader(bearerToken: String): String {
+    if (bearerToken.isNotEmpty()) {
+        return "Bearer $bearerToken"
     }
     return ""
-}
-
-internal fun Context.getAndroidId(): String {
-    return Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 }

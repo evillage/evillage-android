@@ -1,19 +1,23 @@
-package nl.worth.clangnotifications.ui
+package nl.worth
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import nl.worth.clangnotifications.Clang
 import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.data.model.KeyValue
-import nl.worth.clangnotifications.firebase.ClangIntentService
 
-internal class ClangActivity : AppCompatActivity() {
+internal class NotificationClickedActivity : AppCompatActivity() {
+
+    lateinit var clang: Clang
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_clang)
+
         val title = findViewById<TextView>(R.id.title)
         val description = findViewById<TextView>(R.id.description)
         val action1Btn = findViewById<Button>(R.id.action1)
@@ -46,6 +50,8 @@ internal class ClangActivity : AppCompatActivity() {
                 }
             }
         }
+
+        clang = Clang.getInstance(applicationContext,"46b6dfb6-d5fe-47b1-b4a2-b92cbb30f0a5", "63f4bf70-2a0d-4eb2-b35a-531da0a61b20")
     }
 
     private fun onActionClick(
@@ -60,9 +66,11 @@ internal class ClangActivity : AppCompatActivity() {
     }
 
     private fun sendAction(actionId: String, notificationId: String) {
-        startService(Intent(this, ClangIntentService::class.java).apply {
-            this.putExtra("notificationId", notificationId)
-            this.putExtra("actionId", actionId)
-        })
+        clang.logNotificationAction(actionId, notificationId,
+            {
+
+            }, {
+                Toast.makeText(applicationContext, it.message, Toast.LENGTH_LONG).show()
+            })
     }
 }

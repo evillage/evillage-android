@@ -23,7 +23,21 @@ interface Clang {
         errorCallback: (Throwable) -> Unit
     )
 
+    fun logNotificationAction(
+        actionId: String,
+        notificationId: String,
+        successCallback: () -> Unit,
+        errorCallback: (Throwable) -> Unit
+    )
+
+    fun updateToken (
+        firebaseToken: String,
+        successCallback: () -> Unit,
+        errorCallback: (Throwable) -> Unit
+    )
+
     companion object {
+
         fun getInstance(
             context: Context,
             authenticationToken: String,

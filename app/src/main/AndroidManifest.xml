@@ -11,6 +11,20 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+
+        <service
+                android:name=".notifications.ClangIntentService"
+                android:exported="false">
+        </service>
+
+        <service
+                android:name=".notifications.ClangFirebaseMessagingService"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
         <activity android:name=".thank_you.ThankYouActivity">
         </activity>
         <activity android:name=".poll.PollActivity">
@@ -38,6 +52,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name="nl.worth.NotificationClickedActivity" />
 
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_channel_id"
