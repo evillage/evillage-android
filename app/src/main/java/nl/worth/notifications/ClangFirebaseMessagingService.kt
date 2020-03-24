@@ -13,6 +13,7 @@ import com.google.firebase.messaging.RemoteMessage
 import nl.worth.clangnotifications.Clang
 import nl.worth.clangnotifications.R
 import nl.worth.clangnotifications.data.model.ClangKeyValue
+import nl.worth.ui.NotificationClickedActivity
 import kotlin.random.Random
 
 open class ClangFirebaseMessagingService : FirebaseMessagingService() {

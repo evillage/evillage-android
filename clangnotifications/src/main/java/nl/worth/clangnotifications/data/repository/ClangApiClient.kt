@@ -2,6 +2,7 @@ package nl.worth.clangnotifications.data.repository
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import nl.worth.clangnotifications.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

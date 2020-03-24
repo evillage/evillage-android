@@ -23,6 +23,8 @@ class PollFragment : Fragment() {
         requireActivity() as MainActivity
     }
 
+    private lateinit var question: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,17 +45,23 @@ class PollFragment : Fragment() {
             QuestionItem(false, "Blue")
         ))
 
+        btn_submit.setOnClickListener(submitClickListener)
+
         rv_recycler_view.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
         rv_recycler_view.layoutManager = LinearLayoutManager(requireContext())
         rv_recycler_view.adapter = topicsAdapter
 
         topicsAdapter.onItemClick = { question ->
-            mainActivity.clang.logEvent("pollSubmit", mapOf("title" to "FavoriteCarColor", "value" to question.text), {
-                showAlertDialog()
-            }, {
-                showAlertDialog(it)
-            })
+           this.question = question.text
         }
+    }
+
+    private var submitClickListener = View.OnClickListener {
+        mainActivity.clang.logEvent("pollSubmit", mapOf("title" to "FavoriteCarColor", "value" to question), {
+            showAlertDialog()
+        }, {
+            showAlertDialog(it)
+        })
     }
 
     private fun showAlertDialog(throwable: Throwable? = null) {
