@@ -7,7 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import nl.worth.clangnotifications.Clang
 import nl.worth.clangnotifications.R
-import nl.worth.clangnotifications.data.model.KeyValue
+import nl.worth.clangnotifications.data.model.ClangKeyValue
 
 internal class NotificationClickedActivity : AppCompatActivity() {
 
@@ -24,29 +24,29 @@ internal class NotificationClickedActivity : AppCompatActivity() {
         val action2Btn = findViewById<Button>(R.id.action2)
         val action3Btn = findViewById<Button>(R.id.action3)
 
-        val keyValue: ArrayList<KeyValue> = intent.getParcelableArrayListExtra("keyValue")
+        val clangKeyValue: ArrayList<ClangKeyValue> = intent.getParcelableArrayListExtra("keyValue")
 
-        title.text = keyValue.find { it.key == "notificationTitle" }?.value
-        description.text = keyValue.find { it.key == "notificationBody" }?.value
-        action1Btn.text = keyValue.find { it.key == "action1Title" }?.value
-        action2Btn.text = keyValue.find { it.key == "action2Title" }?.value
-        action3Btn.text = keyValue.find { it.key == "action3Title" }?.value
+        title.text = clangKeyValue.find { it.key == "notificationTitle" }?.value
+        description.text = clangKeyValue.find { it.key == "notificationBody" }?.value
+        action1Btn.text = clangKeyValue.find { it.key == "action1Title" }?.value
+        action2Btn.text = clangKeyValue.find { it.key == "action2Title" }?.value
+        action3Btn.text = clangKeyValue.find { it.key == "action3Title" }?.value
 
-        val notificationId = keyValue.find { it.key == "notificationId" }?.value
+        val notificationId = clangKeyValue.find { it.key == "notificationId" }?.value
         notificationId?.let {
             action1Btn.apply {
                 setOnClickListener {
-                    onActionClick(keyValue, notificationId, "action1Id")
+                    onActionClick(clangKeyValue, notificationId, "action1Id")
                 }
             }
             action2Btn.apply {
                 setOnClickListener {
-                    onActionClick(keyValue, notificationId, "action2Id")
+                    onActionClick(clangKeyValue, notificationId, "action2Id")
                 }
             }
             action3Btn.apply {
                 setOnClickListener {
-                    onActionClick(keyValue, notificationId, "action3Id")
+                    onActionClick(clangKeyValue, notificationId, "action3Id")
                 }
             }
         }
@@ -55,11 +55,11 @@ internal class NotificationClickedActivity : AppCompatActivity() {
     }
 
     private fun onActionClick(
-        keyValue: ArrayList<KeyValue>,
+        clangKeyValue: ArrayList<ClangKeyValue>,
         notificationId: String,
         actionKey: String
     ) {
-        keyValue.find { it.key == actionKey }?.value?.let {
+        clangKeyValue.find { it.key == actionKey }?.value?.let {
             sendAction(it, notificationId)
         }
         finish()

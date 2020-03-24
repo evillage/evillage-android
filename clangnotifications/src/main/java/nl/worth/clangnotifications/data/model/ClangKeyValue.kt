@@ -3,7 +3,7 @@ package nl.worth.clangnotifications.data.model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class KeyValue(val key: String, val value: String) : Parcelable {
+data class ClangKeyValue(val key: String, val value: String) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: ""
@@ -16,12 +16,12 @@ data class KeyValue(val key: String, val value: String) : Parcelable {
 
     override fun describeContents(): Int = 0
 
-    companion object CREATOR : Parcelable.Creator<KeyValue> {
-        override fun createFromParcel(parcel: Parcel): KeyValue {
-            return KeyValue(parcel)
+    companion object CREATOR : Parcelable.Creator<ClangKeyValue> {
+        override fun createFromParcel(parcel: Parcel): ClangKeyValue {
+            return ClangKeyValue(parcel)
         }
 
-        override fun newArray(size: Int): Array<KeyValue?> {
+        override fun newArray(size: Int): Array<ClangKeyValue?> {
             return arrayOfNulls(size)
         }
     }

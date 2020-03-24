@@ -12,7 +12,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import nl.worth.clangnotifications.Clang
 import nl.worth.clangnotifications.R
-import nl.worth.clangnotifications.data.model.KeyValue
+import nl.worth.clangnotifications.data.model.ClangKeyValue
 import nl.worth.ui.NotificationClickedActivity
 import kotlin.random.Random
 
@@ -40,8 +40,8 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
 
         intent.apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            val list = arrayListOf<KeyValue>().apply {
-                data.keys.forEach { add(KeyValue(it, data[it] ?: "")) }
+            val list = arrayListOf<ClangKeyValue>().apply {
+                data.keys.forEach { add(ClangKeyValue(it, data[it] ?: "")) }
             }
             putExtra("keyValue", list)
         }

@@ -1,8 +1,8 @@
 package nl.worth.clangnotifications.data.interactor
 
-import nl.worth.clangnotifications.data.model.ActionRequest
-import nl.worth.clangnotifications.data.model.EventLogRequest
-import nl.worth.clangnotifications.data.repository.RemoteRepository
+import nl.worth.clangnotifications.data.model.ClangActionRequest
+import nl.worth.clangnotifications.data.model.ClangEvent
+import nl.worth.clangnotifications.data.repository.ClangApiClient
 import nl.worth.clangnotifications.util.authenticationHeader
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -19,9 +19,9 @@ internal class NotificationInteractor {
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
-        val actionRequest = ActionRequest(notificationId, userId, actionId)
+        val actionRequest = ClangActionRequest(notificationId, userId, actionId)
 
-        RemoteRepository.create().logNotificationAction(
+        ClangApiClient.getInstance().logNotificationAction(
             authenticationHeader(authenticationToken),
             actionRequest
         ).enqueue(object : Callback<ResponseBody> {
@@ -44,9 +44,9 @@ internal class NotificationInteractor {
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
-        val eventLogRequest = EventLogRequest(userId, event, data, integrationId)
+        val eventLogRequest = ClangEvent(userId, event, data, integrationId)
 
-        RemoteRepository.create().logEvent(authenticationHeader(authenticationToken), eventLogRequest).enqueue(object :
+        ClangApiClient.getInstance().logEvent(authenticationHeader(authenticationToken), eventLogRequest).enqueue(object :
             Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 errorCallback(t)
