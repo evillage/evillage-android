@@ -6,13 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_poll.*
 import nl.worth.ui.MainActivity
 import nl.worth.R
-import nl.worth.data.QuestionItem
 
 /**
  * A simple [Fragment] subclass.
@@ -23,7 +22,7 @@ class PollFragment : Fragment() {
         requireActivity() as MainActivity
     }
 
-    private lateinit var question: String
+    private lateinit var answer: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,27 +36,17 @@ class PollFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tv_question.text = "What is your favorite car color?"
-
-        val topicsAdapter = QuestionsAdapter(mutableListOf(
-            QuestionItem(false, "Red"),
-            QuestionItem(false, "Grey"),
-            QuestionItem(false, "Black"),
-            QuestionItem(false, "Blue")
-        ))
-
+        rg_poll.setOnCheckedChangeListener(radioCheckedChangeListener)
         btn_submit.setOnClickListener(submitClickListener)
+    }
 
-        rv_recycler_view.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
-        rv_recycler_view.layoutManager = LinearLayoutManager(requireContext())
-        rv_recycler_view.adapter = topicsAdapter
-
-        topicsAdapter.onItemClick = { question ->
-           this.question = question.text
-        }
+    private var radioCheckedChangeListener = RadioGroup.OnCheckedChangeListener { _, id ->
+        answer = (view?.findViewById(id) as RadioButton).text.toString()
     }
 
     private var submitClickListener = View.OnClickListener {
-        mainActivity.clang.logEvent("pollSubmit", mapOf("title" to "FavoriteCarColor", "value" to question), {
+        btn_submit.isEnabled = false
+        mainActivity.clang.logEvent("pollSubmit", mapOf("title" to "FavoriteCarColor", "value" to answer), {
             showAlertDialog()
         }, {
             showAlertDialog(it)
@@ -66,7 +55,6 @@ class PollFragment : Fragment() {
 
     private fun showAlertDialog(throwable: Throwable? = null) {
         val builder = AlertDialog.Builder(requireContext())
-
         if (throwable != null) {
             builder.setTitle("Error!Error!Panic!")
             builder.setMessage(throwable.message)
@@ -77,9 +65,10 @@ class PollFragment : Fragment() {
             builder.setTitle("Success")
             builder.setMessage("Favorite car color submitted")
             builder.setPositiveButton(android.R.string.ok) {_, _ ->
-                findNavController().popBackStack()
+                findNavController().navigateUp()
             }
         }
         builder.show()
+        btn_submit.isEnabled = true
     }
 }
