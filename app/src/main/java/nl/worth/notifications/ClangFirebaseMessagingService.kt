@@ -35,7 +35,7 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
         val productTitle = data["notificationTitle"]
         val productContent = data["notificationBody"]
 
-        val intent = Intent(this, nl.worth.NotificationClickedActivity::class.java)
+        val intent = Intent(this, NotificationClickedActivity::class.java)
 
         intent.apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

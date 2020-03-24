@@ -1,17 +1,16 @@
-package nl.worth.poll
+package nl.worth.ui.poll
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import nl.worth.R
+import nl.worth.data.QuestionItem
 
 class QuestionsAdapter(private val answers: List<QuestionItem>): RecyclerView.Adapter<QuestionsAdapter.ViewHolder>() {
 
     var onItemClick: ((QuestionItem) -> Unit)? = null
-
 
     override fun getItemCount() = answers.size
 
