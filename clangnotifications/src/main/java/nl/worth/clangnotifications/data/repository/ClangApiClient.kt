@@ -9,38 +9,48 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-object ClangApiClient{
+
+/**
+ * INSERT CLASS DESCRIPTION HERE
+ */
+object ClangApiClient {
 
     @Volatile
     private var instance: ClangApiService? = null
 
+    /**
+     * Returns the same instance of the class if previously created, else it returns a new instance
+     */
     fun getInstance(): ClangApiService {
         return if (instance == null) {
-            return provideApi()
+            return createApi()
         } else {
             instance as ClangApiService
         }
     }
 
-     private fun provideApi(): ClangApiService {
-         val retrofit = Retrofit.Builder()
-             .baseUrl(BuildConfig.REMOTE_REPO_BASE_URL)
-             .addConverterFactory(GsonConverterFactory.create(provideGsonAdapter()))
-             .client(provideOkHttpClient())
-             .build()
-
+    /**
+     * Creates an instance of the [ClangApiService] using a configured [OkHttpClient] and [Gson] as JSON adapter
+     */
+    private fun createApi(): ClangApiService {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BuildConfig.REMOTE_REPO_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create(createGsonAdapter()))
+            .client(createOkHttpClient())
+            .build()
         return retrofit.create(ClangApiService::class.java)
     }
 
-    private fun provideOkHttpClient(): OkHttpClient {
+    /**
+     * Creates an instance of an [OkHttpClient] configured with custom connect, read and write timeouts
+     * Also logs API calls to logcat if on DEBUG mode
+     */
+    private fun createOkHttpClient(): OkHttpClient {
 
         val loggingInterceptor = HttpLoggingInterceptor()
 
-        if (BuildConfig.DEBUG) {
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-        } else {
-            loggingInterceptor.level = HttpLoggingInterceptor.Level.NONE
-        }
+        loggingInterceptor.level =
+            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
 
         return OkHttpClient.Builder()
             .connectTimeout(15, TimeUnit.SECONDS)
@@ -50,7 +60,10 @@ object ClangApiClient{
             .build()
     }
 
-    private fun provideGsonAdapter(): Gson {
+    /**
+     * Creates an instance of [Gson] JSON adapter to parse API responses
+     */
+    private fun createGsonAdapter(): Gson {
         return GsonBuilder()
             .create()
     }

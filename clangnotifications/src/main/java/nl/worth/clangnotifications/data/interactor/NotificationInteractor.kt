@@ -9,8 +9,21 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * INSERT CLASS DESCRIPTION HERE
+ */
 internal class NotificationInteractor {
 
+    /**
+     * METHOD DESCRIPTION GOES HERE
+     *
+     * @param authenticationToken PARAM DESCRIPTION GOES HERE
+     * @param notificationId PARAM DESCRIPTION GOES HERE
+     * @param userId PARAM DESCRIPTION GOES HERE
+     * @param actionId PARAM DESCRIPTION GOES HERE
+     * @param successCallback Notifies caller that action was successful
+     * @param errorCallback Notifies caller that action failed returning a Throwable
+     */
     fun logNotificationAction(
         authenticationToken: String,
         notificationId: String,
@@ -35,6 +48,17 @@ internal class NotificationInteractor {
         })
     }
 
+    /**
+     * METHOD DESCRIPTION GOES HERE
+     *
+     * @param authenticationToken PARAM DESCRIPTION GOES HERE
+     * @param integrationId PARAM DESCRIPTION GOES HERE
+     * @param event PARAM DESCRIPTION GOES HERE
+     * @param data PARAM DESCRIPTION GOES HERE
+     * @param userId PARAM DESCRIPTION GOES HERE
+     * @param successCallback Notifies caller that action was successful
+     * @param errorCallback Notifies caller that action failed returning a Throwable
+     */
     fun logEvent(
         authenticationToken: String,
         integrationId: String,
@@ -53,8 +77,11 @@ internal class NotificationInteractor {
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                successCallback()
-            }
+                if(response.isSuccessful){
+                    successCallback()
+                }else{
+                    errorCallback(Throwable("Error: code not in 200..299"))
+                }            }
         })
     }
 }

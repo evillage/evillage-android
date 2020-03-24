@@ -8,9 +8,21 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
+/**
+ * INSERT CLASS DESCRIPTION HERE
+ */
 internal class PropertiesInteractor {
 
+    /**
+     * METHOD DESCRIPTION GOES HERE
+     *
+     * @param authenticationToken PARAM DESCRIPTION GOES HERE
+     * @param integrationId PARAM DESCRIPTION GOES HERE
+     * @param data PARAM DESCRIPTION GOES HERE
+     * @param userId PARAM DESCRIPTION GOES HERE
+     * @param successCallback Notifies caller that action was successful
+     * @param errorCallback Notifies caller that action failed returning a Throwable
+     */
     fun updateProperties (
         authenticationToken: String,
         integrationId: String,
@@ -30,7 +42,11 @@ internal class PropertiesInteractor {
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                successCallback()
+                if(response.isSuccessful){
+                    successCallback()
+                }else{
+                    errorCallback(Throwable("Error code not in 200..299"))
+                }
             }
         })
     }

@@ -7,6 +7,9 @@ import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.POST
 
+/**
+ * Interface where all API calls are declared
+ */
 interface ClangApiService {
 
     @POST("api/v1/account/register")
