@@ -3,25 +3,32 @@ package nl.worth.clangnotifications.data.repository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import nl.worth.clangnotifications.BuildConfig
-import okhttp3.OkHttpClient
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.NullPointerException
 import java.util.concurrent.TimeUnit
 
-
 /**
- * INSERT CLASS DESCRIPTION HERE
+ * Singleton implementation of the API client
  */
 object ClangApiClient {
 
     @Volatile
     private var instance: ClangApiService? = null
 
+    private var authToken: String? = null
+
+    fun init(authToken: String) {
+        this.authToken = authToken
+    }
+
     /**
      * Returns the same instance of the class if previously created, else it returns a new instance
      */
     fun getInstance(): ClangApiService {
+        if (authToken == null) throw NullPointerException("Authorization token is null, call init at least one time passing the Authorization")
         return if (instance == null) {
             return createApi()
         } else {
@@ -56,6 +63,7 @@ object ClangApiClient {
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
+            .addInterceptor(TokenAuthenticator())
             .addInterceptor(loggingInterceptor)
             .build()
     }
@@ -68,4 +76,18 @@ object ClangApiClient {
             .create()
     }
 
+    /**
+     * Intercepts every API call and adds the Authorization header
+     */
+    class TokenAuthenticator : Interceptor {
+        private val authorizationHeader = "Bearer $authToken"
+
+        override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
+            var request = chain.request()
+            request = request.newBuilder()
+                .addHeader("authorization", authorizationHeader)
+                .build()
+            return chain.proceed(request)
+        }
+    }
 }
