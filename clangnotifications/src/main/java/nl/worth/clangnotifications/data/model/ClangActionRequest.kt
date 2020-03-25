@@ -8,4 +8,4 @@ package nl.worth.clangnotifications.data.model
  * @property actionId PROPERTY DESCRIPTION GOES HERE
  * @property event PROPERTY DESCRIPTION GOES HERE
  */
-data class ClangActionRequest(val notificationId: String, val userId: String, val actionId: String, val event: String = "Notification")
+internal data class ClangActionRequest(val notificationId: String, val userId: String, val actionId: String, val event: String = "Notification")

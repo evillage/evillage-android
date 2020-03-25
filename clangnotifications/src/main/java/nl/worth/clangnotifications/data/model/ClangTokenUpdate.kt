@@ -7,4 +7,4 @@ package nl.worth.clangnotifications.data.model
  * @property id PROPERTY DESCRIPTION GOES HERE
  * @property newToken PROPERTY DESCRIPTION GOES HERE
  */
-data class ClangTokenUpdate(val id: String, val newToken: String)
+internal data class ClangTokenUpdate(val id: String, val newToken: String)

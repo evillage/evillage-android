@@ -17,7 +17,7 @@ import nl.worth.clangnotifications.util.getUserId
  * @param authenticationToken The authorization header value
  * @param integrationId PARAM DESCRIPTION GOES HERE
  */
-class ClangImplementation(
+internal class ClangImplementation(
     private val context: Context,
     authenticationToken: String,
     private val integrationId: String

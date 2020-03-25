@@ -8,7 +8,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 /**
- * INSERT CLASS DESCRIPTION HERE
+ * Repository like class that updates user's FCM token
  */
 internal class TokenInteractor {
 

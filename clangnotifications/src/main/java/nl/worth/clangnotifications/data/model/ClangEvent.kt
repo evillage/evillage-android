@@ -9,7 +9,7 @@ package nl.worth.clangnotifications.data.model
  * @property data PROPERTY DESCRIPTION GOES HERE
  * @property integrationId PROPERTY DESCRIPTION GOES HERE
  */
-data class ClangEvent(
+internal data class ClangEvent(
     val userId: String,
     val event: String,
     val data: Map<String, String>,

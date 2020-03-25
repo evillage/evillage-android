@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 /**
  * Interface used to generate code for API calls used by [Retrofit]
  */
-interface ClangApiService {
+internal interface ClangApiService {
 
     @POST("api/v1/account/register")
     fun createAccount(@Body clangAccount: ClangAccount): Call<ClangAccountResponse>

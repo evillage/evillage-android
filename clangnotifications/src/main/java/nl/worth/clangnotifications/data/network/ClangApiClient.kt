@@ -3,7 +3,9 @@ package nl.worth.clangnotifications.data.network
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import nl.worth.clangnotifications.BuildConfig
-import okhttp3.*
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,7 +15,7 @@ import java.util.concurrent.TimeUnit
 /**
  *  Creates an instance of [ClangApiService] as a Singleton
  */
-object ClangApiClient {
+internal object ClangApiClient {
 
     /**
      * Singleton instance of [ClangApiClient]
@@ -93,7 +95,7 @@ object ClangApiClient {
     class TokenAuthenticator(authToken: String) : Interceptor {
         private val authorizationHeader = "Bearer $authToken"
 
-        override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
+        override fun intercept(chain: Interceptor.Chain): Response {
             var request = chain.request()
             request = request.newBuilder()
                 .addHeader("authorization", authorizationHeader)

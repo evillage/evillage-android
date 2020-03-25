@@ -9,7 +9,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 /**
- * INSERT CLASS DESCRIPTION HERE
+ * Repository like class that logs Firebase related events
  */
 internal class NotificationInteractor {
 

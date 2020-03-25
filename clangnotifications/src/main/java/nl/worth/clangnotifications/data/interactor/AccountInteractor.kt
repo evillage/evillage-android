@@ -10,11 +10,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 /**
- * INSERT CLASS DESCRIPTION HERE
+ * Repository like class that registers the user's account
  */
 internal class AccountInteractor {
 
-    /** Creates a unique user account using a unique device ID
+    /** Creates a unique user account using a unique device ID, the user id generated from the remote service is saved locally and used as a user identifier when events are logged
      *
      * @param context Used to get access to EncryptedSharedPreferences
      * @param integrationId PARAM DESCRIPTION GOES HERE
