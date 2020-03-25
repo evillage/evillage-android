@@ -1,7 +1,6 @@
 package nl.worth.clangnotifications
 
 import android.content.Context
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import nl.worth.clangnotifications.data.interactor.AccountInteractor
 import nl.worth.clangnotifications.data.interactor.NotificationInteractor
@@ -21,19 +20,21 @@ import nl.worth.clangnotifications.util.getUserId
 class ClangImplementation(
     private val context: Context,
     authenticationToken: String,
-    private val integrationId: String) : Clang() {
+    private val integrationId: String
+) : Clang() {
 
     init {
         ClangApiClient.init(authenticationToken)
     }
 
-    /** Sends an event to remote server
-    *
-    * @param event The event to log
-    * @param data PARAM DESCRIPTION GOES HERE
-    * @param successCallback Notifies caller that action was successful
-    * @param errorCallback Notifies caller that action failed returning a Throwable
-    */
+    /** Logs an event to remote server that may contain additional information
+     * For example: event = "login" and data = "mapOf("action" to "login","email" to et_email.text.toString())"
+     *
+     * @param event The event to log
+     * @param data The data of that event
+     * @param successCallback Notifies caller that action was successful
+     * @param errorCallback Notifies caller that action failed returning a Throwable
+     */
     override fun logEvent(
         event: String,
         data: Map<String, String>,
@@ -70,7 +71,7 @@ class ClangImplementation(
         )
     }
 
-    /** METHOD DESCRIPTION GOES HERE
+    /** Creates a unique user account using a unique device ID
      *
      * @param deviceId Unique device identifier
      * @param successCallback Notifies caller that action was successful returning an [ClangAccountResponse] object
@@ -81,19 +82,24 @@ class ClangImplementation(
         successCallback: (ClangAccountResponse) -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
-        retrieveFirebaseToken { token ->
-            AccountInteractor().registerAccount(
-                context,
-                integrationId,
-                token,
-                deviceId,
-                successCallback,
-                errorCallback
-            )
-        }
+        retrieveFirebaseToken(
+            { token ->
+                AccountInteractor().registerAccount(
+                    context,
+                    integrationId,
+                    token,
+                    deviceId,
+                    successCallback,
+                    errorCallback
+                )
+            },
+            { throwable ->
+                errorCallback(throwable)
+            }
+        )
     }
 
-    /** METHOD DESCRIPTION GOES HERE
+    /** Logs a Notification action
      *
      * @param actionId PARAM DESCRIPTION GOES HERE
      * @param notificationId PARAM DESCRIPTION GOES HERE
@@ -115,13 +121,13 @@ class ClangImplementation(
         )
     }
 
-    /** METHOD DESCRIPTION GOES HERE
+    /** Updates user's FCM token
      *
      * @param firebaseToken FCM token generated for this device
      * @param successCallback Notifies caller that action was successful
      * @param errorCallback Notifies caller that action failed returning a Throwable
      */
-    override fun updateToken (
+    override fun updateToken(
         firebaseToken: String,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
@@ -140,13 +146,13 @@ class ClangImplementation(
      * @param onTokenReceived Notifies caller that action was successful returning a FCM token
      */
     //TODO add error case handling
-    private fun retrieveFirebaseToken(onTokenReceived: (String) -> Unit) {
+    private fun retrieveFirebaseToken(
+        onTokenReceived: (String) -> Unit,
+        onTokenFailed: (Throwable) -> Unit
+    ) {
         FirebaseInstanceId.getInstance().instanceId
-            .addOnCompleteListener(OnCompleteListener { task ->
-                if (!task.isSuccessful) return@OnCompleteListener
-                task.result?.let {
-                    onTokenReceived(it.token)
-                }
-            })
+            .addOnSuccessListener { onTokenReceived(it.token) }
+            .addOnFailureListener { exception -> onTokenFailed(exception)}
+
     }
 }
