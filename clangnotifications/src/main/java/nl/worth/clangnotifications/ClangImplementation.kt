@@ -99,7 +99,7 @@ internal class ClangImplementation(
         )
     }
 
-    /** Logs a Notification action
+    /** Logs a Notification
      *
      * @param actionId PARAM DESCRIPTION GOES HERE
      * @param notificationId PARAM DESCRIPTION GOES HERE

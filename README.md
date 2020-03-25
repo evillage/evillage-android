@@ -8,6 +8,27 @@ App is written in Kotlin, uses Retrofit2 for http calls and Firebase cloud messa
 * clone this repository and open it in AndroidStudio (can be downloaded from [here](https://developer.android.com/studio))
 * Run on a virtual device or connect Android phone with Android version 5.0 or higher
 
+### Clang library setup ###
+
+To use the Clang library you need to call Clang.getInstance() passing the Application context, the authorization token and the intergration id  
+
+The last two values will be provided when you contact E-Village to start integrating with the Clang platform.
+
+### Using the Clang library in your own project ###
+
+Just add the library to your project gradle
+
+dependencies {
+    implementation 'org.bitbucket.wi:evillage-android:0.0.3'
+}
+
+### Generate documentation ###
+
+To generate documentation for this project, follow these simple steps:
+
+- In AndroidStudio terminal run ./gradlew dokka 
+- The documentation will be generated into your project root directory under /ducumentation
+
 ### Links ###
 
 * [Firebase project](https://console.firebase.google.com/project/test-a04ac/overview) (for access ask oboekesteijn@worth.systems or tpadalko@worth.systems)
