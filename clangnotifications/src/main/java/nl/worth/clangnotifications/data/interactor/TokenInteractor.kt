@@ -12,8 +12,7 @@ import retrofit2.Response
  */
 internal class TokenInteractor {
 
-    /**
-     * METHOD DESCRIPTION GOES HERE
+    /** Updates user's FCM token
      *
      * @param firebaseToken FCM token generated for this device
      * @param userId Unique user identifier

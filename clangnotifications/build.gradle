@@ -45,7 +45,7 @@ repositories {
 
 dokka {
     outputFormat = 'html' // use 'javadoc' to get standard java docs
-    outputDirectory = "$buildDir/javadoc"
+    outputDirectory = "$rootDir/documentation"
 
     configuration {
         includeNonPublic = true

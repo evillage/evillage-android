@@ -1,0 +1,9 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:nl.worth.clangnotifications.util$getUserId(android.content.Context)nl.worth.clangnotifications.util/android.content.-context/get-user-id.html
+$dokka.location:nl.worth.clangnotifications.util$saveUserId(android.content.Context, kotlin.String)nl.worth.clangnotifications.util/android.content.-context/save-user-id.html
+nl.worth.clangnotifications
+nl.worth.clangnotifications.data.interactor
+nl.worth.clangnotifications.data.model
+nl.worth.clangnotifications.data.network
+nl.worth.clangnotifications.util

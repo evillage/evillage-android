@@ -145,7 +145,6 @@ class ClangImplementation(
      *
      * @param onTokenReceived Notifies caller that action was successful returning a FCM token
      */
-    //TODO add error case handling
     private fun retrieveFirebaseToken(
         onTokenReceived: (String) -> Unit,
         onTokenFailed: (Throwable) -> Unit

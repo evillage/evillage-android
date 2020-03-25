@@ -13,8 +13,7 @@ import retrofit2.Response
  */
 internal class NotificationInteractor {
 
-    /**
-     * METHOD DESCRIPTION GOES HERE
+    /** Logs a Notification action
      *
      * @param notificationId PARAM DESCRIPTION GOES HERE
      * @param userId Unique user identifier
@@ -43,12 +42,12 @@ internal class NotificationInteractor {
         })
     }
 
-    /**
-     * METHOD DESCRIPTION GOES HERE
+    /** Logs an event to remote server that may contain additional information
+     * For example: event = "login" and data = "mapOf("action" to "login","email" to et_email.text.toString())"
      *
      * @param integrationId PARAM DESCRIPTION GOES HERE
-     * @param event PARAM DESCRIPTION GOES HERE
-     * @param data PARAM DESCRIPTION GOES HERE
+     * @param event The event to log
+     * @param data The data of that event
      * @param userId PARAM DESCRIPTION GOES HERE
      * @param successCallback Notifies caller that action was successful
      * @param errorCallback Notifies caller that action failed returning a Throwable

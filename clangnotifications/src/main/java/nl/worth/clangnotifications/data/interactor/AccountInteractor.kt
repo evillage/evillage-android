@@ -14,8 +14,7 @@ import retrofit2.Response
  */
 internal class AccountInteractor {
 
-    /**
-     * METHOD DESCRIPTION GOES HERE
+    /** Creates a unique user account using a unique device ID
      *
      * @param context Used to get access to EncryptedSharedPreferences
      * @param integrationId PARAM DESCRIPTION GOES HERE
