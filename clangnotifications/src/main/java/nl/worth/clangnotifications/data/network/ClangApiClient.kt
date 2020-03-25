@@ -1,4 +1,4 @@
-package nl.worth.clangnotifications.data.repository
+package nl.worth.clangnotifications.data.network
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -11,15 +11,26 @@ import java.lang.NullPointerException
 import java.util.concurrent.TimeUnit
 
 /**
- * Singleton implementation of the API client
+ *  Creates an instance of [ClangApiService] as a Singleton
  */
 object ClangApiClient {
 
+    /**
+     * Singleton instance of [ClangApiClient]
+     */
     @Volatile
     private var instance: ClangApiService? = null
 
+    /**
+     * Value of the authorization header
+     */
     private var authToken: String? = null
 
+    /**
+     * Initializes singleton instance of [ClangApiClient]
+     *
+     * @param authToken Value of authorization header
+     */
     fun init(authToken: String) {
         this.authToken = authToken
     }
@@ -27,8 +38,8 @@ object ClangApiClient {
     /**
      * Returns the same instance of the class if previously created, else it returns a new instance
      */
-    fun getInstance(): ClangApiService {
-        if (authToken == null) throw NullPointerException("Authorization token is null, call init at least one time passing the Authorization")
+    fun getService(): ClangApiService {
+        if (authToken == null) throw NullPointerException("Authorization token is null, call init(authToken) at least one time passing the value for the authorization token")
         return if (instance == null) {
             return createApi()
         } else {
@@ -63,7 +74,7 @@ object ClangApiClient {
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
-            .addInterceptor(TokenAuthenticator())
+            .addInterceptor(TokenAuthenticator(authToken!!))
             .addInterceptor(loggingInterceptor)
             .build()
     }
@@ -79,7 +90,7 @@ object ClangApiClient {
     /**
      * Intercepts every API call and adds the Authorization header
      */
-    class TokenAuthenticator : Interceptor {
+    class TokenAuthenticator(authToken: String) : Interceptor {
         private val authorizationHeader = "Bearer $authToken"
 
         override fun intercept(chain: Interceptor.Chain): okhttp3.Response {

@@ -1,14 +1,14 @@
-package nl.worth.clangnotifications.data.repository
+package nl.worth.clangnotifications.data.network
 
 import nl.worth.clangnotifications.data.model.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.Retrofit
 
 /**
- * Interface where all API calls are declared
+ * Interface used to generate code for API calls used by [Retrofit]
  */
 interface ClangApiService {
 

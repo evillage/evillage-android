@@ -8,7 +8,7 @@ import nl.worth.clangnotifications.data.interactor.NotificationInteractor
 import nl.worth.clangnotifications.data.interactor.PropertiesInteractor
 import nl.worth.clangnotifications.data.interactor.TokenInteractor
 import nl.worth.clangnotifications.data.model.ClangAccountResponse
-import nl.worth.clangnotifications.data.repository.ClangApiClient
+import nl.worth.clangnotifications.data.network.ClangApiClient
 import nl.worth.clangnotifications.util.getUserId
 
 /**

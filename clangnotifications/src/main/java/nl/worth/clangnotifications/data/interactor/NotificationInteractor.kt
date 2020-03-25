@@ -2,7 +2,7 @@ package nl.worth.clangnotifications.data.interactor
 
 import nl.worth.clangnotifications.data.model.ClangActionRequest
 import nl.worth.clangnotifications.data.model.ClangEvent
-import nl.worth.clangnotifications.data.repository.ClangApiClient
+import nl.worth.clangnotifications.data.network.ClangApiClient
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,7 +30,7 @@ internal class NotificationInteractor {
         errorCallback: (Throwable) -> Unit
     ) {
         val actionRequest = ClangActionRequest(notificationId, userId, actionId)
-        ClangApiClient.getInstance().logNotificationAction(
+        ClangApiClient.getService().logNotificationAction(
             actionRequest
         ).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -63,7 +63,7 @@ internal class NotificationInteractor {
     ) {
         val eventLogRequest = ClangEvent(userId, event, data, integrationId)
 
-        ClangApiClient.getInstance().logEvent(eventLogRequest).enqueue(object :
+        ClangApiClient.getService().logEvent(eventLogRequest).enqueue(object :
             Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 errorCallback(t)

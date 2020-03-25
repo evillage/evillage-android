@@ -1,7 +1,7 @@
 package nl.worth.clangnotifications.data.interactor
 
 import nl.worth.clangnotifications.data.model.ClangProperties
-import nl.worth.clangnotifications.data.repository.ClangApiClient
+import nl.worth.clangnotifications.data.network.ClangApiClient
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,7 +30,7 @@ internal class PropertiesInteractor {
     ) {
         val propertiesRequest = ClangProperties(userId, integrationId, data)
 
-        ClangApiClient.getInstance().updateProperties(
+        ClangApiClient.getService().updateProperties(
             propertiesRequest
         ).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

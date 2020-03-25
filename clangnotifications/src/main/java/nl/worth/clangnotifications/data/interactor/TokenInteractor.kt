@@ -1,7 +1,7 @@
 package nl.worth.clangnotifications.data.interactor
 
 import nl.worth.clangnotifications.data.model.ClangTokenUpdate
-import nl.worth.clangnotifications.data.repository.ClangApiClient
+import nl.worth.clangnotifications.data.network.ClangApiClient
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,7 +28,7 @@ internal class TokenInteractor {
     ) {
         val account = ClangTokenUpdate(userId, firebaseToken)
 
-        ClangApiClient.getInstance().storeFirebaseToken(
+        ClangApiClient.getService().storeFirebaseToken(
             account
         ).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {

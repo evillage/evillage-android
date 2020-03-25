@@ -3,7 +3,7 @@ package nl.worth.clangnotifications.data.interactor
 import android.content.Context
 import nl.worth.clangnotifications.data.model.ClangAccount
 import nl.worth.clangnotifications.data.model.ClangAccountResponse
-import nl.worth.clangnotifications.data.repository.ClangApiClient
+import nl.worth.clangnotifications.data.network.ClangApiClient
 import nl.worth.clangnotifications.util.saveUserId
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,7 +33,7 @@ internal class AccountInteractor {
         errorCallback: (Throwable) -> Unit
     ) {
         val account = ClangAccount(firebaseToken, deviceId, integrationId)
-        ClangApiClient.getInstance()
+        ClangApiClient.getService()
             .createAccount(account).enqueue(object :
                 Callback<ClangAccountResponse> {
                 override fun onFailure(call: Call<ClangAccountResponse>, t: Throwable) {
