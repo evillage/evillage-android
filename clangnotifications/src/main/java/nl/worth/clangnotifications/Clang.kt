@@ -3,6 +3,9 @@ package nl.worth.clangnotifications
 import android.content.Context
 import nl.worth.clangnotifications.data.model.ClangAccountResponse
 
+/**
+ *
+ */
 abstract class Clang {
 
     abstract fun createAccount(
@@ -37,6 +40,9 @@ abstract class Clang {
         errorCallback: (Throwable) -> Unit
     )
 
+    /**
+     * Returns the same instance of an [ClangImplementation] class if previously created, else it returns a new instance casted as [Clang]
+     */
     companion object {
         @Volatile
         private var instance: ClangImplementation? = null

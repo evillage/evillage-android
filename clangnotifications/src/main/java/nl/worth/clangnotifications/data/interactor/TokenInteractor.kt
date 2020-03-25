@@ -2,13 +2,24 @@ package nl.worth.clangnotifications.data.interactor
 
 import nl.worth.clangnotifications.data.model.ClangTokenUpdate
 import nl.worth.clangnotifications.data.repository.ClangApiClient
-import nl.worth.clangnotifications.util.authenticationHeader
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+/**
+ * INSERT CLASS DESCRIPTION HERE
+ */
 internal class TokenInteractor {
+
+    /**
+     * METHOD DESCRIPTION GOES HERE
+     *
+     * @param firebaseToken FCM token generated for this device
+     * @param userId Unique user identifier
+     * @param successCallback Notifies caller that action was successful
+     * @param errorCallback Notifies caller that action failed returning a Throwable
+     */
     fun sendTokenToServer(
         firebaseToken: String,
         userId: String,
@@ -18,7 +29,6 @@ internal class TokenInteractor {
         val account = ClangTokenUpdate(userId, firebaseToken)
 
         ClangApiClient.getInstance().storeFirebaseToken(
-            authenticationHeader("authenticationHeader"), // not required since no Clang API call
             account
         ).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
@@ -26,7 +36,11 @@ internal class TokenInteractor {
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                successCallback()
+                if (response.isSuccessful) {
+                    successCallback()
+                } else {
+                    errorCallback(Throwable("Error code not in 200..299"))
+                }
             }
         })
     }

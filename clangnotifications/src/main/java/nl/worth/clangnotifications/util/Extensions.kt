@@ -2,28 +2,19 @@ package nl.worth.clangnotifications.util
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.provider.Settings
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.iid.FirebaseInstanceId
-import nl.worth.clangnotifications.R
 
-
-internal fun retrieveFirebaseToken(onTokenReceived: (String) -> Unit) {
-    FirebaseInstanceId.getInstance().instanceId
-        .addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) return@OnCompleteListener
-
-            task.result?.let {
-                onTokenReceived(it.token)
-            }
-        })
-}
-
+/**
+ * Saves the registered user id into [EncryptedSharedPreferences]
+ *
+ * @param userId The id of the current user's registered account
+ */
 internal fun Context.saveUserId(userId: String) {
     val masterKeyAlias: String = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-
     val sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
         "clang",
         masterKeyAlias,
@@ -34,10 +25,13 @@ internal fun Context.saveUserId(userId: String) {
 
     sharedPreferences.edit().apply {
         putString("user.id", userId)
-    }.apply()
+        apply()
+    }
 }
 
-
+/**
+ * Fetches the user id from [EncryptedSharedPreferences]
+ */
 internal fun Context.getUserId(): String {
     val masterKeyAlias: String = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
@@ -52,9 +46,3 @@ internal fun Context.getUserId(): String {
     return sharedPreferences.getString("user.id", "").orEmpty()
 }
 
-internal fun authenticationHeader(bearerToken: String): String {
-    if (bearerToken.isNotEmpty()) {
-        return "Bearer $bearerToken"
-    }
-    return ""
-}
