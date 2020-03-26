@@ -7,4 +7,4 @@ package nl.worth.clangnotifications.data.model
  * @property title PROPERTY DESCRIPTION GOES HERE
  * @property value PROPERTY DESCRIPTION GOES HERE
  */
-data class ClangPollData(val title: String, val value: String)
+internal data class ClangPollData(val title: String, val value: String)

@@ -7,7 +7,7 @@ package nl.worth.clangnotifications.data.model
  * @property deviceId Unique device identifier
  * @property integrationId PROPERTY DESCRIPTION GOES HERE
  */
-data class ClangAccount (
+internal data class ClangAccount (
     val token: String,
     val deviceId: String,
     val integrationId: String

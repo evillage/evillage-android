@@ -4,7 +4,7 @@ import android.content.Context
 import nl.worth.clangnotifications.data.model.ClangAccountResponse
 
 /**
- *
+ * DESCRIPTION
  */
 abstract class Clang {
 

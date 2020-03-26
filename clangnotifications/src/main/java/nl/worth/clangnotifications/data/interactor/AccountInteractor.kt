@@ -3,19 +3,18 @@ package nl.worth.clangnotifications.data.interactor
 import android.content.Context
 import nl.worth.clangnotifications.data.model.ClangAccount
 import nl.worth.clangnotifications.data.model.ClangAccountResponse
-import nl.worth.clangnotifications.data.repository.ClangApiClient
+import nl.worth.clangnotifications.data.network.ClangApiClient
 import nl.worth.clangnotifications.util.saveUserId
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 /**
- * INSERT CLASS DESCRIPTION HERE
+ * Repository like class that registers the user's account
  */
 internal class AccountInteractor {
 
-    /**
-     * METHOD DESCRIPTION GOES HERE
+    /** Creates a unique user account using a unique device ID, the user id generated from the remote service is saved locally and used as a user identifier when events are logged
      *
      * @param context Used to get access to EncryptedSharedPreferences
      * @param integrationId PARAM DESCRIPTION GOES HERE
@@ -33,7 +32,7 @@ internal class AccountInteractor {
         errorCallback: (Throwable) -> Unit
     ) {
         val account = ClangAccount(firebaseToken, deviceId, integrationId)
-        ClangApiClient.getInstance()
+        ClangApiClient.getService()
             .createAccount(account).enqueue(object :
                 Callback<ClangAccountResponse> {
                 override fun onFailure(call: Call<ClangAccountResponse>, t: Throwable) {

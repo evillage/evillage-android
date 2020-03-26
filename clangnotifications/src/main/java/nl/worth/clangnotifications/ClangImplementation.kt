@@ -7,7 +7,7 @@ import nl.worth.clangnotifications.data.interactor.NotificationInteractor
 import nl.worth.clangnotifications.data.interactor.PropertiesInteractor
 import nl.worth.clangnotifications.data.interactor.TokenInteractor
 import nl.worth.clangnotifications.data.model.ClangAccountResponse
-import nl.worth.clangnotifications.data.repository.ClangApiClient
+import nl.worth.clangnotifications.data.network.ClangApiClient
 import nl.worth.clangnotifications.util.getUserId
 
 /**
@@ -17,7 +17,7 @@ import nl.worth.clangnotifications.util.getUserId
  * @param authenticationToken The authorization header value
  * @param integrationId PARAM DESCRIPTION GOES HERE
  */
-class ClangImplementation(
+internal class ClangImplementation(
     private val context: Context,
     authenticationToken: String,
     private val integrationId: String
@@ -99,7 +99,7 @@ class ClangImplementation(
         )
     }
 
-    /** Logs a Notification action
+    /** Logs a Notification
      *
      * @param actionId PARAM DESCRIPTION GOES HERE
      * @param notificationId PARAM DESCRIPTION GOES HERE
@@ -145,7 +145,6 @@ class ClangImplementation(
      *
      * @param onTokenReceived Notifies caller that action was successful returning a FCM token
      */
-    //TODO add error case handling
     private fun retrieveFirebaseToken(
         onTokenReceived: (String) -> Unit,
         onTokenFailed: (Throwable) -> Unit

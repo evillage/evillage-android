@@ -1,19 +1,18 @@
 package nl.worth.clangnotifications.data.interactor
 
 import nl.worth.clangnotifications.data.model.ClangTokenUpdate
-import nl.worth.clangnotifications.data.repository.ClangApiClient
+import nl.worth.clangnotifications.data.network.ClangApiClient
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 /**
- * INSERT CLASS DESCRIPTION HERE
+ * Repository like class that updates user's FCM token
  */
 internal class TokenInteractor {
 
-    /**
-     * METHOD DESCRIPTION GOES HERE
+    /** Updates user's FCM token
      *
      * @param firebaseToken FCM token generated for this device
      * @param userId Unique user identifier
@@ -28,7 +27,7 @@ internal class TokenInteractor {
     ) {
         val account = ClangTokenUpdate(userId, firebaseToken)
 
-        ClangApiClient.getInstance().storeFirebaseToken(
+        ClangApiClient.getService().storeFirebaseToken(
             account
         ).enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
