@@ -51,9 +51,9 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
         val notificationManager = this.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val channelId = "channel-01"
         val channelName = "Channel Name"
-        val importance = NotificationManager.IMPORTANCE_HIGH
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val importance = NotificationManager.IMPORTANCE_HIGH
             val mChannel = NotificationChannel(
                 channelId, channelName, importance
             )
@@ -89,8 +89,7 @@ open class ClangFirebaseMessagingService : FirebaseMessagingService() {
 
             actionId?.let {
                 actionTitle.let {
-                    val pendingIntent =
-                        PendingIntent.getService(this, Random.nextInt(0, Int.MAX_VALUE) + i,
+                    val pendingIntent = PendingIntent.getService(this, Random.nextInt(0, Int.MAX_VALUE) + i,
                             Intent(this, ClangIntentService::class.java).apply {
                                 this.putExtra("notificationId", notId)
                                 this.putExtra("actionId", actionId)
