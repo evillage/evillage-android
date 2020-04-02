@@ -1,40 +1,57 @@
 package nl.worth.clangnotifications.data.interactor
 
 import android.content.Context
-import nl.worth.clangnotifications.data.model.CreateAccountModel
-import nl.worth.clangnotifications.data.model.CreateAccountResponse
-import nl.worth.clangnotifications.data.repository.RemoteRepository
-import nl.worth.clangnotifications.util.getAndroidId
+import nl.worth.clangnotifications.data.model.ClangAccount
+import nl.worth.clangnotifications.data.model.ClangAccountResponse
+import nl.worth.clangnotifications.data.network.ClangApiClient
+import nl.worth.clangnotifications.util.saveUserId
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.NullPointerException
-import nl.worth.clangnotifications.util.saveIdToSharedPreferences
 
-
-
+/**
+ * Repository like class that registers the user's account
+ */
 internal class AccountInteractor {
 
+    /** Creates a unique user account using a unique device ID, the user id generated from the remote service is saved locally and used as a user identifier when events are logged
+     *
+     * @param context Used to get access to EncryptedSharedPreferences
+     * @param integrationId PARAM DESCRIPTION GOES HERE
+     * @param firebaseToken FCM token generated for this device
+     * @param deviceId Unique device identifier
+     * @param successCallback Notifies caller that action was successful returning an [ClangAccountResponse] object
+     * @param errorCallback Notifies caller that action failed returning a Throwable
+     */
     fun registerAccount(
-        firebaseToken: String,
         context: Context,
-        successCallback: (CreateAccountResponse) -> Unit,
+        integrationId: String,
+        firebaseToken: String,
+        deviceId: String,
+        successCallback: (ClangAccountResponse) -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
+        val account = ClangAccount(firebaseToken, deviceId, integrationId)
+        ClangApiClient.getService()
+            .createAccount(account).enqueue(object :
+                Callback<ClangAccountResponse> {
+                override fun onFailure(call: Call<ClangAccountResponse>, t: Throwable) {
+                    errorCallback(t)
+                }
 
-        val account = CreateAccountModel(firebaseToken, context.getAndroidId())
-        RemoteRepository.create().createAccount(account).enqueue(object :
-            Callback<CreateAccountResponse> {
-            override fun onFailure(call: Call<CreateAccountResponse>, t: Throwable) {
-                errorCallback(t)
-            }
-
-            override fun onResponse(call: Call<CreateAccountResponse>, response: Response<CreateAccountResponse>) {
-                response.body()?.let {
-                    context.saveIdToSharedPreferences(it.id)
-                    successCallback(it)
-                } ?: errorCallback(NullPointerException("response null"))
-            }
-        })
+                override fun onResponse(
+                    call: Call<ClangAccountResponse>,
+                    response: Response<ClangAccountResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.let {
+                            context.saveUserId(it.id)
+                            successCallback(it)
+                        } ?: errorCallback(Throwable("Response was null"))
+                    } else {
+                        errorCallback(Throwable("Error: code not in 200..299"))
+                    }
+                }
+            })
     }
 }

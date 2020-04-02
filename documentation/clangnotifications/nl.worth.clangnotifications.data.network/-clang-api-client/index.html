@@ -1,0 +1,94 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ClangApiClient - clangnotifications</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">clangnotifications</a>&nbsp;/&nbsp;<a href="../index.html">nl.worth.clangnotifications.data.network</a>&nbsp;/&nbsp;<a href="./index.html">ClangApiClient</a><br/>
+<br/>
+<h1>ClangApiClient</h1>
+<code><span class="keyword">object </span><span class="identifier">ClangApiClient</span></code>
+<p>Creates an instance of <a href="../-clang-api-service/index.html">ClangApiService</a> as a Singleton</p>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-token-authenticator/index.html">TokenAuthenticator</a></h4>
+</td>
+<td>
+<p>Intercepts every API call and adds the Authorization header</p>
+<code><span class="keyword">class </span><span class="identifier">TokenAuthenticator</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Interceptor</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="auth-token.html">authToken</a></h4>
+</td>
+<td>
+<p>Value of the authorization header</p>
+<code><span class="keyword">var </span><span class="identifier">authToken</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="instance.html">instance</a></h4>
+</td>
+<td>
+<p>Singleton instance of <a href="./index.html">ClangApiClient</a></p>
+<code><span class="keyword">var </span><span class="identifier">instance</span><span class="symbol">: </span><a href="../-clang-api-service/index.html"><span class="identifier">ClangApiService</span></a><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="create-api.html">createApi</a></h4>
+</td>
+<td>
+<p>Creates an instance of the <a href="../-clang-api-service/index.html">ClangApiService</a> using a configured <a href="#">OkHttpClient</a> and <a href="#">Gson</a> as JSON adapter</p>
+<code><span class="keyword">fun </span><span class="identifier">createApi</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-clang-api-service/index.html"><span class="identifier">ClangApiService</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="create-gson-adapter.html">createGsonAdapter</a></h4>
+</td>
+<td>
+<p>Creates an instance of <a href="#">Gson</a> JSON adapter to parse API responses</p>
+<code><span class="keyword">fun </span><span class="identifier">createGsonAdapter</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Gson</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="create-ok-http-client.html">createOkHttpClient</a></h4>
+</td>
+<td>
+<p>Creates an instance of an <a href="#">OkHttpClient</a> configured with custom connect, read and write timeouts
+Also logs API calls to logcat if on DEBUG mode</p>
+<code><span class="keyword">fun </span><span class="identifier">createOkHttpClient</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">OkHttpClient</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-service.html">getService</a></h4>
+</td>
+<td>
+<p>Returns the same instance of the class if previously created, else it returns a new instance</p>
+<code><span class="keyword">fun </span><span class="identifier">getService</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-clang-api-service/index.html"><span class="identifier">ClangApiService</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="init.html">init</a></h4>
+</td>
+<td>
+<p>Initializes singleton instance of <a href="./index.html">ClangApiClient</a></p>
+<code><span class="keyword">fun </span><span class="identifier">init</span><span class="symbol">(</span><span class="identifier" id="nl.worth.clangnotifications.data.network.ClangApiClient$init(kotlin.String)/authToken">authToken</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
