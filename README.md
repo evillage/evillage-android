@@ -1,6 +1,6 @@
 # e-Village - Android Clang Library
 This is the Android library project for the implementation of the Clang platform on mobile platforms.
-For the use of this in an example Android app with UI please see: https://bitbucket.org/wi/evillage-android-demo
+For the use of this in an example Android app with UI please see: https://github.com/evillage/evillage-android-demo
 
 The library is written in Kotlin, uses Retrofit2 for HTTP calls and Firebase Cloud Messaging for notifications.
 
@@ -17,7 +17,7 @@ Just add the library to your project gradle
 
 ```
 dependencies {
-    implementation 'org.bitbucket.wi:evillage-android:0.0.3'
+    implementation 'com.github.evillage:evillage-android:0.0.3'
 }
 ```
 
@@ -30,4 +30,4 @@ To generate documentation for this project, follow these simple steps:
 ## Links
 * [Firebase project](https://console.firebase.google.com/project/test-a04ac/overview) (for access ask oboekesteijn@worth.systems or tpadalko@worth.systems)
 * [Google doc with some edge cases, etc.](https://docs.google.com/document/d/1Nw7Ik1VY8Sz2PPtj86yaTUyZ9qnO__xaDHcRuk6Xsbk/edit?usp=sharing)
-* [Token Server repo](https://bitbucket.org/wi/evillage-token-server/src)
+* [Token Server repo](https://github.com/evillage/evillage-token-server/src)
