@@ -12,10 +12,10 @@ import retrofit2.Retrofit
  */
 internal interface ClangApiService {
 
-    @POST("api/v1/account/register")
+    @POST("/api/v1/account/register")
     fun createAccount(@Body clangAccount: ClangAccount): Call<ClangAccountResponse>
 
-    @POST("api/v1/token/save")
+    @POST("/api/v1/token/save")
     fun storeFirebaseToken(@Body clangToken: ClangTokenUpdate): Call<ResponseBody>
 
     @POST("/api/v1/notification/action")

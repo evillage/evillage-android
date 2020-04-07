@@ -16,7 +16,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "REMOTE_REPO_BASE_URL", '"https://api.clang.cloud"'
+        buildConfigField "String", "REMOTE_REPO_BASE_URL", '"https://api.clang.cloud/push"'
     }
 
     buildTypes {
