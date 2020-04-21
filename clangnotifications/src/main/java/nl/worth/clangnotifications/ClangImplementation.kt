@@ -17,6 +17,7 @@ import nl.worth.clangnotifications.util.getUserId
  * @param integrationId PARAM DESCRIPTION GOES HERE
  */
 internal class ClangImplementation(
+    baseUrl: String,
     authenticationToken: String,
     private val integrationId: String
 ) : Clang() {
@@ -24,7 +25,7 @@ internal class ClangImplementation(
     lateinit var context: Context
 
     init {
-        ClangApiClient.init(authenticationToken)
+        ClangApiClient.init(authenticationToken, baseUrl)
     }
 
     /** Logs an event to remote server that may contain additional information

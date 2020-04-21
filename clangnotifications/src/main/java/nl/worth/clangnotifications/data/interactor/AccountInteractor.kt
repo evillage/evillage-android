@@ -49,7 +49,7 @@ internal class AccountInteractor {
                             successCallback(it)
                         } ?: errorCallback(Throwable("Response was null"))
                     } else {
-                        errorCallback(Throwable("Error: code not in 200..299"))
+                        errorCallback(Throwable("Response code not in 200..299, was " + response.code()))
                     }
                 }
             })
