@@ -38,7 +38,7 @@ internal class TokenInteractor {
                 if (response.isSuccessful) {
                     successCallback()
                 } else {
-                    errorCallback(Throwable("Error code not in 200..299"))
+                    errorCallback(Throwable("Response code not in 200..299, was " + response.code()))
                 }
             }
         })
