@@ -2,9 +2,15 @@ package nl.worth.clangnotifications
 
 import android.content.Context
 import nl.worth.clangnotifications.data.model.ClangAccountResponse
+import java.lang.NullPointerException
 
 /**
- * DESCRIPTION
+ * Abstract access class for Clang logging services.
+ *
+ * Call setUp() at least once in your Application class to initialize the library.
+ * Call getInstance() after setUp() to get a reference to the Singleton object.
+ *
+ * It is advised to keep a reference of the Singleton to you Application class and use that when logging instead of calling getInstance() every time.
  */
 abstract class Clang {
 
@@ -47,14 +53,19 @@ abstract class Clang {
         @Volatile
         private var instance: ClangImplementation? = null
 
-        fun getInstance(
-            context: Context,
-            authenticationToken: String,
-            integrationId: String
-        ): Clang {
+        fun setUp(context: Context,
+                   authenticationToken: String,
+                   integrationId: String){
+            if (instance == null) {
+                instance = ClangImplementation(authenticationToken, integrationId)
+            }
+        }
+
+        fun getInstance(context: Context): Clang {
             return if (instance == null) {
-                ClangImplementation(context, authenticationToken, integrationId)
+                throw NullPointerException("Call setUp() first at least once before calling getInstance()")
             } else {
+                instance!!.context = context
                 instance as ClangImplementation
             }
         }

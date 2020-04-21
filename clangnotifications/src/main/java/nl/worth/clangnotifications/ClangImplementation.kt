@@ -13,15 +13,15 @@ import nl.worth.clangnotifications.util.getUserId
 /**
  * This Class is used to log events to a remote server
  *
- * @param context Used to access
  * @param authenticationToken The authorization header value
  * @param integrationId PARAM DESCRIPTION GOES HERE
  */
 internal class ClangImplementation(
-    private val context: Context,
     authenticationToken: String,
     private val integrationId: String
 ) : Clang() {
+
+    lateinit var context: Context
 
     init {
         ClangApiClient.init(authenticationToken)
