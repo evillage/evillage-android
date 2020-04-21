@@ -69,11 +69,12 @@ internal class NotificationInteractor {
             }
 
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     successCallback()
-                }else{
-                    errorCallback(Throwable("Error: code not in 200..299"))
-                }            }
+                } else {
+                    errorCallback(Throwable("Response code not in 200..299, was " + response.code()))
+                }
+            }
         })
     }
 }

@@ -10,7 +10,7 @@ import java.lang.NullPointerException
  * Call setUp() at least once in your Application class to initialize the library.
  * Call getInstance() after setUp() to get a reference to the Singleton object.
  *
- * It is advised to keep a reference of the Singleton to you Application class and use that when logging instead of calling getInstance() every time.
+ * It is advised to keep a reference of the Singleton Clang object to you Application class and use that when logging instead of calling getInstance() every time you need one.
  */
 abstract class Clang {
 
@@ -46,26 +46,34 @@ abstract class Clang {
         errorCallback: (Throwable) -> Unit
     )
 
-    /**
-     * Returns the same instance of an [ClangImplementation] class if previously created, else it returns a new instance casted as [Clang]
-     */
     companion object {
         @Volatile
         private var instance: ClangImplementation? = null
 
-        fun setUp(context: Context,
-                   authenticationToken: String,
-                   integrationId: String){
+        /**
+         * Call once in your Application class to create Singleton object
+         */
+        fun setUp(
+            context: Context,
+            baseUrl: String,
+            authenticationToken: String,
+            integrationId: String
+        ) {
             if (instance == null) {
-                instance = ClangImplementation(authenticationToken, integrationId)
+                instance = ClangImplementation(baseUrl, authenticationToken, integrationId)
+                instance!!.context = context
             }
         }
 
-        fun getInstance(context: Context): Clang {
+        /**
+         * Call to get instance of Clang
+         *
+         * It's advised to keep a reference to a Clang object in your Application class instead of calling getInstance() every time you need one
+         */
+        fun getInstance(): Clang {
             return if (instance == null) {
                 throw NullPointerException("Call setUp() first at least once before calling getInstance()")
             } else {
-                instance!!.context = context
                 instance as ClangImplementation
             }
         }

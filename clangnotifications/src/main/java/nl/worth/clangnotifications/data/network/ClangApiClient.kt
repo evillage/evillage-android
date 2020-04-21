@@ -9,7 +9,6 @@ import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.NullPointerException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -24,16 +23,23 @@ internal object ClangApiClient {
     private var instance: ClangApiService? = null
 
     /**
+     * Value of the base server url
+     */
+    @Volatile
+    private lateinit var baseUrl: String
+
+    /**
      * Value of the authorization header
      */
-    private var authToken: String? = null
+    private lateinit var authToken: String
 
     /**
      * Initializes singleton instance of [ClangApiClient]
      *
      * @param authToken Value of authorization header
      */
-    fun init(authToken: String) {
+    fun init(baseUrl: String, authToken: String) {
+        this.baseUrl = baseUrl
         this.authToken = authToken
     }
 
@@ -41,7 +47,6 @@ internal object ClangApiClient {
      * Returns the same instance of the class if previously created, else it returns a new instance
      */
     fun getService(): ClangApiService {
-        if (authToken == null) throw NullPointerException("Authorization token is null, call init(authToken) at least one time passing the value for the authorization token")
         return if (instance == null) {
             return createApi()
         } else {
@@ -54,7 +59,7 @@ internal object ClangApiClient {
      */
     private fun createApi(): ClangApiService {
         val retrofit = Retrofit.Builder()
-            .baseUrl(BuildConfig.REMOTE_REPO_BASE_URL)
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(createGsonAdapter()))
             .client(createOkHttpClient())
             .build()
@@ -76,7 +81,7 @@ internal object ClangApiClient {
             .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
-            .addInterceptor(TokenAuthenticator(authToken!!))
+            .addInterceptor(TokenAuthenticator(authToken))
             .addInterceptor(loggingInterceptor)
             .build()
     }

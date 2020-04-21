@@ -1,9 +1,1 @@
-<resources>
-    <string name="app_name">embeddedNotifications</string>
-    <string name="thank_you">You\'re all done, have a 🍪</string>
-    <string name="done">Done</string>
-    <string name="email_hint">Enter email</string>
-    <string name="submit">Submit</string>
-    <string name="saved_id_key">saved_id_key</string>
-    <string name="ok">OK</string>
-</resources>
+<resources></resources>
