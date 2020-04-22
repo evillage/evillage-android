@@ -17,12 +17,18 @@ import nl.worth.clangnotifications.util.getUserId
  * @param integrationId PARAM DESCRIPTION GOES HERE
  */
 internal class ClangImplementation(
-    baseUrl: String,
+    baseUrl: String?,
     authenticationToken: String,
     private val integrationId: String
 ) : Clang() {
 
     lateinit var context: Context
+
+    constructor(authenticationToken: String, integrationId: String) : this(
+        null,
+        authenticationToken,
+        integrationId
+    )
 
     init {
         ClangApiClient.init(baseUrl, authenticationToken)
