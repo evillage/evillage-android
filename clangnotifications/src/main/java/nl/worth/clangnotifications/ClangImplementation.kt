@@ -25,51 +25,7 @@ internal class ClangImplementation(
     lateinit var context: Context
 
     init {
-        ClangApiClient.init(authenticationToken, baseUrl)
-    }
-
-    /** Logs an event to remote server that may contain additional information
-     * For example: event = "login" and data = "mapOf("action" to "login","email" to et_email.text.toString())"
-     *
-     * @param event The event to log
-     * @param data The data of that event
-     * @param successCallback Notifies caller that action was successful
-     * @param errorCallback Notifies caller that action failed returning a Throwable
-     */
-    override fun logEvent(
-        event: String,
-        data: Map<String, String>,
-        successCallback: () -> Unit,
-        errorCallback: (Throwable) -> Unit
-    ) {
-        NotificationInteractor().logEvent(
-            integrationId,
-            event,
-            data,
-            context.getUserId(),
-            successCallback,
-            errorCallback
-        )
-    }
-
-    /** METHOD DESCRIPTION GOES HERE
-     *
-     * @param data PARAM DESCRIPTION GOES HERE
-     * @param successCallback Notifies caller that action was successful
-     * @param errorCallback Notifies caller that action failed returning a Throwable
-     */
-    override fun updateProperties(
-        data: Map<String, String>,
-        successCallback: () -> Unit,
-        errorCallback: (Throwable) -> Unit
-    ) {
-        PropertiesInteractor().updateProperties(
-            integrationId,
-            data,
-            context.getUserId(),
-            successCallback,
-            errorCallback
-        )
+        ClangApiClient.init(baseUrl, authenticationToken)
     }
 
     /** Creates a unique user account using a unique device ID
@@ -100,6 +56,60 @@ internal class ClangImplementation(
         )
     }
 
+    /** Logs an event to remote server that may contain additional information
+     * For example: event = "login" and data = "mapOf("action" to "login","email" to et_email.text.toString())"
+     *
+     * @param event The event to log
+     * @param data The data of that event
+     * @param successCallback Notifies caller that action was successful
+     * @param errorCallback Notifies caller that action failed returning a Throwable
+     */
+    override fun logEvent(
+        event: String,
+        data: Map<String, String>,
+        successCallback: () -> Unit,
+        errorCallback: (Throwable) -> Unit
+    ) {
+        val userId = context.getUserId()
+        if (userId == null) {
+            errorCallback(Throwable("User id is null, call createAccount() first passing a unique user id"))
+            return
+        }
+        NotificationInteractor().logEvent(
+            integrationId,
+            event,
+            data,
+            context.getUserId()!!,
+            successCallback,
+            errorCallback
+        )
+    }
+
+    /** METHOD DESCRIPTION GOES HERE
+     *
+     * @param data PARAM DESCRIPTION GOES HERE
+     * @param successCallback Notifies caller that action was successful
+     * @param errorCallback Notifies caller that action failed returning a Throwable
+     */
+    override fun updateProperties(
+        data: Map<String, String>,
+        successCallback: () -> Unit,
+        errorCallback: (Throwable) -> Unit
+    ) {
+        val userId = context.getUserId()
+        if (userId == null) {
+            errorCallback(Throwable("User id is null, call createAccount() first passing a unique user id"))
+            return
+        }
+        PropertiesInteractor().updateProperties(
+            integrationId,
+            data,
+            context.getUserId()!!,
+            successCallback,
+            errorCallback
+        )
+    }
+
     /** Logs a Notification
      *
      * @param actionId PARAM DESCRIPTION GOES HERE
@@ -113,9 +123,14 @@ internal class ClangImplementation(
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
+        val userId = context.getUserId()
+        if (userId == null) {
+            errorCallback(Throwable("User id is null, call createAccount() first passing a unique user id"))
+            return
+        }
         NotificationInteractor().logNotificationAction(
             notificationId,
-            context.getUserId(),
+            context.getUserId()!!,
             actionId,
             successCallback,
             errorCallback
@@ -133,14 +148,20 @@ internal class ClangImplementation(
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     ) {
+        val userId = context.getUserId()
+        if (userId == null) {
+            errorCallback(Throwable("User id is null, call createAccount() first passing a unique user id"))
+            return
+        }
         TokenInteractor().sendTokenToServer(
             firebaseToken,
-            context.getUserId(),
+            userId,
             successCallback,
             errorCallback
         )
     }
 
+    //region Util methods
     /**
      * Queries FCM token using the [FirebaseInstanceId] class
      *
@@ -152,7 +173,8 @@ internal class ClangImplementation(
     ) {
         FirebaseInstanceId.getInstance().instanceId
             .addOnSuccessListener { onTokenReceived(it.token) }
-            .addOnFailureListener { exception -> onTokenFailed(exception)}
+            .addOnFailureListener { exception -> onTokenFailed(exception) }
 
     }
+    //endregion
 }

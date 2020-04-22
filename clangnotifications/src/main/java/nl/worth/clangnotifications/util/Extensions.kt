@@ -29,7 +29,7 @@ internal fun Context.saveUserId(userId: String) {
 /**
  * Fetches the user id from [EncryptedSharedPreferences]
  */
-internal fun Context.getUserId(): String {
+internal fun Context.getUserId(): String? {
     val masterKeyAlias: String = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 
     val sharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
@@ -40,6 +40,6 @@ internal fun Context.getUserId(): String {
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
     )
 
-    return sharedPreferences.getString("user.id", "").orEmpty()
+    return sharedPreferences.getString("user.id", null).orEmpty()
 }
 
