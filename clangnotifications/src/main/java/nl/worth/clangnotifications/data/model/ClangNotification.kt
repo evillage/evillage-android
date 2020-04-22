@@ -13,7 +13,7 @@ import java.io.Serializable
  * Unwraps data fields (a [Map] of [String]s) of a [RemoteMessage] coming from Clang
  *
  */
-data class ClangNotification(val remoteMessage: RemoteMessage) : Serializable {
+class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
     var id: String? = null
         private set
     var title: String? = null
@@ -57,7 +57,7 @@ data class ClangNotification(val remoteMessage: RemoteMessage) : Serializable {
     /**
      * Static methods
      */
-    companion object{
+    companion object : Serializable {
 
         /**
          * Checks if received [RemoteMessage] is coming from Clang
