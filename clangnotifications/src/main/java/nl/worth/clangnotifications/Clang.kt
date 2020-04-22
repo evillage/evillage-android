@@ -66,6 +66,22 @@ abstract class Clang {
         }
 
         /**
+         * Call once in your Application class to create Singleton object
+         *
+         * - Uses default URL
+         */
+        fun setUp(
+            context: Context,
+            authenticationToken: String,
+            integrationId: String
+        ) {
+            if (instance == null) {
+                instance = ClangImplementation(authenticationToken, integrationId)
+                instance!!.context = context
+            }
+        }
+
+        /**
          * Call to get instance of Clang
          *
          * It's advised to keep a reference to a Clang object in your Application class instead of calling getInstance() every time you need one

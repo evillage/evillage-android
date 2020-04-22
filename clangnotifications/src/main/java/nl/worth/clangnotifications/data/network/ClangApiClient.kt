@@ -38,8 +38,8 @@ internal object ClangApiClient {
      *
      * @param authToken Value of authorization header
      */
-    fun init(baseUrl: String, authToken: String) {
-        this.baseUrl = baseUrl
+    fun init(baseUrl: String?, authToken: String) {
+        this.baseUrl = if (baseUrl.isNullOrEmpty()) BuildConfig.BASE_URL else baseUrl
         this.authToken = authToken
     }
 
@@ -97,7 +97,7 @@ internal object ClangApiClient {
     /**
      * Intercepts every API call and adds the Authorization header
      */
-    class TokenAuthenticator(authToken: String) : Interceptor {
+    private class TokenAuthenticator(authToken: String) : Interceptor {
         private val authorizationHeader = "Bearer $authToken"
 
         override fun intercept(chain: Interceptor.Chain): Response {

@@ -40,6 +40,6 @@ internal fun Context.getUserId(): String? {
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
     )
 
-    return sharedPreferences.getString("user.id", null).orEmpty()
+    return sharedPreferences.getString("user.id", null)
 }
 
