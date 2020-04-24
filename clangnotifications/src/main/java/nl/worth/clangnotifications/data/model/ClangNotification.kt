@@ -6,6 +6,7 @@ import nl.worth.clangnotifications.util.*
 import org.json.JSONArray
 import org.json.JSONException
 import java.io.Serializable
+import java.lang.Exception
 
 /**
  * Data class for Clang notifications
@@ -29,22 +30,24 @@ class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
         message = data[tagNotificationMessage]
         id = data[tagNotificationId]
 
-        try {
-            val jsonArray = JSONArray(data[tagNotificationActions])
-            for (i in 0 until jsonArray.length()) {
-                val action = jsonArray.getJSONObject(i)
-                actions.add(
-                    ClangAction(
-                        action.getString(tagActionsId), action.getString(tagActionsTitle)
+        if(remoteMessage.data.containsKey(tagNotificationActions)){
+            try {
+                val jsonArray = JSONArray(data[tagNotificationActions])
+                for (i in 0 until jsonArray.length()) {
+                    val action = jsonArray.getJSONObject(i)
+                    actions.add(
+                        ClangAction(
+                            action.getString(tagActionsId), action.getString(tagActionsTitle)
+                        )
                     )
+                }
+            } catch (exception: Exception) {
+                Log.e(
+                    this::class.java.simpleName,
+                    "Failed to parse Clang actions from remote message",
+                    exception
                 )
             }
-        } catch (exception: JSONException) {
-            Log.e(
-                this::class.java.simpleName,
-                "Failed to parse Clang actions from remote message",
-                exception
-            )
         }
     }
 
