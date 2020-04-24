@@ -5,9 +5,16 @@ For the use of this in an example Android app with UI please see: https://github
 The library is written in Kotlin, uses Retrofit2 for HTTP calls and Firebase Cloud Messaging for notifications.
 
 ## Clang library setup
-To use the Clang library you need to call Clang.getInstance() passing the Application context, the authorization token and the integration id  
+To setup the Clang library you need to call Clang.setUp() in your Application class and pass:
+    - Application context
+    - Authentication token
+    - Integration id 
+    - Base url (optional, if not present a default base url will be choosen)
 
-The last two values will be provided when you contact e-Village to start integrating with the Clang platform.
+The last three values will be provided when you contact e-Village to start integrating with the Clang platform.
+
+## Clang library usage
+To use the Clang library you can just call Clang.getInstance() after setUp() and a Singletion instance of the Clang library will be returned. 
 
 ## Publising a new version of the library
 In our test setup we have used https://jitpack.io to take care of builds of the library. By linking jitpack.io to the repository it can automatically create new builds based on version tags (tags on commits). Please refer to the documentation of jitpack.io on how to set this up.
@@ -17,7 +24,7 @@ Just add the library to your project gradle
 
 ```
 dependencies {
-    implementation 'com.github.evillage:evillage-android:0.0.3'
+    implementation 'com.github.evillage:evillage-android:0.0.11'
 }
 ```
 
