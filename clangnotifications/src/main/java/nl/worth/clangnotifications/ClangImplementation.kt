@@ -1,6 +1,8 @@
 package nl.worth.clangnotifications
 
 import android.content.Context
+import android.util.Log
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import nl.worth.clangnotifications.data.interactor.AccountInteractor
 import nl.worth.clangnotifications.data.interactor.NotificationInteractor
@@ -9,6 +11,7 @@ import nl.worth.clangnotifications.data.interactor.TokenInteractor
 import nl.worth.clangnotifications.data.model.ClangAccountResponse
 import nl.worth.clangnotifications.data.network.ClangApiClient
 import nl.worth.clangnotifications.util.getUserId
+import java.lang.Exception
 
 /**
  * This Class is used to log events to a remote server
@@ -178,9 +181,16 @@ internal class ClangImplementation(
         onTokenFailed: (Throwable) -> Unit
     ) {
         FirebaseInstanceId.getInstance().instanceId
-            .addOnSuccessListener { onTokenReceived(it.token) }
-            .addOnFailureListener { exception -> onTokenFailed(exception) }
+            .addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let { onTokenFailed(it) } ?: onTokenFailed(Exception("Unknown FirebaseInstanceId exception"))
+                    return@OnCompleteListener
+                }
 
+                // Get new Instance ID token
+                val token = task.result?.token
+                token?.let { onTokenReceived(it) } ?: onTokenFailed(Exception("Null FCM token"))
+            })
     }
     //endregion
 }
