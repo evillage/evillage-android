@@ -30,7 +30,7 @@ class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
         message = data[tagNotificationMessage]
         id = data[tagNotificationId]
 
-        if(remoteMessage.data.containsKey(tagNotificationActions)){
+        if (remoteMessage.data.containsKey(tagNotificationActions)) {
             try {
                 val jsonArray = JSONArray(data[tagNotificationActions])
                 for (i in 0 until jsonArray.length()) {
@@ -47,6 +47,30 @@ class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
                     "Failed to parse Clang actions from remote message",
                     exception
                 )
+            }
+        }
+
+        if (remoteMessage.data.containsKey(tagNotificationActionOneId) && remoteMessage.data.containsKey(tagNotificationActionOneTitle)) {
+            remoteMessage.data[tagNotificationActionOneId]?.let { id ->
+                remoteMessage.data[tagNotificationActionOneTitle]?.let { title ->
+                    actions.add(ClangAction(id, title))
+                }
+            }
+        }
+
+        if (remoteMessage.data.containsKey(tagNotificationActionTwoId) && remoteMessage.data.containsKey(tagNotificationActionTwoTitle)) {
+            remoteMessage.data[tagNotificationActionTwoId]?.let { id ->
+                remoteMessage.data[tagNotificationActionTwoTitle]?.let { title ->
+                    actions.add(ClangAction(id, title))
+                }
+            }
+        }
+
+        if (remoteMessage.data.containsKey(tagNotificationActionThreeId) && remoteMessage.data.containsKey(tagNotificationActionThreeTitle)) {
+            remoteMessage.data[tagNotificationActionThreeId]?.let { id ->
+                remoteMessage.data[tagNotificationActionThreeTitle]?.let { title ->
+                    actions.add(ClangAction(id, title))
+                }
             }
         }
     }
