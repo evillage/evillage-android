@@ -6,7 +6,7 @@ The library is written in Kotlin, uses Retrofit2 for HTTP calls and Firebase Clo
 
 ## Clang library setup
 To setup the Clang library you need to call Clang.Companion.setUp() in your Application class and pass:
- * Base url
+ * Base url (optional, defaults to https://api.clang.cloud)
  * Application context
  * Authentication token
  * Integration id 
