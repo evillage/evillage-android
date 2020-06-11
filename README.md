@@ -16,7 +16,7 @@ The last three values will be provided when you contact e-Village to start integ
 ## Clang library usage
 To use the Clang library you can just call Clang.getInstance() after setUp() and a Singletion instance of the Clang library will be returned. 
 
-## Publising a new version of the library
+## Publishing a new version of the library
 In our test setup we have used https://jitpack.io to take care of builds of the library. By linking jitpack.io to the repository it can automatically create new builds based on version tags (tags on commits). Please refer to the documentation of jitpack.io on how to set this up.
 
 ## Using the Clang library in your own project 
