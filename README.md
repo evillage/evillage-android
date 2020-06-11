@@ -14,7 +14,7 @@ To setup the Clang library you need to call Clang.Companion.setUp() in your Appl
 The last three values will be provided when you contact e-Village to start integrating with the Clang platform.
 
 ## Clang library usage
-To use the Clang library you can just call Clang.Companion.getInstance() after Clang.Companion.setUp() and a Singletoon instance of the Clang library will be returned. 
+To use the Clang library you can just call Clang.Companion.getInstance() after Clang.Companion.setUp() and a Singleton instance of the Clang library will be returned. 
 
 ## Publishing a new version of the library
 In our test setup we have used https://jitpack.io to take care of builds of the library. By linking jitpack.io to the repository it can automatically create new builds based on version tags (tags on commits). Please refer to the documentation of jitpack.io on how to set this up.
