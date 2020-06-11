@@ -6,10 +6,10 @@ The library is written in Kotlin, uses Retrofit2 for HTTP calls and Firebase Clo
 
 ## Clang library setup
 To setup the Clang library you need to call Clang.Companion.setUp() in your Application class and pass:
-    - Application context
-    - Authentication token
-    - Integration id 
-    - Base url (optional, if not present a default base url will be choosen)
+ * Base url
+ * Application context
+ * Authentication token
+ * Integration id 
 
 The last three values will be provided when you contact e-Village to start integrating with the Clang platform.
 
