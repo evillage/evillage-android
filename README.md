@@ -24,7 +24,7 @@ Just add the library to your project gradle
 
 ```
 dependencies {
-    implementation 'org.bitbucket.wi:evillage-android:0.0.10'
+    implementation 'org.bitbucket.wi:evillage-android:0.0.13'
 }
 ```
 

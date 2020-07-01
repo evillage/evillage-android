@@ -42,11 +42,7 @@ class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
                     )
                 }
             } catch (exception: Exception) {
-                Log.e(
-                    this::class.java.simpleName,
-                    "Failed to parse Clang actions from remote message",
-                    exception
-                )
+                Log.e(this::class.java.simpleName, "Failed to parse Clang actions from remote message", exception)
             }
         }
 
