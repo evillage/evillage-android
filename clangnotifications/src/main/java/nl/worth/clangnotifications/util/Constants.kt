@@ -16,3 +16,8 @@ const val tagNotificationActionThreeTitle = "action3Title"
 const val tagActionsId = "id"
 const val tagActionsTitle = "title"
 //endregion
+
+//region EncryptedSharedPreferences Tags
+const val clangFile = "clang"
+const val userIdKey = "user.id"
+//endregion
