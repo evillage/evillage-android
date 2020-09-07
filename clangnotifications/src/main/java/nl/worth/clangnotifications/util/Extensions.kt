@@ -2,6 +2,7 @@ package nl.worth.clangnotifications.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.annotation.Keep
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
@@ -11,6 +12,7 @@ import androidx.security.crypto.MasterKey
  *
  * @param userId The id of the current user's registered account
  */
+@Keep
 fun Context.saveUserId(userId: String) {
     getSharedPreferences(this).edit().putString(userIdKey, userId).apply()
 }
@@ -18,6 +20,7 @@ fun Context.saveUserId(userId: String) {
 /**
  * Fetches the user id from [EncryptedSharedPreferences]
  */
+@Keep
 fun Context.getUserId(): String? {
     return getSharedPreferences(this).getString(userIdKey, null)
 }
@@ -27,6 +30,7 @@ fun Context.getUserId(): String? {
  *
  * @return SharedPreferences instance
  */
+@Keep
 fun getSharedPreferences(context: Context): SharedPreferences {
     val masterKey = MasterKey
         .Builder(context, MasterKey.DEFAULT_MASTER_KEY_ALIAS)

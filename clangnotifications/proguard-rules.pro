@@ -19,3 +19,8 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class androidx.security.crypto.EncryptedSharedPreferences { *; }
+-keep class androidx.security.crypto.MasterKey
+-keep class androidx.security.crypto.EncryptedFile
+-keep class androidx.security.R
