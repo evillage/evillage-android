@@ -19,7 +19,7 @@ import java.lang.Exception
  * @param authenticationToken The authorization header value
  * @param integrationId PARAM DESCRIPTION GOES HERE
  */
-internal class ClangImplementation(
+class ClangImplementation(
     baseUrl: String?,
     authenticationToken: String,
     private val integrationId: String

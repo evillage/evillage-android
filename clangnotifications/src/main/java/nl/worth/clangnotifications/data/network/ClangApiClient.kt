@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 /**
  *  Creates an instance of [ClangApiService] as a Singleton
  */
-internal object ClangApiClient {
+object ClangApiClient {
 
     /**
      * Singleton instance of [ClangApiClient]

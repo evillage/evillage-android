@@ -12,7 +12,7 @@ import retrofit2.Response
 /**
  * Repository like class that registers the user's account
  */
-internal class AccountInteractor {
+class AccountInteractor {
 
     /** Creates a unique user account using a unique device ID, the user id generated from the remote service is saved locally and used as a user identifier when events are logged
      *

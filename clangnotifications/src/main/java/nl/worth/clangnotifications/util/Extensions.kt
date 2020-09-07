@@ -11,14 +11,14 @@ import androidx.security.crypto.MasterKey
  *
  * @param userId The id of the current user's registered account
  */
-internal fun Context.saveUserId(userId: String) {
+fun Context.saveUserId(userId: String) {
     getSharedPreferences(this).edit().putString(userIdKey, userId).apply()
 }
 
 /**
  * Fetches the user id from [EncryptedSharedPreferences]
  */
-internal fun Context.getUserId(): String? {
+fun Context.getUserId(): String? {
     return getSharedPreferences(this).getString(userIdKey, null)
 }
 

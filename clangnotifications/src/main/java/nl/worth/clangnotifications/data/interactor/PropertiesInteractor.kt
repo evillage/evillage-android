@@ -10,7 +10,7 @@ import retrofit2.Response
 /**
  * Repository like class that ..
  */
-internal class PropertiesInteractor {
+class PropertiesInteractor {
 
     /**
      * METHOD DESCRIPTION GOES HERE

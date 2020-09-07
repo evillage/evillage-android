@@ -11,7 +11,7 @@ import retrofit2.Response
 /**
  * Repository like class that logs Firebase related events
  */
-internal class NotificationInteractor {
+class NotificationInteractor {
 
     /** Logs a Notification action
      *

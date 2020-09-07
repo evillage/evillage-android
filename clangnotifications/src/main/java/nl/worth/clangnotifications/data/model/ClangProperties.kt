@@ -8,4 +8,4 @@ package nl.worth.clangnotifications.data.model
  * @property integrationId PROPERTY DESCRIPTION GOES HERE
  * @property data PROPERTY DESCRIPTION GOES HERE
  */
-internal data class ClangProperties(val userId: String, val integrationId: String, val data: Map<String, String>)
+data class ClangProperties(val userId: String, val integrationId: String, val data: Map<String, String>)

@@ -10,7 +10,7 @@ import retrofit2.Response
 /**
  * Repository like class that updates user's FCM token
  */
-internal class TokenInteractor {
+class TokenInteractor {
 
     /** Updates user's FCM token
      *
