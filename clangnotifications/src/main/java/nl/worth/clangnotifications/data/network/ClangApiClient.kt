@@ -1,5 +1,6 @@
 package nl.worth.clangnotifications.data.network
 
+import androidx.annotation.Keep
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import nl.worth.clangnotifications.BuildConfig
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit
 /**
  *  Creates an instance of [ClangApiService] as a Singleton
  */
+@Keep
 object ClangApiClient {
 
     /**

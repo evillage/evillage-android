@@ -1,6 +1,7 @@
 package nl.worth.clangnotifications.data.model
 
 import android.util.Log
+import androidx.annotation.Keep
 import com.google.firebase.messaging.RemoteMessage
 import nl.worth.clangnotifications.util.*
 import org.json.JSONArray
@@ -14,6 +15,7 @@ import java.lang.Exception
  * Unwraps data fields (a [Map] of [String]s) of a [RemoteMessage] coming from Clang
  *
  */
+@Keep
 class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
     var id: String? = null
         private set

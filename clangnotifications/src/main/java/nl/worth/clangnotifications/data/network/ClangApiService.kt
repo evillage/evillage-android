@@ -1,5 +1,6 @@
 package nl.worth.clangnotifications.data.network
 
+import androidx.annotation.Keep
 import nl.worth.clangnotifications.data.model.*
 import okhttp3.ResponseBody
 import retrofit2.Call
@@ -10,6 +11,7 @@ import retrofit2.Retrofit
 /**
  * Interface used to generate code for API calls used by [Retrofit]
  */
+@Keep
 interface ClangApiService {
 
     @POST("/push/account/register")

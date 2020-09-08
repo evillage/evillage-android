@@ -1,5 +1,6 @@
 package nl.worth.clangnotifications.data.interactor
 
+import androidx.annotation.Keep
 import nl.worth.clangnotifications.data.model.ClangTokenUpdate
 import nl.worth.clangnotifications.data.network.ClangApiClient
 import okhttp3.ResponseBody
@@ -10,6 +11,7 @@ import retrofit2.Response
 /**
  * Repository like class that updates user's FCM token
  */
+@Keep
 class TokenInteractor {
 
     /** Updates user's FCM token

@@ -1,5 +1,6 @@
 package nl.worth.clangnotifications.data.interactor
 
+import androidx.annotation.Keep
 import nl.worth.clangnotifications.data.model.ClangActionRequest
 import nl.worth.clangnotifications.data.model.ClangEvent
 import nl.worth.clangnotifications.data.network.ClangApiClient
@@ -11,6 +12,7 @@ import retrofit2.Response
 /**
  * Repository like class that logs Firebase related events
  */
+@Keep
 class NotificationInteractor {
 
     /** Logs a Notification action

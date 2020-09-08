@@ -2,6 +2,7 @@ package nl.worth.clangnotifications
 
 import android.content.Context
 import android.util.Log
+import androidx.annotation.Keep
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import nl.worth.clangnotifications.data.interactor.AccountInteractor
@@ -19,6 +20,7 @@ import java.lang.Exception
  * @param authenticationToken The authorization header value
  * @param integrationId PARAM DESCRIPTION GOES HERE
  */
+@Keep
 class ClangImplementation(
     baseUrl: String?,
     authenticationToken: String,

@@ -1,6 +1,7 @@
 package nl.worth.clangnotifications
 
 import android.content.Context
+import androidx.annotation.Keep
 import nl.worth.clangnotifications.data.model.ClangAccountResponse
 import java.lang.NullPointerException
 
@@ -12,6 +13,7 @@ import java.lang.NullPointerException
  *
  * It is advised to keep a reference of the Singleton Clang object to you Application class and use that when logging instead of calling getInstance() every time you need one.
  */
+@Keep
 abstract class Clang {
 
     abstract fun createAccount(

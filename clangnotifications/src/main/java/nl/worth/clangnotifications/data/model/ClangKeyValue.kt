@@ -2,6 +2,7 @@ package nl.worth.clangnotifications.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.Keep
 
 
 /**
@@ -10,6 +11,7 @@ import android.os.Parcelable
  * @property key PROPERTY DESCRIPTION GOES HERE
  * @property value PROPERTY DESCRIPTION GOES HERE
  */
+@Keep
 data class ClangKeyValue(val key: String, val value: String) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",

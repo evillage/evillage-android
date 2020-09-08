@@ -1,5 +1,7 @@
 package nl.worth.clangnotifications.data.model
 
+import androidx.annotation.Keep
+
 
 /**
  * INSERT CLASS DESCRIPTION HERE
@@ -9,6 +11,7 @@ package nl.worth.clangnotifications.data.model
  * @property data PROPERTY DESCRIPTION GOES HERE
  * @property integrationId PROPERTY DESCRIPTION GOES HERE
  */
+@Keep
 data class ClangEvent(
     val userId: String,
     val event: String,
