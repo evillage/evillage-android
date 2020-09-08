@@ -20,7 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class androidx.security.crypto.EncryptedSharedPreferences { *; }
--keep class androidx.security.crypto.MasterKey
--keep class androidx.security.crypto.EncryptedFile
--keep class androidx.security.R
+-keep class androidx.security** { *; }
+-keep class net.oqee.core.services** { *; }
+-keep class com.google.crypto** { *; }
+
