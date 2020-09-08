@@ -48,6 +48,7 @@ abstract class Clang {
         errorCallback: (Throwable) -> Unit
     )
 
+    @Keep
     companion object {
         @Volatile
         private var instance: ClangImplementation? = null

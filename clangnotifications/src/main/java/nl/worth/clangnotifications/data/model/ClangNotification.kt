@@ -77,11 +77,13 @@ class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
      * Data class for actions included within a Clang [RemoteMessage] data section (a [Map] of [String]s)
      * The tag for the data is "actions" and the structure is of a Json array as [{"id":"..","title":"..", ...}]
      */
+    @Keep
     data class ClangAction(val id: String, val title: String) : Serializable
 
     /**
      * Static methods
      */
+    @Keep
     companion object : Serializable {
 
         /**
