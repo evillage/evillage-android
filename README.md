@@ -24,7 +24,7 @@ Just add the library to your project gradle
 
 ```
 dependencies {
-    implementation 'com.github.evillage:evillage-android:v0.0.20'
+    implementation 'com.github.evillage:evillage-android:0.0.20'
 }
 ```
 
