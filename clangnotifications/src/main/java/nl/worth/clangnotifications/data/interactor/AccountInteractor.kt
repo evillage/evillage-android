@@ -45,7 +45,7 @@ class AccountInteractor {
                     call: Call<ClangAccountResponse>,
                     response: Response<ClangAccountResponse>
                 ) {
-                    if (response.isSuccessful) {
+                    if (response.isSuccessful && response.body()?.id != null) {
                         response.body()?.let {
                             context.saveUserId(it.id)
                             successCallback(it)
