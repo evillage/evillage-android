@@ -8,6 +8,8 @@ import org.json.JSONArray
 import org.json.JSONException
 import java.io.Serializable
 import java.lang.Exception
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Data class for Clang notifications
@@ -19,11 +21,17 @@ import java.lang.Exception
 class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
     var id: String? = null
         private set
+    var category: String? = null
+        private set
+    var type: String? = null
+        private set
     var title: String? = null
         private set
     var message: String? = null
         private set
     var actions: ArrayList<ClangAction> = arrayListOf()
+        private set
+    var customFields: ArrayList<ClangCustomField> = arrayListOf()
         private set
 
     init {
@@ -31,6 +39,8 @@ class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
         title = data[tagNotificationTitle]
         message = data[tagNotificationMessage]
         id = data[tagNotificationId]
+        type = data[tagType]
+        category = data[tagCategory]
 
         if (remoteMessage.data.containsKey(tagNotificationActions)) {
             try {
@@ -45,6 +55,22 @@ class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
                 }
             } catch (exception: Exception) {
                 Log.e(this::class.java.simpleName, "Failed to parse Clang actions from remote message", exception)
+            }
+        }
+
+        if (remoteMessage.data.containsKey(tagNotificationCustomFields)) {
+            try {
+                val jsonArray = JSONArray(data[tagNotificationCustomFields])
+                for (i in 0 until jsonArray.length()) {
+                    val customField = jsonArray.getJSONObject(i)
+                    customFields.add(
+                        ClangCustomField(
+                            customField.getString(tagCustomFieldId), customField.getString(tagCustomFieldTitle)
+                        )
+                    )
+                }
+            } catch (exception: Exception) {
+                Log.e(this::class.java.simpleName, "Failed to parse Clang customFields from remote message", exception)
             }
         }
 
@@ -79,6 +105,13 @@ class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
      */
     @Keep
     data class ClangAction(val id: String, val title: String) : Serializable
+
+    /**
+     * Data class for custom fields included within a Clang [RemoteMessage] data section (a [Map] of [String]s)
+     * The tag for the data is "actions" and the structure is of a Json array as [{"id":"..","title":"..", ...}]
+     */
+    @Keep
+    data class ClangCustomField(val id: String, val title: String) : Serializable
 
     /**
      * Static methods

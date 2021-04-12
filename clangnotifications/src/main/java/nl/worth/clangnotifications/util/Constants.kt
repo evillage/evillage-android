@@ -14,7 +14,13 @@ const val tagNotificationMessage = "notificationBody"
 @Keep
 const val tagNotificationId = "notificationId"
 @Keep
+const val tagType = "type"
+@Keep
+const val tagCategory = "category"
+@Keep
 const val tagNotificationActions = "actions"
+@Keep
+const val tagNotificationCustomFields = "customFields"
 @Keep
 const val tagNotificationActionOneId = "action1Id"
 @Keep
@@ -31,6 +37,10 @@ const val tagNotificationActionThreeTitle = "action3Title"
 const val tagActionsId = "id"
 @Keep
 const val tagActionsTitle = "title"
+@Keep
+const val tagCustomFieldId = "id"
+@Keep
+const val tagCustomFieldTitle = "title"
 //endregion
 
 //region EncryptedSharedPreferences Tags
