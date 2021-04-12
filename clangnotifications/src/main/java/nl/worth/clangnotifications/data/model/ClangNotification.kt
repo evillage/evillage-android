@@ -108,7 +108,7 @@ class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
      * The tag for the data is "actions" and the structure is of a Json array as [{"id":"..","title":"..", ...}]
      */
     @Keep
-    data class ClangCustomField(val key: String, val value: String) : Serializable
+    data class ClangCustomField(val name: String, val content: String) : Serializable
 
     /**
      * Static methods
