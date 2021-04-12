@@ -38,9 +38,11 @@ const val tagActionsId = "id"
 @Keep
 const val tagActionsTitle = "title"
 @Keep
-const val tagCustomFieldId = "id"
+const val tagCustomFieldPrefix = "custom_"
 @Keep
-const val tagCustomFieldTitle = "title"
+const val tagCustomFieldKey = "key"
+@Keep
+const val tagCustomFieldValue = "value"
 //endregion
 
 //region EncryptedSharedPreferences Tags

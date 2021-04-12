@@ -5,11 +5,7 @@ import androidx.annotation.Keep
 import com.google.firebase.messaging.RemoteMessage
 import nl.worth.clangnotifications.util.*
 import org.json.JSONArray
-import org.json.JSONException
 import java.io.Serializable
-import java.lang.Exception
-import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * Data class for Clang notifications
@@ -58,23 +54,18 @@ class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
             }
         }
 
-        if (remoteMessage.data.containsKey(tagNotificationCustomFields)) {
-            try {
-                val jsonArray = JSONArray(data[tagNotificationCustomFields])
-                for (i in 0 until jsonArray.length()) {
-                    val customField = jsonArray.getJSONObject(i)
-                    customFields.add(
-                        ClangCustomField(
-                            customField.getString(tagCustomFieldId), customField.getString(tagCustomFieldTitle)
-                        )
-                    )
-                }
-            } catch (exception: Exception) {
-                Log.e(this::class.java.simpleName, "Failed to parse Clang customFields from remote message", exception)
+        remoteMessage.data.forEach() {
+            if (it.key.startsWith(tagCustomFieldPrefix)) {
+                customFields.add(
+                    ClangCustomField(it.key.removePrefix(tagCustomFieldPrefix), it.value)
+                )
             }
         }
 
-        if (remoteMessage.data.containsKey(tagNotificationActionOneId) && remoteMessage.data.containsKey(tagNotificationActionOneTitle)) {
+        if (remoteMessage.data.containsKey(tagNotificationActionOneId) && remoteMessage.data.containsKey(
+                tagNotificationActionOneTitle
+            )
+        ) {
             remoteMessage.data[tagNotificationActionOneId]?.let { id ->
                 remoteMessage.data[tagNotificationActionOneTitle]?.let { title ->
                     actions.add(ClangAction(id, title))
@@ -82,7 +73,10 @@ class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
             }
         }
 
-        if (remoteMessage.data.containsKey(tagNotificationActionTwoId) && remoteMessage.data.containsKey(tagNotificationActionTwoTitle)) {
+        if (remoteMessage.data.containsKey(tagNotificationActionTwoId) && remoteMessage.data.containsKey(
+                tagNotificationActionTwoTitle
+            )
+        ) {
             remoteMessage.data[tagNotificationActionTwoId]?.let { id ->
                 remoteMessage.data[tagNotificationActionTwoTitle]?.let { title ->
                     actions.add(ClangAction(id, title))
@@ -90,7 +84,10 @@ class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
             }
         }
 
-        if (remoteMessage.data.containsKey(tagNotificationActionThreeId) && remoteMessage.data.containsKey(tagNotificationActionThreeTitle)) {
+        if (remoteMessage.data.containsKey(tagNotificationActionThreeId) && remoteMessage.data.containsKey(
+                tagNotificationActionThreeTitle
+            )
+        ) {
             remoteMessage.data[tagNotificationActionThreeId]?.let { id ->
                 remoteMessage.data[tagNotificationActionThreeTitle]?.let { title ->
                     actions.add(ClangAction(id, title))
@@ -111,7 +108,7 @@ class ClangNotification(remoteMessage: RemoteMessage) : Serializable {
      * The tag for the data is "actions" and the structure is of a Json array as [{"id":"..","title":"..", ...}]
      */
     @Keep
-    data class ClangCustomField(val id: String, val title: String) : Serializable
+    data class ClangCustomField(val key: String, val value: String) : Serializable
 
     /**
      * Static methods
