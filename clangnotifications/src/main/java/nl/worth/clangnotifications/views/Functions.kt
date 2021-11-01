@@ -56,10 +56,10 @@ class Functions {
             return layerList
         }
 
-        fun removeTheTickets(parent: Activity, strings: ArrayList<String>, check : ConstraintLayout) {
+        fun removeTheTickets(parent: Activity, strings: ArrayList<String>, mainConstraintLayout : ConstraintLayout) {
 
-            for (index in 0 until (check as ViewGroup).childCount) {
-                val nextChild = (check as ViewGroup).getChildAt(index)
+            for (index in 0 until (mainConstraintLayout as ViewGroup).childCount) {
+                val nextChild = (mainConstraintLayout as ViewGroup).getChildAt(index)
                 if (nextChild.tag == "cp_Layout") {
 
                     val layout = parent.findViewById<LinearLayout>(nextChild.id) as LinearLayout
@@ -71,7 +71,7 @@ class Functions {
                     } else {
 
                         if (strings.size > 1) {
-                            indicators!!.build(check)
+                            indicators!!.build(mainConstraintLayout)
                         }
                     }
                     if (strings.size == 0) {
@@ -88,7 +88,7 @@ class Functions {
 
                         viewPager.adapter = TicketSliderAdapter(parent, strings)
                         (viewPager.adapter as TicketSliderAdapter).aparent = parent
-                        (viewPager.adapter as TicketSliderAdapter).check = check
+                        (viewPager.adapter as TicketSliderAdapter).mainConstraintLayout = mainConstraintLayout
                         val params = FrameLayout.LayoutParams(
                             ViewGroup.LayoutParams.WRAP_CONTENT,
                             ViewGroup.LayoutParams.WRAP_CONTENT
@@ -117,11 +117,11 @@ class Functions {
 
 
 
-        fun buildTheTickets(parent: Activity, toAdd: String, check : ConstraintLayout) {
+        fun buildTheTickets(parent: Activity, toAdd: String, mainConstraintLayout : ConstraintLayout) {
 
 
-            for (index in 0 until (check as ViewGroup).childCount) {
-                val nextChild = (check as ViewGroup).getChildAt(index)
+            for (index in 0 until (mainConstraintLayout as ViewGroup).childCount) {
+                val nextChild = (mainConstraintLayout as ViewGroup).getChildAt(index)
                 if (nextChild.tag == "cp_Layout") {
 
                     val layout = parent.findViewById<LinearLayout>(nextChild.id) as LinearLayout
@@ -139,7 +139,7 @@ class Functions {
                         strings.add(0, convertDemoJSON(toAdd))
                         viewPager.adapter = TicketSliderAdapter(parent, strings)
                         (viewPager.adapter as TicketSliderAdapter).aparent = parent
-                        (viewPager.adapter as TicketSliderAdapter).check = check
+                        (viewPager.adapter as TicketSliderAdapter).mainConstraintLayout = mainConstraintLayout
                         val params = FrameLayout.LayoutParams(
                             ViewGroup.LayoutParams.WRAP_CONTENT,
                             ViewGroup.LayoutParams.WRAP_CONTENT
@@ -149,7 +149,7 @@ class Functions {
                         viewPager.layoutParams = params
                         layout.addView(viewPager, 0)
                         indicators = Indicator(layout.context, strings, parent)
-                        indicators!!.build(check)
+                        indicators!!.build(mainConstraintLayout)
 
                         viewPager?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
@@ -166,7 +166,7 @@ class Functions {
                             }
 
                             override fun onPageSelected(position: Int) {
-                                indicators!!.changeBullets(position, check)
+                                indicators!!.changeBullets(position, mainConstraintLayout)
                             }
 
                         })
@@ -185,7 +185,7 @@ class Functions {
                         //strings.add(toAdd)
                         viewPager.adapter = TicketSliderAdapter(parent, strings)
                         (viewPager.adapter as TicketSliderAdapter).aparent = parent
-                        (viewPager.adapter as TicketSliderAdapter).check = check
+                        (viewPager.adapter as TicketSliderAdapter).mainConstraintLayout = mainConstraintLayout
                         val params = FrameLayout.LayoutParams(
                             ViewGroup.LayoutParams.WRAP_CONTENT,
                             ViewGroup.LayoutParams.WRAP_CONTENT

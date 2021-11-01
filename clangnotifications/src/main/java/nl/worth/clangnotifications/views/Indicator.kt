@@ -19,11 +19,11 @@ class Indicator(private val context: Context, list: ArrayList<String>, parent: A
     public val strings: ArrayList<String> = list
     public val bullets: ArrayList<String> = list
 
-    fun reset(check : ConstraintLayout) {
+    fun reset(mainConstraintLayout : ConstraintLayout) {
 
 
-        for (index in 0 until (check as ViewGroup).childCount) {
-            val nextChild = (check as ViewGroup).getChildAt(index)
+        for (index in 0 until (mainConstraintLayout as ViewGroup).childCount) {
+            val nextChild = (mainConstraintLayout as ViewGroup).getChildAt(index)
             if (nextChild.tag == "cp_Layout") {
 
                 val layout = aparent.findViewById<LinearLayout>(nextChild.id) as LinearLayout
@@ -58,12 +58,12 @@ class Indicator(private val context: Context, list: ArrayList<String>, parent: A
 
     }
 
-    fun build(check : ConstraintLayout) {
+    fun build(mainConstraintLayout : ConstraintLayout) {
 
 
 
-        for (index in 0 until (check as ViewGroup).childCount) {
-            val nextChild = (check as ViewGroup).getChildAt(index)
+        for (index in 0 until (mainConstraintLayout as ViewGroup).childCount) {
+            val nextChild = (mainConstraintLayout as ViewGroup).getChildAt(index)
             if (nextChild.tag == "cp_Layout") {
 
                 val layout = aparent.findViewById<LinearLayout>(nextChild.id) as LinearLayout
@@ -143,11 +143,11 @@ class Indicator(private val context: Context, list: ArrayList<String>, parent: A
         }
     }
 
-    fun changeBullets(position: Int, check : ConstraintLayout) {
+    fun changeBullets(position: Int, mainConstraintLayout : ConstraintLayout) {
 
 
-        for (index in 0 until (check as ViewGroup).childCount) {
-            val nextChild = (check as ViewGroup).getChildAt(index)
+        for (index in 0 until (mainConstraintLayout as ViewGroup).childCount) {
+            val nextChild = (mainConstraintLayout as ViewGroup).getChildAt(index)
             if (nextChild.tag == "cp_Layout") {
 
                 var layout = aparent.findViewById<LinearLayout>(nextChild.id) as LinearLayout

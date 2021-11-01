@@ -26,7 +26,7 @@ import nl.evillage.views.Functions
 class TicketSliderAdapter(private val context: Context, list: ArrayList<String>) : PagerAdapter() {
 
     public var aparent: Activity? = null
-    public var check: ConstraintLayout? = null
+    public var mainConstraintLayout: ConstraintLayout? = null
     private var inflater: LayoutInflater? = null
     public val strings: ArrayList<String> = list
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -91,7 +91,7 @@ class TicketSliderAdapter(private val context: Context, list: ArrayList<String>)
             strings.remove(strings[position]);
             notifyDataSetChanged()
 
-            Functions.removeTheTickets(aparent!!, strings, check as ConstraintLayout)
+            Functions.removeTheTickets(aparent!!, strings, mainConstraintLayout!!)
         })
         button.setTextColor(Color.BLACK)
         button.gravity =(Gravity.RIGHT)
