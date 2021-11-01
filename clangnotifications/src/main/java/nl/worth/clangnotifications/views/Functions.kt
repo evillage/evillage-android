@@ -178,11 +178,8 @@ class Functions {
                         viewPager.setId(View.generateViewId())
                         viewPager.setTag("ViewPager")// --> this is important!
 
-                        val strings: ArrayList<String> = arrayListOf(
-                            "<!DOCTYPE html><html><head><meta name=\"viewport\"content=\"width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no\" /><link href=\"https://fonts.googleapis.com/css?family=PT+Sans:400,700\"rel=\"stylesheet\"><style>table{width: 100%;font-size:17px;font-family:PT Sans, Helvetica,Arial,sans-serif;color:#003b5a;line-height:24px;}.title{font-size:20px;}.button{text-align:left;color:#00a4a7;font-weight:bold;text-decoration:none;}</style></head><body><table><tr><td><table><tr><td width=\"40px;\"><img src=\"https://i.ibb.co/WgbrXmc/Shield.png\"width=\"35px\"></td><td class=\"title\"><b>AOV te duur?</b></td></tr></table></td></tr><tr><td>Verzeker je voordelig tegen arbeidsongeschiktheid met Knab Crowsdurance.</td><tr><td class=\"button\"><a class=\"button\"target=\"_blank\"href=\"https://www.knab.nl/in-app/knab-verzekeren?utm_source=knab&utm_medium=inapp&utm_campaign=ONBCRS\">Ontdek crowdsurance</a></td></tr></tr></table></body></html>"
-                        )
+                        val strings: ArrayList<String> = arrayListOf(convertDemoJSON(toAdd))
 
-                        //strings.add(toAdd)
                         viewPager.adapter = TicketSliderAdapter(parent, strings)
                         (viewPager.adapter as TicketSliderAdapter).aparent = parent
                         (viewPager.adapter as TicketSliderAdapter).mainConstraintLayout = mainConstraintLayout
