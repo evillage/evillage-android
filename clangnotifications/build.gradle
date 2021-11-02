@@ -15,7 +15,6 @@ android {
         versionCode 23
         versionName "0.0.23"
         consumerProguardFiles 'proguard-rules.pro'
-
         buildConfigField "String", "BASE_URL", '"https://api.clang.cloud"'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
