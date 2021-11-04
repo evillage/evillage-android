@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.annotation.Keep
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import nl.worth.clangnotifications.data.interactor.AccountInteractor
 import nl.worth.clangnotifications.data.interactor.NotificationInteractor
 import nl.worth.clangnotifications.data.interactor.PropertiesInteractor
@@ -174,25 +174,25 @@ class ClangImplementation(
 
     //region Util methods
     /**
-     * Queries FCM token using the [FirebaseInstanceId] class
-     *
+    *
      * @param onTokenReceived Notifies caller that action was successful returning a FCM token
      */
     private fun retrieveFirebaseToken(
         onTokenReceived: (String) -> Unit,
         onTokenFailed: (Throwable) -> Unit
     ) {
-        FirebaseInstanceId.getInstance().instanceId
-            .addOnCompleteListener(OnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let { onTokenFailed(it) } ?: onTokenFailed(Exception("Unknown FirebaseInstanceId exception"))
-                    return@OnCompleteListener
-                }
 
-                // Get new Instance ID token
-                val token = task.result?.token
+        FirebaseMessaging.getInstance().token.addOnSuccessListener { result ->
+            if(result != null){
+                var token = result
                 token?.let { onTokenReceived(it) } ?: onTokenFailed(Exception("Null FCM token"))
-            })
+
+            } else {
+
+                onTokenFailed(Exception("Unknown FirebaseInstanceId exception"))
+
+            }
+        }
     }
     //endregion
 }
