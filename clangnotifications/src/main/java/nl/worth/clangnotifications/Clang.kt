@@ -1,7 +1,9 @@
 package nl.worth.clangnotifications
 
+import android.app.Activity
 import android.content.Context
 import androidx.annotation.Keep
+import androidx.constraintlayout.widget.ConstraintLayout
 import nl.worth.clangnotifications.data.model.ClangAccountResponse
 import java.lang.NullPointerException
 
@@ -22,12 +24,35 @@ abstract class Clang {
         errorCallback: (Throwable) -> Unit
     )
 
+    fun logEventWithToken(mail: String, token : String) {
+
+        logEvent("login", mapOf("title" to "login","userEmail" to mail), {
+
+        }, {
+
+        })
+
+        updateToken(token,{
+
+        }, {
+
+        })
+
+    }
+
     abstract fun logEvent(
         event: String,
         data: Map<String, String>,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     )
+
+    abstract fun updateToken(
+        firebaseToken: String,
+        successCallback: () -> Unit,
+        errorCallback: (Throwable) -> Unit
+    )
+
 
     abstract fun updateProperties(
         data: Map<String, String>,
@@ -42,11 +67,6 @@ abstract class Clang {
         errorCallback: (Throwable) -> Unit
     )
 
-    abstract fun updateToken(
-        firebaseToken: String,
-        successCallback: () -> Unit,
-        errorCallback: (Throwable) -> Unit
-    )
 
     @Keep
     companion object {
