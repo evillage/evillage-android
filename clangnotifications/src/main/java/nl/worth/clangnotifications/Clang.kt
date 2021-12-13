@@ -24,6 +24,21 @@ abstract class Clang {
         errorCallback: (Throwable) -> Unit
     )
 
+    /// Log an event to the Clang backend
+    /// - Parameters:
+    ///   - data: The data you want to log for this event
+    ///   - token: The token we receive from Firebase when registering for push notifications
+    ///   - login: Event date of the event you want to log
+    ///   - data:  Proporties you want to log
+    fun registerAccountWithProperties(token : String, data  : Map<String, String>, login  : Map<String, String>) {
+
+        updateToken(token,{ }, {})
+        updateProperties(data, {}, {})
+        logEvent("login", login, {}, {})
+
+
+    }
+
     fun logEventWithToken(mail: String, token : String) {
 
         logEvent("login", mapOf("title" to "login","userEmail" to mail), {
