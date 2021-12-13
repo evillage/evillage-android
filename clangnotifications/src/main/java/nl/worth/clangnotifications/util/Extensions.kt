@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.annotation.Keep
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import androidx.security.crypto.MasterKeys
 import java.security.KeyStore
 
 
@@ -32,6 +33,8 @@ fun Context.getUserId(): String? {
  * @return SharedPreferences instance
  */
 @Keep
+
+
 fun makeSharedPreferences(context: Context): SharedPreferences {
 
     val keyStore: KeyStore = KeyStore.getInstance("AndroidKeyStore")
@@ -100,6 +103,8 @@ fun getSharedPreferences(context: Context): SharedPreferences {
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
     )
 }
+
+
 
 
 

@@ -36,7 +36,6 @@ abstract class Clang {
         updateProperties(data, {}, {})
         logEvent("login", login, {}, {})
 
-
     }
 
     fun logEventWithToken(mail: String, token : String) {
