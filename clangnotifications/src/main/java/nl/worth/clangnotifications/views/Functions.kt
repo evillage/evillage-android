@@ -11,6 +11,7 @@ import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
@@ -98,6 +99,7 @@ class Functions {
 
                         params.height = Resources.getSystem().getDisplayMetrics().heightPixels / 3
                         viewPager.layoutParams = params
+
                         layout.addView(viewPager, 0)
                     }
                 }
@@ -147,6 +149,10 @@ class Functions {
                         )
                         params.height = Resources.getSystem().getDisplayMetrics().heightPixels / 3
                         viewPager.layoutParams = params
+                        val animation =
+                            AnimationUtils.loadAnimation(parent, nl.worth.clangnotifications.R.anim.popup)
+                        animation.startOffset = 0
+                        viewPager.startAnimation(animation)
                         layout.addView(viewPager, 0)
                         indicators = Indicator(layout.context, strings, parent)
                         indicators!!.build(mainConstraintLayout)
@@ -190,6 +196,10 @@ class Functions {
                         )
                         params.height = Resources.getSystem().getDisplayMetrics().heightPixels / 3
                         viewPager.layoutParams = params
+                        val animation =
+                            AnimationUtils.loadAnimation(parent, nl.worth.clangnotifications.R.anim.popup)
+                        animation.startOffset = 0
+                        viewPager.startAnimation(animation)
                         layout.addView(viewPager, 0)
 
 

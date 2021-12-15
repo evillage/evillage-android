@@ -1,7 +1,9 @@
 package nl.worth.clangnotifications
 
+import android.app.Activity
 import android.content.Context
 import androidx.annotation.Keep
+import androidx.constraintlayout.widget.ConstraintLayout
 import nl.worth.clangnotifications.data.model.ClangAccountResponse
 import java.lang.NullPointerException
 
@@ -22,12 +24,49 @@ abstract class Clang {
         errorCallback: (Throwable) -> Unit
     )
 
+    /// Log an event to the Clang backend
+    /// - Parameters:
+    ///   - data: The data you want to log for this event
+    ///   - token: The token we receive from Firebase when registering for push notifications
+    ///   - login: Event date of the event you want to log
+    ///   - data:  Proporties you want to log
+    fun registerAccountWithProperties(token : String, data  : Map<String, String>, login  : Map<String, String>) {
+
+        updateToken(token,{ }, {})
+        updateProperties(data, {}, {})
+        logEvent("login", login, {}, {})
+
+    }
+
+    fun logEventWithToken(mail: String, token : String) {
+
+        logEvent("login", mapOf("title" to "login","userEmail" to mail), {
+
+        }, {
+
+        })
+
+        updateToken(token,{
+
+        }, {
+
+        })
+
+    }
+
     abstract fun logEvent(
         event: String,
         data: Map<String, String>,
         successCallback: () -> Unit,
         errorCallback: (Throwable) -> Unit
     )
+
+    abstract fun updateToken(
+        firebaseToken: String,
+        successCallback: () -> Unit,
+        errorCallback: (Throwable) -> Unit
+    )
+
 
     abstract fun updateProperties(
         data: Map<String, String>,
@@ -42,11 +81,6 @@ abstract class Clang {
         errorCallback: (Throwable) -> Unit
     )
 
-    abstract fun updateToken(
-        firebaseToken: String,
-        successCallback: () -> Unit,
-        errorCallback: (Throwable) -> Unit
-    )
 
     @Keep
     companion object {
