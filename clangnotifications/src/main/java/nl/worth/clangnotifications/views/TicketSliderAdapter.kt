@@ -83,7 +83,7 @@ class TicketSliderAdapter(private val context: Context, list: ArrayList<String>)
 
         val button = Button(context)
         button.layoutParams = lp
-        button.setBackgroundColor(Color.TRANSPARENT)
+        button.setBackgroundColor(Color.BLUE)
         button.text = " ✕  "
         button.setOnClickListener(View.OnClickListener {
 
@@ -95,7 +95,7 @@ class TicketSliderAdapter(private val context: Context, list: ArrayList<String>)
         })
         button.setTextColor(Color.BLACK)
         button.gravity =(Gravity.RIGHT)
-        button.setPadding(2,2,10,2)
+        button.setPadding(0,0,10,0)
         view.fragment_web.addView(button)
 
         return view
