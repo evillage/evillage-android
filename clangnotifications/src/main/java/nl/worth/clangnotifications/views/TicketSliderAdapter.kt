@@ -76,7 +76,7 @@ class TicketSliderAdapter(private val context: Context, list: ArrayList<String>)
         vp.addView(view, 0)
         val lp = LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            50
+            70
         )
         lp.gravity = (Gravity.CENTER_HORIZONTAL)
         lp.setMargins(0,0,0,0)
@@ -95,6 +95,7 @@ class TicketSliderAdapter(private val context: Context, list: ArrayList<String>)
         })
         button.setTextColor(Color.BLACK)
         button.gravity =(Gravity.RIGHT)
+        button.setTextSize(22F)
         button.setPadding(0,0,10,0)
         view.fragment_web.addView(button)
 
