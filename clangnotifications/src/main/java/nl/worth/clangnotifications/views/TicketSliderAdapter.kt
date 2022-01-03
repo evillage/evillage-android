@@ -66,6 +66,16 @@ class TicketSliderAdapter(private val context: Context, list: ArrayList<String>)
 
 
             }
+            override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {
+                return if (url != null && (url.startsWith("http://") || url.startsWith("https://"))) {
+                    view.context.startActivity(
+                        Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    )
+                    true
+                } else {
+                    false
+                }
+            }
             fun onProgressChanged(wv: WebView?, url: String?) {
 
                 Log.d("makeText", view.fragment_web.contentHeight.toString())
@@ -76,15 +86,15 @@ class TicketSliderAdapter(private val context: Context, list: ArrayList<String>)
         vp.addView(view, 0)
         val lp = LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            50
+            70
         )
         lp.gravity = (Gravity.CENTER_HORIZONTAL)
         lp.setMargins(0,0,0,0)
 
         val button = Button(context)
         button.layoutParams = lp
-        button.setBackgroundColor(Color.TRANSPARENT)
-        button.text = "x  "
+        button.setBackgroundColor(Color.BLUE)
+        button.text = " ✕  "
         button.setOnClickListener(View.OnClickListener {
 
 
@@ -95,6 +105,7 @@ class TicketSliderAdapter(private val context: Context, list: ArrayList<String>)
         })
         button.setTextColor(Color.BLACK)
         button.gravity =(Gravity.RIGHT)
+        button.setTextSize(22F)
         button.setPadding(0,0,10,0)
         view.fragment_web.addView(button)
 
