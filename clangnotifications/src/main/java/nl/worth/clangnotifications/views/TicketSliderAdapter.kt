@@ -66,6 +66,16 @@ class TicketSliderAdapter(private val context: Context, list: ArrayList<String>)
 
 
             }
+            override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {
+                return if (url != null && (url.startsWith("http://") || url.startsWith("https://"))) {
+                    view.context.startActivity(
+                        Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    )
+                    true
+                } else {
+                    false
+                }
+            }
             fun onProgressChanged(wv: WebView?, url: String?) {
 
                 Log.d("makeText", view.fragment_web.contentHeight.toString())
