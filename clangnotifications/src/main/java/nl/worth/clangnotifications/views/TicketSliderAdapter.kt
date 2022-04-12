@@ -14,8 +14,10 @@ import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.ticket_slider_item.view.*
 import android.app.Activity
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.net.Uri
 import android.view.Gravity
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -47,6 +49,7 @@ class TicketSliderAdapter(private val context: Context, list: ArrayList<String>)
         val view = inflater!!.inflate(nl.worth.clangnotifications.R.layout.ticket_slider_item, null)
         view.setBackgroundColor(Color.TRANSPARENT)
         view.fragment_web.settings.javaScriptEnabled = true
+
         view.fragment_web.loadDataWithBaseURL(
             null,
             strings[position],
@@ -65,6 +68,14 @@ class TicketSliderAdapter(private val context: Context, list: ArrayList<String>)
                 Log.d("makeText", view?.contentHeight.toString())
 
 
+            }
+
+            override fun shouldOverrideUrlLoading(view: WebView, url: String?): Boolean {
+                return if (url != null && (url.startsWith("http://") || url.startsWith("https://"))) {
+                    false
+                } else {
+                    false
+                }
             }
             fun onProgressChanged(wv: WebView?, url: String?) {
 
