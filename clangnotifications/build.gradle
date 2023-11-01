@@ -7,11 +7,11 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.evillage'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 33
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 33
         versionCode 29
         versionName "0.0.29"
         consumerProguardFiles 'proguard-rules.pro'
@@ -38,7 +38,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.firebase:firebase-messaging:23.0.0'
     implementation 'com.android.support:recyclerview-v7'
-    implementation 'androidx.security:security-crypto:1.1.0-alpha01'
 }
 
 repositories {
