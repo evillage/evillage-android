@@ -86,6 +86,8 @@ abstract class Clang {
     companion object {
         @Volatile
         private var instance: ClangImplementation? = null
+        private var authenticationToken: String = ""
+        private var integrationId: String = ""
 
         /**
          * Call once in your Application class to create Singleton object
@@ -100,6 +102,15 @@ abstract class Clang {
                 instance = ClangImplementation(baseUrl, authenticationToken, integrationId)
                 instance!!.context = context
             }
+        }
+
+
+        fun setAuthenticationToken(authenticationToken: String) {
+            this.authenticationToken = authenticationToken
+        }
+
+        fun setIntegrationId(integrationId: String) {
+            this.integrationId = integrationId
         }
 
         /**

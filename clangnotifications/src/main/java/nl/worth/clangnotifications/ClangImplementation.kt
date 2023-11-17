@@ -23,8 +23,8 @@ import java.lang.Exception
 @Keep
 class ClangImplementation(
     baseUrl: String?,
-    authenticationToken: String,
-    private val integrationId: String
+    private var authenticationToken: String,
+    private var integrationId: String
 ) : Clang() {
 
     lateinit var context: Context
@@ -174,7 +174,7 @@ class ClangImplementation(
 
     //region Util methods
     /**
-    *
+     *
      * @param onTokenReceived Notifies caller that action was successful returning a FCM token
      */
     private fun retrieveFirebaseToken(
@@ -194,5 +194,7 @@ class ClangImplementation(
             }
         }
     }
+
+
     //endregion
 }
