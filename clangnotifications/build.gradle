@@ -12,8 +12,8 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 29
-        versionName "0.0.29"
+        versionCode 30
+        versionName "0.0.30"
         consumerProguardFiles 'proguard-rules.pro'
         buildConfigField "String", "BASE_URL", '"https://api.clang.cloud"'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

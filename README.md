@@ -1,30 +1,30 @@
-# TeamITG - Android CanopyDeploy Library
-This is the Android library project for the implementation of the CanopyDeploy platform on mobile platforms.
+#  Android Deployteq Library
+This is the Android library project for the implementation of the Deployteq platform on mobile platforms.
 For the use of this in an example Android app with UI please see: https://github.com/evillage/evillage-android-demo
 
 The library is written in Kotlin, uses Retrofit2 for HTTP calls and Firebase Cloud Messaging for notifications.
 
-## CanopyDeploy library setup
-To setup the CanopyDeploy library you need to call Clang.Companion.setUp() in your Application class and pass:
+## Deployteq library setup
+To setup the Deployteq library you need to call Clang.Companion.setUp() in your Application class and pass:
  * Base url (optional, defaults to https://api.clang.cloud)
  * Application context
  * Authentication token
  * Integration id 
 
-The last three values will be provided when you contact e-Village to start integrating with the CanopyDeploy platform.
+The last three values will be provided when you contact e-Village to start integrating with the Deployteq platform.
 
-## CanopyDeploy library usage
-To use the CanopyDeploy library you can just call Clang.Companion.getInstance() after Clang.Companion.setUp() and a Singleton instance of the CanopyDeploy library will be returned. 
+## Deployteq library usage
+To use the Deployteq library you can just call Clang.Companion.getInstance() after Clang.Companion.setUp() and a Singleton instance of the Deployteq library will be returned. 
 
 ## Publishing a new version of the library
 In our test setup we have used https://jitpack.io to take care of builds of the library. By linking jitpack.io to the repository it can automatically create new builds based on version tags (tags on commits). Please refer to the documentation of jitpack.io on how to set this up.
 
-## Using the CanopyDeploy library in your own project 
+## Using the Deployteq library in your own project 
 Just add the library to your project gradle
 
 ```
 dependencies {
-    implementation 'com.github.evillage:evillage-android:0.0.29'
+    implementation 'com.github.evillage:evillage-android:0.0.30'
 }
 ```
 
